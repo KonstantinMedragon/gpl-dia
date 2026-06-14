@@ -26,14 +26,20 @@
             overflow: hidden;
         }
 
+        /* Изображение прижато к левому верхнему углу, без искажений */
         .hero-image {
-            width: 100%;
-            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            min-height: 100%;
             object-fit: cover;
-            display: block;
+            object-position: top left;
         }
 
-        /* ---------- БУРГЕР МЕНЮ (правый верхний угол) ---------- */
+        /* БУРГЕР МЕНЮ (правый верхний угол) */
         .burger {
             position: absolute;
             top: 32px;
@@ -146,7 +152,7 @@
             opacity: 1;
         }
 
-        /* СЛОГАН В ЛЕВОМ НИЖНЕМ УГЛУ — ТОЛЬКО ТО, ЧТО В ТЗ */
+        /* СЛОГАН В ЛЕВОМ НИЖНЕМ УГЛУ */
         .slogan {
             position: absolute;
             bottom: 48px;
@@ -184,7 +190,7 @@
 </head>
 <body>
 <div class="hero">
-    <!-- ваша фотография из репозитория -->
+    <!-- Изображение прижато к левому верхнему углу -->
     <img class="hero-image" src="images/main.png" alt="GPL Diagnostics background">
 
     <!-- БУРГЕР -->
@@ -196,7 +202,7 @@
         </div>
     </div>
 
-    <!-- МЕНЮ СО ВСЕМИ КАТЕГОРИЯМИ -->
+    <!-- МЕНЮ -->
     <div class="menu-panel" id="menuPanel">
         <button class="close-menu" id="closeMenuBtn">✕</button>
         <div style="margin-top: 32px;"></div>
@@ -234,7 +240,7 @@
         </div>
     </div>
 
-    <!-- СЛОГАН — только то, что вы просили, без лишнего текста -->
+    <!-- СЛОГАН -->
     <div class="slogan">
         <h1>Trace the unknown.<br>Make the invisible visible.</h1>
     </div>
