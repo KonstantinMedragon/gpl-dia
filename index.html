@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>GPL Diagnostics | Trace the unknown</title>
-    <!-- Подключение шрифта Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -26,7 +25,6 @@
             overflow: hidden;
         }
 
-        /* По умолчанию для ПК используем main.png */
         .hero-image {
             position: absolute;
             top: 0;
@@ -37,14 +35,13 @@
             object-position: top left;
         }
 
-        /* На телефонах (ширина до 768px) подменяем изображение на mainph.png */
         @media (max-width: 768px) {
             .hero-image {
                 content: url('images/mainph.png');
             }
         }
 
-        /* БУРГЕР МЕНЮ (правый верхний угол) */
+        /* БУРГЕР — без обводки */
         .burger {
             position: absolute;
             top: 32px;
@@ -55,7 +52,8 @@
         .burger-btn {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* border убран */
+            border: none;
             border-radius: 40px;
             width: 52px;
             height: 52px;
@@ -69,7 +67,6 @@
         }
         .burger-btn:hover {
             background: rgba(255, 255, 255, 0.18);
-            border-color: rgba(255, 255, 255, 0.5);
         }
         .burger-btn span {
             display: block;
@@ -110,7 +107,7 @@
             letter-spacing: -0.3px;
             color: white;
             margin-bottom: 12px;
-            border-left: 3px solid #4c9aff;
+            border-left: 3px solid #00101c;
             padding-left: 14px;
         }
         .sub-list {
@@ -157,7 +154,7 @@
             opacity: 1;
         }
 
-        /* СЛОГАН В ЛЕВОМ НИЖНЕМ УГЛУ */
+        /* СЛОГАН — общие стили */
         .slogan {
             position: absolute;
             bottom: 48px;
@@ -176,13 +173,14 @@
             margin: 0;
         }
 
+        /* Телефонная версия: слоган выше (увеличил bottom, чтобы поднять текст вверх) */
         @media (max-width: 640px) {
             .burger-btn {
                 width: 44px;
                 height: 44px;
             }
             .slogan {
-                bottom: 28px;
+                bottom: 120px;   /* поднят относительно исходного положения */
                 left: 24px;
                 right: 24px;
             }
@@ -195,10 +193,8 @@
 </head>
 <body>
 <div class="hero">
-    <!-- Изображение: на ПК main.png, на телефоне подменится через медиа-запрос -->
     <img class="hero-image" src="images/main.png" alt="GPL Diagnostics background">
 
-    <!-- БУРГЕР -->
     <div class="burger">
         <div class="burger-btn" id="burgerBtn">
             <span></span>
@@ -207,18 +203,15 @@
         </div>
     </div>
 
-    <!-- МЕНЮ -->
     <div class="menu-panel" id="menuPanel">
         <button class="close-menu" id="closeMenuBtn">✕</button>
         <div style="margin-top: 32px;"></div>
 
-        <!-- Mission -->
         <div class="menu-section">
             <div class="main-cat">Mission</div>
             <a href="about.html" class="simple-link" style="margin-left: 18px;">About GPL →</a>
         </div>
 
-        <!-- Products + подкатегории -->
         <div class="menu-section">
             <div class="main-cat">Products</div>
             <ul class="sub-list">
@@ -228,7 +221,6 @@
             </ul>
         </div>
 
-        <!-- Services + подкатегории -->
         <div class="menu-section">
             <div class="main-cat">Services</div>
             <ul class="sub-list">
@@ -238,14 +230,12 @@
             </ul>
         </div>
 
-        <!-- Contacts -->
         <div class="menu-section">
             <div class="main-cat">Contacts</div>
             <a href="contacts.html" class="simple-link" style="margin-left: 18px;">Get in touch →</a>
         </div>
     </div>
 
-    <!-- СЛОГАН -->
     <div class="slogan">
         <h1>Trace the unknown.<br>Make the invisible visible.</h1>
     </div>
