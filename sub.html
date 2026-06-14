@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Substances | GPL Diagnostics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #2c2c2c; line-height: 1.5; }
+        .hero-image, .bottom-image { width: 100%; display: block; }
+        .content { max-width: 1400px; margin: 0 auto; padding: 60px 24px; }
+        .content h1 { color: #00101c; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 32px; text-align: center; }
+        
+        .substances-section { margin-bottom: 60px; }
+        .substances-section h2 { color: #00101c; font-size: 1.8rem; font-weight: 600; margin-bottom: 24px; border-left: 4px solid #00101c; padding-left: 20px; }
+        
+        /* Таблица на всю ширину с прокруткой */
+        .table-wrapper { overflow-x: auto; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .substances-table { width: 100%; border-collapse: collapse; background: #fff; min-width: 600px; }
+        .substances-table th, .substances-table td { border: 1px solid #e2e2e2; padding: 12px 16px; text-align: left; vertical-align: top; }
+        .substances-table th { background-color: #f5f5f5; font-weight: 600; color: #00101c; }
+        .substances-table td { font-size: 0.9rem; }
+        .cas { font-family: monospace; font-size: 0.85rem; color: #4a4a4a; }
+        
+        /* Кнопка и форма */
+        .btn-inquire { display: inline-block; background-color: #00101c; color: white; font-weight: 600; font-size: 1rem; padding: 12px 40px; border-radius: 40px; border: none; cursor: pointer; transition: 0.25s; margin: 32px auto 20px; text-align: center; }
+        .btn-inquire:hover { background-color: #002a3b; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; max-width: 520px; width: 90%; border-radius: 28px; padding: 36px 28px; position: relative; }
+        .modal-content h3 { font-size: 1.8rem; font-weight: 600; color: #00101c; margin-bottom: 20px; }
+        .modal-content label { display: block; margin-top: 16px; margin-bottom: 6px; font-weight: 500; color: #1f1f1f; }
+        .modal-content input, .modal-content textarea { width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 16px; font-family: 'Inter', sans-serif; font-size: 0.95rem; }
+        .modal-content input:focus, .modal-content textarea:focus { outline: none; border-color: #00101c; }
+        .modal-content textarea { min-height: 100px; resize: vertical; }
+        .modal-submit { background-color: #00101c; color: white; border: none; padding: 12px 24px; border-radius: 40px; font-weight: 600; cursor: pointer; margin-top: 24px; width: 100%; font-size: 1rem; }
+        .close-modal { position: absolute; top: 18px; right: 22px; font-size: 28px; cursor: pointer; color: #777; }
+        .close-modal:hover { color: black; }
+        .form-status { margin-top: 16px; font-size: 0.9rem; text-align: center; }
+        .footer { width: 100%; margin: 0; padding: 0; line-height: 0; }
+        .footer img { width: 100%; display: block; }
+        .text-center { text-align: center; }
+        
+        @media (max-width: 768px) { .content { padding: 40px 16px; } .substances-table th, .substances-table td { padding: 8px 12px; } }
+    </style>
+</head>
+<body>
+    <img class="hero-image" src="images/hero.png" alt="GPL Diagnostics top">
+    
+    <div class="content">
+        <h1>Substances</h1>
+        
+        <!-- ========== CHEMICALS ========== -->
+        <div class="substances-section">
+            <h2>Chemicals</h2>
+            <div class="table-wrapper">
+                <table class="substances-table">
+                    <thead>
+                        <tr><th>#</th><th>Product Name</th><th>CAS</th><th>#</th><th>Product Name</th><th>CAS</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>2 - Morpholinethanesulfonic acid hydrate</td><td class="cas">1266615-59-1</td><td>43</td><td>Sodium-omadine (2-mercaptopyridine-1-oxide sodium salt)</td><td class="cas">3811-73-2</td></tr>
+                        <tr><td>2</td><td>2 - chloroacetamide</td><td class="cas">79-07-2</td><td>44</td><td>Sodium sulfate</td><td class="cas">7757-82-6</td></tr>
+                        <tr><td>3</td><td>2,4 - dichloraniline</td><td class="cas">554-00-7</td><td>45</td><td>Sodium phosphate 2-deputy.12-water.</td><td class="cas">10039-32-4</td></tr>
+                        <tr><td>4</td><td>2,4,6 - tribromo-3-hydroxy-benzoic acid</td><td class="cas">14348-40-4</td><td>46</td><td>Pyrogallol Red</td><td class="cas">32638-88-3</td></tr>
+                        <tr><td>5</td><td>3 - Cyclohexylamino-2-Hydroxypropanesulfonic acid (CAPSO)</td><td class="cas">73463-39-5</td><td>47</td><td>Pluronic R-123, PEG-PPG-PEG, Mn 5.800</td><td class="cas">9003-11-6</td></tr>
+                        <tr><td>6</td><td>3-methoxy-3-methyl-1-butanol</td><td class="cas">56539-66-3</td><td>48</td><td>Polyvinyl alcohol</td><td class="cas">9002-89-5</td></tr>
+                        <tr><td>7</td><td>4 - aminoantipyrine</td><td class="cas">83-07-8</td><td>49</td><td>Polydocanol, detergent (thesite)</td><td class="cas">9002-92-0</td></tr>
+                        <tr><td>8</td><td>4 - Nitrophenyl Phosphate disodium salt hexahydrate</td><td class="cas">4264-83-9</td><td>50</td><td>Sulfamic acid</td><td class="cas">5329-14-6</td></tr>
+                        <tr><td>9</td><td>5 - Sulfosalicylic acid</td><td class="cas">5965-83-3</td><td>51</td><td>Sulfanilic acid</td><td class="cas">121-57-3</td></tr>
+                        <tr><td>10</td><td>6 - Aminocaproic acid</td><td class="cas">60-32-2</td><td>52</td><td>Eighteen-way Aluminum sulfate</td><td class="cas">7784-31-8</td></tr>
+                        <tr><td>11</td><td>8 - hydroxyquinoline-5- sulfonic acid monohydrate</td><td class="cas">283158-18-9</td><td>53</td><td>Thimerosal</td><td class="cas">54-64-8</td></tr>
+                        <tr><td>12</td><td>8-hydroxyquinoline</td><td class="cas">148-24-3</td><td>54</td><td>Thiourea</td><td class="cas">62-56-6</td></tr>
+                        <tr><td>13</td><td>D - mannitol</td><td class="cas">69-65-8</td><td>55</td><td>Tripropylene Glycol methyl ether</td><td class="cas">25498-49-1</td></tr>
+                        <tr><td>14</td><td>L - Ascorbic acid</td><td class="cas">50-81-7</td><td>56</td><td>Tris</td><td class="cas">77-86-1</td></tr>
+                        <tr><td>15</td><td>N-acetyl-L-cysteine</td><td class="cas">616-91-1</td><td>57</td><td>Phosphotungstic acid</td><td class="cas">12501-23-4</td></tr>
+                        <tr><td>16</td><td>Adenosine-5-monophosphoric acid</td><td class="cas">18422-05-4</td><td>58</td><td>Hepes</td><td class="cas">7365-45-9</td></tr>
+                        <tr><td>17</td><td>Sodium nitric acid (Sodium nitrite)</td><td class="cas">7632-00-0</td><td>59</td><td>Zwittergen 3-10</td><td class="cas">15163-36-7</td></tr>
+                        <tr><td>18</td><td>Arsenazo III</td><td class="cas">1668-00-4</td><td>60</td><td>Cetyltrimethylammonium bromide</td><td class="cas">57-09-0</td></tr>
+                        <tr><td>19</td><td>Genapol X-080</td><td class="cas">9043-30-5</td><td>61</td><td>Ethyl ether of para-hydroxybenzoic acid</td><td class="cas">120-47-8</td></tr>
+                        <tr><td>20</td><td>Sodium hydroxide</td><td class="cas">1310-73-2</td><td>62</td><td>1-Heptanol</td><td class="cas">111-70-60</td></tr>
+                        <tr><td>21</td><td>Glycyl-glycine</td><td class="cas">556-50-3</td><td>63</td><td>Picric acid</td><td class="cas">88-89-1</td></tr>
+                        <tr><td>22</td><td>Glycine</td><td class="cas">56-40-6</td><td>64</td><td>Sulfuric Acid 98%</td><td class="cas">7664-93-9</td></tr>
+                        <tr><td>23</td><td>Guanidine Hydrochloride</td><td class="cas">50-01-1</td><td>65</td><td>Triton X-100</td><td class="cas">9002-93-1</td></tr>
+                        <tr><td>24</td><td>Sodium deoxycholate</td><td class="cas">302-95-4</td><td>66</td><td>EDTA disodium salt, dihydrate</td><td class="cas">7558-79-4</td></tr>
+                        <tr><td>25</td><td>Dextran sulfate sodium salt</td><td class="cas">9011-18-1</td><td>67</td><td>Sodium Phospate, dibasic, anhydrous</td><td class="cas">299-27-4</td></tr>
+                        <tr><td>26</td><td>Dipropylene Glycol methyl ether</td><td class="cas">34590-94-8</td><td>68</td><td>Monosodium Glutamate</td><td class="cas">6106-04-3</td></tr>
+                        <tr><td>27</td><td>Diethanolamine 85%</td><td class="cas">111-42-2</td><td>69</td><td>DHBS</td><td class="cas">54970-72-8</td></tr>
+                        <tr><td>28</td><td>Diethylamine</td><td class="cas">109-89-7</td><td>70</td><td>BSA</td><td class="cas">9048-46-8</td></tr>
+                        <tr><td>29</td><td>Iron III nitrate 9-aqueous</td><td class="cas">7782-61-8</td><td>71</td><td>4-Hydroxbenzoic acid</td><td class="cas">99-96-7</td></tr>
+                        <tr><td>30</td><td>Imidazole</td><td class="cas">288-32-4</td><td>72</td><td>Sodium Azide</td><td class="cas">26628-22-8</td></tr>
+                        <tr><td>31</td><td>Potassium iodide</td><td class="cas">7681-11-0</td><td>73</td><td>Boric acid</td><td class="cas">10043-35-3</td></tr>
+                        <tr><td>32</td><td>Potassium phosphoric acid 1-substituted</td><td class="cas">7778-77-0</td><td>74</td><td>Diethylenetriamine pentaacetic acid (DPTA)</td><td class="cas">67-43-6</td></tr>
+                        <tr><td>33</td><td>Citric acid monohydrate</td><td class="cas">5949-29-1</td><td>75</td><td>K-Hexacyanofrrate(III).3H2O</td><td class="cas">14459-95-1</td></tr>
+                        <tr><td>34</td><td>Magnesium Chloride hexahydrate</td><td class="cas">7791-18-6</td><td>76</td><td>L-Aspartic acid sodium salt.Monohydrate</td><td class="cas">323194-76-7</td></tr>
+                        <tr><td>35</td><td>Mercaptoyantaric acid</td><td class="cas">70-49-5</td><td>77</td><td>Bicine-free acid</td><td class="cas">150-25-4</td></tr>
+                        <tr><td>36</td><td>Methyl ether of para-hydroxybenzoic acid</td><td class="cas">99-76-3</td><td>78</td><td>Sodium Hydrogen carbonate.Anhyd</td><td class="cas">497-19-8</td></tr>
+                        <tr><td>37</td><td>Ammonium molybdate</td><td class="cas">12054-85-2</td><td>79</td><td>ADP-K.2H2O</td><td class="cas">58-64-0</td></tr>
+                        <tr><td>38</td><td>Monoethyl ether of diethylene glycol</td><td class="cas">111-90-0</td><td>80</td><td>ɑ -Ketoglutaric acid.2Na</td><td class="cas">305-72-6</td></tr>
+                        <tr><td>39</td><td>3-morphylinpropanesulfonic acid</td><td class="cas">1132-61-2</td><td>81</td><td>D-Glucose</td><td class="cas">50-99-7</td></tr>
+                        <tr><td>40</td><td>Sodium phosphoric acid 1-substituted 1-aqueous</td><td class="cas">10049-21-5</td><td>82</td><td>Bronidox-L</td><td class="cas">30007-47-7</td></tr>
+                        <tr><td>41</td><td>Sodium phosphoric acid 2-substituted dihydrate</td><td class="cas">10028-24-7</td><td>83</td><td>Sodium carbonate.Anhyd</td><td class="cas">144-55-8</td></tr>
+                        <tr><td>42</td><td>Sodium fluoride</td><td class="cas">7681-49-4</td><td>84</td><td>Beta-NADH</td><td class="cas">606-68-8</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- ========== BIOLOGICAL BUFFERS ========== -->
+        <div class="substances-section">
+            <h2>Biological buffers</h2>
+            <div class="table-wrapper">
+                <table class="substances-table">
+                    <thead><tr><th>#</th><th>Product Name</th><th>CAS</th><th>#</th><th>Product Name</th><th>CAS</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>RIS-HCL</td><td class="cas">1185-53-1</td><td>21</td><td>ADA-NA</td><td class="cas"></td></tr>
+                        <tr><td>2</td><td>TRIS</td><td class="cas">77-86-1</td><td>22</td><td>MES·H2O</td><td class="cas">145224-94-8</td></tr>
+                        <tr><td>3</td><td>Bicine</td><td class="cas">150-25-4</td><td>23</td><td>TES-Na</td><td class="cas"></td></tr>
+                        <tr><td>4</td><td>CAPS</td><td class="cas">1135-40-6</td><td>24</td><td>TES</td><td class="cas">7365-44-8</td></tr>
+                        <tr><td>5</td><td>MOPS</td><td class="cas">1132-61-2</td><td>25</td><td>HEPPSO</td><td class="cas">68399-78-0</td></tr>
+                        <tr><td>6</td><td>MOPS-NA</td><td class="cas">71119-22-7</td><td>26</td><td>POPSO Na2</td><td class="cas"></td></tr>
+                        <tr><td>7</td><td>TAPS</td><td class="cas"></td><td>27</td><td>MES</td><td class="cas">4432-31-9</td></tr>
+                        <tr><td>8</td><td>EPPS</td><td class="cas">16052-06-5</td><td>28</td><td>MES-Na</td><td class="cas">71119-23-8</td></tr>
+                        <tr><td>9</td><td>MOPSO</td><td class="cas">68399-77-9</td><td>29</td><td>Tricine</td><td class="cas">5704-04-1</td></tr>
+                        <tr><td>10</td><td>HEPES</td><td class="cas">7365-45-9</td><td>30</td><td>BIS-TRIS</td><td class="cas">6976-37-0</td></tr>
+                        <tr><td>11</td><td>HEPES-NA</td><td class="cas"></td><td>31</td><td>CHES</td><td class="cas">103-47-9</td></tr>
+                        <tr><td>12</td><td>PIPES</td><td class="cas">5625-37-6</td><td>32</td><td>CAPSO</td><td class="cas">73463-39-5</td></tr>
+                        <tr><td>13</td><td>PIPES-K2</td><td class="cas"></td><td>33</td><td>MOPSO-Na</td><td class="cas">79803-73-9</td></tr>
+                        <tr><td>14</td><td>PEP</td><td class="cas"></td><td>34</td><td>POPSO</td><td class="cas">68189-43-5</td></tr>
+                        <tr><td>15</td><td>BES</td><td class="cas">10191-18-1</td><td>35</td><td>PIPES-2Na</td><td class="cas">76836-02-7</td></tr>
+                        <tr><td>16</td><td>DIPSO</td><td class="cas">68399-80-4</td><td>36</td><td>TAE</td><td class="cas">6850-28-8</td></tr>
+                        <tr><td>17</td><td>CABS</td><td class="cas"></td><td>37</td><td>TAPS</td><td class="cas">29915-38-6</td></tr>
+                        <tr><td>18</td><td>TAPSO</td><td class="cas">68399-81-5</td><td>38</td><td>BIS-TRIS Propane</td><td class="cas">64431-96-5</td></tr>
+                        <tr><td>19</td><td>ADA</td><td class="cas">26239-55-4</td><td>39</td><td>Bis-Tris Hydrochloride</td><td class="cas">124763-51-5</td></tr>
+                        <tr><td>20</td><td>ADA-2NA</td><td class="cas"></td><td>40</td><td>ACES</td><td class="cas">7365-82-4</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- ========== MOLECULAR DIAGNOSTIC ========== -->
+        <div class="substances-section">
+            <h2>Molecular diagnostic</h2>
+            <div class="table-wrapper">
+                <table class="substances-table">
+                    <thead><tr><th>#</th><th>Product Name</th><th>CAS</th><th>#</th><th>Product Name</th><th>CAS</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Guanidine hydrochloride</td><td class="cas">50-01-1</td><td>22</td><td>D-(+)-Trehalose dihydrate</td><td class="cas">6138-23-4</td></tr>
+                        <tr><td>2</td><td>Guanidine isothiocyanate</td><td class="cas">593-84-0</td><td>23</td><td>D-Mannitol</td><td class="cas">69-65-8</td></tr>
+                        <tr><td>3</td><td>IPTG</td><td class="cas">367-93-1</td><td>24</td><td>Betaine</td><td class="cas">107-43-7</td></tr>
+                        <tr><td>4</td><td>DTT</td><td class="cas">3483-12-3</td><td>25</td><td>SDS</td><td class="cas">151-21-3</td></tr>
+                        <tr><td>5</td><td>TCEP-HCl</td><td class="cas">51805-45-9</td><td>26</td><td>DS-500</td><td class="cas">9011-18-1</td></tr>
+                        <tr><td>6</td><td>BCA-2Na</td><td class="cas">979-88-4</td><td>27</td><td>TOOS</td><td class="cas">82692-93-1</td></tr>
+                        <tr><td>7</td><td>Ribonuclease A</td><td class="cas">9001-99-4</td><td>28</td><td>PNPP</td><td class="cas">4264-83-9</td></tr>
+                        <tr><td>8</td><td>Methylenebisacrylamide</td><td class="cas">110-26-9</td><td>29</td><td>TOPS</td><td class="cas">40567-80-4</td></tr>
+                        <tr><td>9</td><td>TMB</td><td class="cas">54827-17-7</td><td>30</td><td>HTBA</td><td class="cas">53279-72-4</td></tr>
+                        <tr><td>10</td><td>TMB dihydrochloride</td><td class="cas">207738-08-7</td><td>31</td><td>TODB</td><td class="cas">127544-88-1</td></tr>
+                        <tr><td>11</td><td>BCIP</td><td class="cas">6578-06-9</td><td>32</td><td>Lithium L-lactate</td><td class="cas">27848-80-2</td></tr>
+                        <tr><td>12</td><td>NBT</td><td class="cas">298-83-9</td><td>33</td><td>ANS-NH4</td><td class="cas">28836-03-5</td></tr>
+                        <tr><td>13</td><td>Tetramethylbenzidine sulfate</td><td class="cas">54827-18-8</td><td>34</td><td>Acetylthiocholine iodide</td><td class="cas">1866-15-5</td></tr>
+                        <tr><td>14</td><td>BCIP-2Na</td><td class="cas">102185-33-1</td><td>35</td><td>5-Sulfosalicylic acid dihydrate</td><td class="cas">5965-83-3</td></tr>
+                        <tr><td>15</td><td>DAB</td><td class="cas">91-95-2</td><td>36</td><td>P300 preservative</td><td class="cas"></td></tr>
+                        <tr><td>16</td><td>3,3′-Diaminobenzidine tetrahydrochloride hydrate</td><td class="cas">868272-85-9</td><td>37</td><td>ME-DMAE-NHS</td><td class="cas"></td></tr>
+                        <tr><td>17</td><td>Glycine</td><td class="cas">56-40-6</td><td>38</td><td>NSP-SA-ADH</td><td class="cas"></td></tr>
+                        <tr><td>18</td><td>L-Alanine</td><td class="cas">56-41-7</td><td>39</td><td>NSP-SA-NHS</td><td class="cas">199293-83-9</td></tr>
+                        <tr><td>19</td><td>L-Aspartic acid</td><td class="cas">56-84-8</td><td>40</td><td>NSP-SA</td><td class="cas">211106-69-3</td></tr>
+                        <tr><td>20</td><td>Succinic acid</td><td class="cas">110-15-6</td><td>41</td><td>DMAE-NHS</td><td class="cas">115853-74-2</td></tr>
+                        <tr><td>21</td><td>2-oxo-Pentanedioic acid</td><td class="cas">328-50-7</td><td>42</td><td>NSP-DMAE-NHS</td><td class="cas">194357-64-7</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <button class="btn-inquire" id="inquireBtnSub">Inquire →</button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <img src="images/bottom.png" alt="GPL Diagnostics bottom">
+    </div>
+    
+    <!-- Modal (форма) -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModalBtn">&times;</span>
+            <h3>Inquiry</h3>
+            <form id="contactForm">
+                <label for="name">Full name *</label>
+                <input type="text" id="name" name="name" required>
+                <label for="company">Company *</label>
+                <input type="text" id="company" name="company" required>
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Your message *</label>
+                <textarea id="message" name="message" required placeholder="Please include product name(s) and CAS if possible"></textarea>
+                <button type="submit" class="modal-submit">Send inquiry</button>
+                <div id="formStatus" class="form-status"></div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        (function() {
+            const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxA5MueC0RXAhrR5oR74pDP3iM5CrNIPr_vtYydxyqm5mgz-RRuGEHgmVHRxphBW40rvA/exec';
+            const modal = document.getElementById('contactModal');
+            const inquireBtn = document.getElementById('inquireBtnSub');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const form = document.getElementById('contactForm');
+            const statusDiv = document.getElementById('formStatus');
+            
+            function openModal() { modal.style.display = 'flex'; statusDiv.innerHTML = ''; }
+            function closeModal() { modal.style.display = 'none'; form.reset(); statusDiv.innerHTML = ''; }
+            
+            if(inquireBtn) inquireBtn.addEventListener('click', openModal);
+            if(closeBtn) closeBtn.addEventListener('click', closeModal);
+            window.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+            
+            if(form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value.trim();
+                    const company = document.getElementById('company').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const message = document.getElementById('message').value.trim();
+                    
+                    if (!name || !company || !email || !message) {
+                        statusDiv.innerHTML = '<span style="color: #d32f2f;">Please fill in all fields.</span>';
+                        return;
+                    }
+                    if (!email.includes('@')) {
+                        statusDiv.innerHTML = '<span style="color: #d32f2f;">Please enter a valid email address.</span>';
+                        return;
+                    }
+                    
+                    const submitBtn = form.querySelector('.modal-submit');
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Sending...';
+                    statusDiv.innerHTML = '<span style="color: #2c2c2c;">Sending...</span>';
+                    
+                    try {
+                        await fetch(PROXY_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name, company, email, message })
+                        });
+                        statusDiv.innerHTML = '<span style="color: #2e7d32;">✓ Thank you! We will get back to you soon.</span>';
+                        form.reset();
+                        setTimeout(() => { closeModal(); }, 2000);
+                    } catch (error) {
+                        statusDiv.innerHTML = '<span style="color: #d32f2f;">❌ Something went wrong. Please try again later.</span>';
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Send inquiry';
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
