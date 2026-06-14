@@ -26,17 +26,22 @@
             overflow: hidden;
         }
 
-        /* Изображение прижато к левому верхнему углу, без искажений */
+        /* По умолчанию для ПК используем main.png */
         .hero-image {
             position: absolute;
             top: 0;
             left: 0;
-            width: auto;
-            height: auto;
-            min-width: 100%;
-            min-height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: top left;
+        }
+
+        /* На телефонах (ширина до 768px) подменяем изображение на mainph.png */
+        @media (max-width: 768px) {
+            .hero-image {
+                content: url('images/mainph.png');
+            }
         }
 
         /* БУРГЕР МЕНЮ (правый верхний угол) */
@@ -190,7 +195,7 @@
 </head>
 <body>
 <div class="hero">
-    <!-- Изображение прижато к левому верхнему углу -->
+    <!-- Изображение: на ПК main.png, на телефоне подменится через медиа-запрос -->
     <img class="hero-image" src="images/main.png" alt="GPL Diagnostics background">
 
     <!-- БУРГЕР -->
