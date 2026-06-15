@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Recombinant antigens | GPL Diagnostics – eukaryotic & prokaryotic biomarkers</title>
+    <meta name="description" content="Full catalog of recombinant antigens: eukaryotic (GL0001–GL0095) and prokaryotic (GLP23001–GLP23182) for IVD, ELISA, clinical chemistry and research.">
+    <meta name="keywords" content="recombinant antigens, eukaryotic expression, prokaryotic expression, biomarkers, IVD, CRP, PSA, TSH, HCG, IL‑6, VEGF, AMH, ACE2, S‑RBD, HE4, KL‑6, MPO, PCNA, GPL Diagnostics">
+    <meta name="author" content="GPL Diagnostics">
+    <meta property="og:title" content="Recombinant antigens for IVD | GPL Diagnostics">
+    <meta property="og:description" content="High‑quality recombinant antigens expressed in eukaryotic and prokaryotic systems – full catalog.">
+    <meta property="og:image" content="images/hero.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #2c2c2c; line-height: 1.5; }
+        .hero-image, .bottom-image { width: 100%; display: block; }
+        .content { max-width: 1400px; margin: 0 auto; padding: 60px 24px; }
+        h1 { color: #00101c; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 700; margin-bottom: 32px; text-align: center; }
+        
+        .burger { position: fixed; top: 32px; right: 32px; z-index: 1000; }
+        .burger-btn { background: rgba(0,16,28,0.7); backdrop-filter: blur(8px); border: none; border-radius: 40px; width: 52px; height: 52px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; }
+        .burger-btn span { width: 24px; height: 2px; background: white; border-radius: 4px; }
+        .menu-panel { position: fixed; top: 0; right: -420px; width: 380px; max-width: 85vw; height: 100%; background: rgba(10,15,26,0.96); backdrop-filter: blur(16px); border-left: 1px solid rgba(255,255,255,0.2); z-index: 1100; transition: right 0.4s; padding: 40px 28px; overflow-y: auto; }
+        .menu-panel.open { right: 0; }
+        .menu-panel .main-cat { font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 12px; border-left: 3px solid #00101c; padding-left: 14px; }
+        .sub-list { list-style: none; padding-left: 20px; }
+        .sub-list li { margin: 12px 0; }
+        .sub-list a { text-decoration: none; font-size: 1rem; color: #e0e4f0; transition: 0.2s; display: inline-block; }
+        .sub-list a:hover { color: white; transform: translateX(4px); }
+        .close-menu { background: none; border: none; color: white; font-size: 28px; cursor: pointer; position: absolute; top: 24px; left: 24px; }
+        
+        .search-section { margin-bottom: 40px; display: flex; justify-content: center; }
+        .search-container { position: relative; width: 100%; max-width: 500px; }
+        .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: #00101c; pointer-events: none; }
+        #searchInput { width: 100%; padding: 14px 20px 14px 48px; font-size: 1rem; border: 1px solid #ccc; border-radius: 60px; outline: none; }
+        #searchInput:focus { border-color: #00101c; }
+        .search-clear { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; cursor: pointer; display: none; }
+        
+        .antigens-section { margin-bottom: 60px; }
+        .category-title { color: #00101c; font-size: 1.8rem; font-weight: 600; margin-bottom: 16px; border-left: 4px solid #00101c; padding-left: 20px; }
+        .result-count { font-size: 0.85rem; color: #4a4a4a; margin-bottom: 12px; }
+        .antigens-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .antigens-table th, .antigens-table td { border: 1px solid #e2e2e2; padding: 12px 16px; text-align: left; vertical-align: top; word-break: break-word; }
+        .antigens-table th { background-color: #f5f5f5; font-weight: 600; color: #00101c; }
+        .product-name { cursor: pointer; transition: background 0.1s; }
+        .product-name:active { background-color: #f0f0f0; }
+        .abbrev-cell { font-family: monospace; font-weight: 500; position: relative; }
+        .tooltip-overlay { position: absolute; top: 0; left: 0; right: 0; background: #00101c; color: white; padding: 8px 12px; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 0.75rem; line-height: 1.4; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: fadeIn 0.2s ease; word-break: break-word; white-space: normal; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+        .no-results { text-align: center; padding: 32px; color: #777; font-style: italic; }
+        
+        .btn-inquire { display: inline-block; background-color: #00101c; color: white; font-weight: 600; font-size: 1rem; padding: 12px 40px; border-radius: 40px; border: none; cursor: pointer; margin: 32px auto 20px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; max-width: 520px; width: 90%; border-radius: 28px; padding: 36px 28px; position: relative; }
+        .modal-content h3 { font-size: 1.8rem; color: #00101c; margin-bottom: 20px; }
+        .modal-content label { display: block; margin-top: 16px; font-weight: 500; }
+        .modal-content input, .modal-content textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 16px; font-family: inherit; }
+        .modal-submit { background: #00101c; color: white; border: none; padding: 12px; border-radius: 40px; font-weight: 600; width: 100%; margin-top: 24px; cursor: pointer; }
+        .close-modal { position: absolute; top: 18px; right: 22px; font-size: 28px; cursor: pointer; color: #777; }
+        .form-status { margin-top: 16px; font-size: 0.9rem; text-align: center; }
+        .footer img { width: 100%; display: block; }
+        .text-center { text-align: center; }
+        
+        @media (max-width: 768px) {
+            .content { padding: 40px 16px; }
+            .antigens-table th, .antigens-table td { padding: 8px 12px; font-size: 0.8rem; }
+            .category-title { font-size: 1.4rem; }
+            .burger { top: 20px; right: 20px; }
+            .burger-btn { width: 44px; height: 44px; }
+            .tooltip-overlay { font-size: 0.7rem; padding: 6px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <img class="hero-image" src="images/hero.png" alt="GPL Diagnostics – recombinant antigens">
+    
+    <div class="burger"><div class="burger-btn" id="burgerBtn"><span></span><span></span><span></span></div></div>
+    <div class="menu-panel" id="menuPanel">
+        <button class="close-menu" id="closeMenuBtn">✕</button>
+        <div style="margin-top: 32px;"></div>
+        <div class="menu-section"><div class="main-cat">Mission</div><a href="about.html" style="margin-left: 18px; color:#e0e4f0;">About GPL →</a></div>
+        <div class="menu-section"><div class="main-cat">Products</div><ul class="sub-list"><li><a href="sub.html">Substances</a></li><li><a href="ab.html">Antibodies</a></li><li><a href="ag.html">Antigens</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Services</div><ul class="sub-list"><li><a href="serv.html">IVD Market Survey</a></li><li><a href="opt.html">IVD Web Optimisation</a></li><li><a href="soft.html">IVD Software Development</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Contacts</div><a href="contacts.html" style="margin-left: 18px; color:#e0e4f0;">Get in touch →</a></div>
+    </div>
+    
+    <div class="content">
+        <h1>Antigens</h1>
+        <div class="search-section"><div class="search-container"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="Search by catalog number, abbreviation or name (e.g. GL0003, CRP, GLP23001)"><button id="clearSearch" class="search-clear">✕</button></div></div>
+        <div id="tablesContainer"></div>
+        <div class="text-center"><button class="btn-inquire" id="inquireBtnAg">Inquire →</button></div>
+    </div>
+    
+    <div class="footer"><img src="images/bottom.png" alt="GPL Diagnostics bottom"></div>
+    
+    <div id="contactModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeModalBtn">&times;</span><h3>Inquiry</h3><form id="contactForm"><label>Full name *</label><input type="text" id="name" required><label>Company *</label><input type="text" id="company" required><label>Email *</label><input type="email" id="email" required><label>Your message *</label><textarea id="message" rows="3" required></textarea><button type="submit" class="modal-submit">Send inquiry</button><div id="formStatus" class="form-status"></div></form></div></div>
+    
+    <script>
+        (function() {
+            // --------------------------------------------------------------
+            // 1) ЭУКАРИОТИЧЕСКИЕ АНТИГЕНЫ (GL0001 – GL0095)
+            // --------------------------------------------------------------
+            const eukaryoticAntigens = [
+                { catalog:"GL0001", name:"HBP", full:"Heparin‑binding protein", desc:"Protein released by neutrophils; marker of severe bacterial infections and sepsis." },
+                { catalog:"GL0002", name:"RBP4", full:"Retinol‑binding protein 4", desc:"Transports retinol (vitamin A) in blood; associated with obesity and insulin resistance." },
+                { catalog:"GL0003", name:"CRP", full:"C‑reactive protein", desc:"Acute‑phase protein; major marker of inflammation and tissue damage." },
+                { catalog:"GL0004", name:"TSH", full:"Thyroid‑stimulating hormone", desc:"Pituitary hormone; regulates thyroid gland function." },
+                { catalog:"GL0005", name:"HCG", full:"Human chorionic gonadotropin", desc:"Placental hormone; marker of pregnancy and certain tumours." },
+                { catalog:"GL0006", name:"FSH", full:"Follicle‑stimulating hormone", desc:"Gonadotropin; stimulates follicle growth and spermatogenesis." },
+                { catalog:"GL0007", name:"LH", full:"Luteinising hormone", desc:"Induces ovulation and testosterone synthesis." },
+                { catalog:"GL0008", name:"PR3", full:"Proteinase‑3", desc:"Neutrophil serine protease; target of antibodies in granulomatosis with polyangiitis." },
+                { catalog:"GL0009", name:"VEGF", full:"Vascular endothelial growth factor", desc:"Stimulates angiogenesis; important in oncology, retinal pathology, rheumatology." },
+                { catalog:"GL0010", name:"ST2", full:"Suppression of tumorigenicity 2 (IL‑33 receptor)", desc:"Biomarker of cardiac fibrosis and heart failure." },
+                { catalog:"GL0011", name:"TPO", full:"Thyroid peroxidase", desc:"Key enzyme in thyroid hormone synthesis; anti‑TPO antibodies are marker of autoimmune thyroiditis." },
+                { catalog:"GL0012", name:"CEA", full:"Carcinoembryonic antigen", desc:"Oncomarker (colorectal, pancreatic, lung cancer)." },
+                { catalog:"GL0013", name:"IL‑6", full:"Interleukin‑6", desc:"Pro‑inflammatory cytokine; marker of systemic inflammation, sepsis, rheumatoid arthritis." },
+                { catalog:"GL0014", name:"MMP‑3", full:"Matrix metalloproteinase‑3", desc:"Involved in extracellular matrix degradation; marker of joint destruction in arthritis." },
+                { catalog:"GL0015", name:"AMH", full:"Anti‑Müllerian hormone", desc:"Marker of ovarian reserve and testicular function; used in reproductive medicine." },
+                { catalog:"GL0016", name:"Lp‑PLA2", full:"Lipoprotein‑associated phospholipase A2", desc:"Enzyme associated with vulnerable atherosclerotic plaques; marker of cardiovascular risk." },
+                { catalog:"GL0017", name:"S100‑β", full:"S100 calcium‑binding protein B", desc:"Neuron‑specific protein; marker of blood‑brain barrier damage, brain injury, stroke." },
+                { catalog:"GL0018", name:"IL‑12p70", full:"Interleukin‑12p70 (heterodimer)", desc:"Induces Th1 response and IFN‑γ production; marker of cellular immunity." },
+                { catalog:"GL0019", name:"AFP", full:"Alpha‑fetoprotein", desc:"Oncomarker (liver cancer, germ cell tumours); also marker of fetal neural tube defects." },
+                { catalog:"GL0020", name:"G100", full:"Gastrin (G100)", desc:"Hormone stimulating gastric acid secretion; marker of gastrinoma and Zollinger‑Ellison syndrome." },
+                { catalog:"GL0021", name:"TBG", full:"Thyroxine‑binding globulin", desc:"Protein that transports thyroid hormones in blood." },
+                { catalog:"GL0022", name:"ACRV1", full:"Acrosin (ACRV1)", desc:"Acrosomal enzyme involved in fertilisation; marker of male infertility." },
+                { catalog:"GL0023", name:"CK‑MB", full:"Creatine kinase MB isoenzyme", desc:"Classic marker of myocardial infarction." },
+                { catalog:"GL0024", name:"C‑CRP", full:"Canine C‑reactive protein", desc:"Species‑specific CRP for veterinary diagnosis of inflammation in dogs." },
+                { catalog:"GL0025", name:"S‑RBD", full:"SARS‑CoV‑2 spike receptor‑binding domain", desc:"RBD of spike protein; used for detection of anti‑SARS‑CoV‑2 antibodies." },
+                { catalog:"GL0026", name:"F‑Hp", full:"Feline haptoglobin", desc:"Acute‑phase protein in cats; marker of inflammation and haemolysis." },
+                { catalog:"GL0027", name:"β‑HCG", full:"Beta subunit of human chorionic gonadotropin", desc:"Highly sensitive marker of pregnancy and trophoblastic tumours." },
+                { catalog:"GL0028", name:"VDBP", full:"Vitamin D‑binding protein", desc:"Transports calcidiol (25‑OH‑D); marker of vitamin D status." },
+                { catalog:"GL0029", name:"ACE2/his", full:"Recombinant ACE2 with His‑tag", desc:"Enzyme serving as SARS‑CoV‑2 receptor; His‑tag for purification (laboratory reagent)." },
+                { catalog:"GL0030", name:"ACE2/hFc", full:"Recombinant ACE2 with hFc fragment", desc:"Fusion protein with enhanced stability; used in COVID‑19 research." },
+                { catalog:"GL0031", name:"t‑PSA", full:"Total prostate‑specific antigen", desc:"Main oncomarker of prostate cancer (together with free fraction)." },
+                { catalog:"GL0032", name:"TK1", full:"Thymidine kinase 1", desc:"DNA synthesis enzyme; marker of tumour proliferation and haematological malignancies." },
+                { catalog:"GL0033", name:"PlGF‑1", full:"Placental growth factor‑1 (recombinant)", desc:"Involved in placental angiogenesis; used in preeclampsia screening (with sFlt‑1)." },
+                { catalog:"GL0034", name:"sFlt‑1", full:"Soluble fms‑like tyrosine kinase‑1", desc:"VEGF/PlGF trap; marker of preeclampsia (elevated levels)." },
+                { catalog:"GL0035", name:"PGI", full:"Pepsinogen I", desc:"Marker of gastric mucosal atrophy; PGI/PGII ratio screens for gastric cancer risk." },
+                { catalog:"GL0036", name:"PGII", full:"Pepsinogen II", desc:"Secreted by all gastric compartments; used with PGI to assess mucosal status." },
+                { catalog:"GL0037", name:"Ins", full:"Human insulin", desc:"Key regulator of glucose metabolism; marker of diabetes and insulinoma." },
+                { catalog:"GL0038", name:"C‑RLN", full:"Canine relaxin", desc:"Pregnancy hormone in dogs; used for pregnancy diagnosis." },
+                { catalog:"GL0039", name:"c‑TSH", full:"Canine thyroid‑stimulating hormone", desc:"Pituitary hormone in dogs; diagnosis of hypo‑ and hyperthyroidism." },
+                { catalog:"GL0040", name:"G73", full:"Golgi protein G73 (GP73)", desc:"Highly sensitive marker of hepatocellular carcinoma." },
+                { catalog:"GL0041", name:"TIMP‑1", full:"Tissue inhibitor of metalloproteinases‑1", desc:"Regulates MMP activity; involved in fibrosis, metastasis, inflammation." },
+                { catalog:"GL0042", name:"GDF‑15", full:"Growth/differentiation factor‑15", desc:"Stress‑induced cytokine; marker of cardiotoxicity, heart failure, cancer." },
+                { catalog:"GL0043", name:"GIF", full:"Gastric intrinsic factor", desc:"Required for vitamin B12 absorption; anti‑GIF antibodies are marker of pernicious anaemia." },
+                { catalog:"GL0044", name:"FBP", full:"Folate‑binding protein", desc:"Folate transporter; used in diagnosis of folate deficiency." },
+                { catalog:"GL0045", name:"f‑PSA", full:"Free prostate‑specific antigen", desc:"Unbound PSA; f‑PSA/t‑PSA ratio helps differentiate cancer from benign prostatic hyperplasia." },
+                { catalog:"GL0046", name:"CHI3L1", full:"Chitinase‑3‑like protein 1", desc:"Marker of macrophage activation; elevated in asthma, rheumatoid arthritis, liver diseases." },
+                { catalog:"GL0047", name:"SHBG", full:"Sex hormone‑binding globulin", desc:"Transports testosterone and oestradiol; regulates bioavailability of sex steroids." },
+                { catalog:"GL0048", name:"TM", full:"Thrombomodulin", desc:"Endothelial thrombin receptor; marker of endothelial damage (sepsis, DIC)." },
+                { catalog:"GL0049", name:"IL‑1β", full:"Interleukin‑1β", desc:"Key pro‑inflammatory cytokine; target in autoinflammatory and rheumatic diseases." },
+                { catalog:"GL0050", name:"IL‑2", full:"Interleukin‑2", desc:"T‑cell growth factor; used in cancer immunotherapy and as marker of T‑cell activation." },
+                { catalog:"GL0051", name:"IL‑4", full:"Interleukin‑4", desc:"Th2 cytokine; involved in IgE‑mediated allergic reactions." },
+                { catalog:"GL0052", name:"MPO", full:"Myeloperoxidase", desc:"Neutrophil enzyme; marker of oxidative stress and atherosclerotic plaque stability." },
+                { catalog:"GL0053", name:"TAT", full:"Thrombin‑antithrombin complex", desc:"Marker of coagulation activation (thrombinaemia); elevated in DIC and thrombosis." },
+                { catalog:"GL0054", name:"t‑PAIC", full:"t‑PA/PAI‑1 complex", desc:"Reflects fibrinolysis activity; elevated in endothelial dysfunction and thrombophilia." },
+                { catalog:"GL0055", name:"β2‑GPI", full:"Beta‑2 glycoprotein I", desc:"Cofactor for antiphospholipid antibodies; target in antiphospholipid syndrome." },
+                { catalog:"GL0056", name:"REN", full:"Renin", desc:"Key enzyme of renin‑angiotensin system; marker of renovascular hypertension." },
+                { catalog:"GL0057", name:"IGFBP‑3", full:"Insulin‑like growth factor‑binding protein 3", desc:"Main carrier of IGF‑1; regulates cell growth, marker of growth hormone deficiency." },
+                { catalog:"GL0058", name:"IFN‑γ", full:"Interferon‑γ", desc:"Th1 cytokine activating macrophages; marker of cellular immunity (e.g., tuberculosis)." },
+                { catalog:"GL0059", name:"HABP1", full:"Hyaluronan‑binding protein 1", desc:"Involved in cell adhesion and migration; marker of fibrosis and inflammation." },
+                { catalog:"GL0060", name:"Naa10", full:"N‑alpha‑acetyltransferase 10", desc:"Protein acetylation enzyme; linked to oncogenesis and Ogden syndrome." },
+                { catalog:"GL0061", name:"EPO", full:"Erythropoietin", desc:"Hormone stimulating red blood cell production; marker of anaemia and renal failure." },
+                { catalog:"GL0062", name:"IL‑8", full:"Interleukin‑8 (CXCL8)", desc:"Chemokine attracting neutrophils; marker of acute inflammation and ischaemia‑reperfusion." },
+                { catalog:"GL0063", name:"IL‑10", full:"Interleukin‑10", desc:"Anti‑inflammatory cytokine; marker of immunosuppression and chronic infections." },
+                { catalog:"GL0064", name:"IL‑18", full:"Interleukin‑18", desc:"Pro‑inflammatory cytokine of IL‑1 family; involved in autoimmune and infectious diseases." },
+                { catalog:"GL0065", name:"IL‑5", full:"Interleukin‑5", desc:"Eosinophil cytokine; marker of allergic diseases and helminth infections." },
+                { catalog:"GL0066", name:"IL‑17A", full:"Interleukin‑17A", desc:"Key Th17 cytokine; target in psoriasis and ankylosing spondylitis." },
+                { catalog:"GL0067", name:"PIC", full:"Plasmin‑antiplasmin complex", desc:"Marker of fibrinolytic activation (plasmin formation)." },
+                { catalog:"GL0068", name:"P‑selectin", full:"P‑selectin", desc:"Adhesion molecule on platelets and endothelium; marker of platelet activation and thrombosis." },
+                { catalog:"GL0069", name:"IL‑2RA", full:"Interleukin‑2 receptor alpha chain (CD25)", desc:"Marker of T‑cell activation; used in T‑cell leukaemia and autoimmune diseases." },
+                { catalog:"GL0070", name:"PAP", full:"Prostatic acid phosphatase", desc:"Classic oncomarker of prostate cancer (now largely replaced by PSA)." },
+                { catalog:"GL0071", name:"IGFBP‑1", full:"Insulin‑like growth factor‑binding protein 1", desc:"Regulates IGF bioavailability; marker of hypoglycaemia and insulin resistance." },
+                { catalog:"GL0072", name:"IL‑12", full:"Interleukin‑12", desc:"Induces Th1 response and IFN‑γ; important against intracellular pathogens." },
+                { catalog:"GL0073", name:"KL‑6", full:"Krebs von den Lungen‑6", desc:"Marker of interstitial lung disease (alveolitis, pneumonitis)." },
+                { catalog:"GL0074", name:"α‑HCG", full:"Alpha subunit of human chorionic gonadotropin", desc:"Common subunit of gonadotropins; used in assessment of pituitary‑gonadal axis." },
+                { catalog:"GL0075", name:"fPL", full:"Feline pancreatic lipase", desc:"Highly specific marker of pancreatitis in cats." },
+                { catalog:"GL0076", name:"cPL", full:"Canine pancreatic lipase", desc:"Specific marker of pancreatitis in dogs." },
+                { catalog:"GL0077", name:"GAGE7", full:"GAGE family member 7", desc:"Cancer‑testis antigen; potential target for immunotherapy." },
+                { catalog:"GL0078", name:"UreB", full:"Urease B (Helicobacter pylori)", desc:"H. pylori antigen; used for infection diagnosis (antibodies, breath tests)." },
+                { catalog:"GL0079", name:"HE4", full:"Human epididymis protein 4", desc:"Ovarian cancer marker (more sensitive than CA125 in early stages)." },
+                { catalog:"GL0080", name:"A35R", full:"Monkeypox virus protein A35R", desc:"Viral protein involved in immune evasion; target for vaccines and serodiagnosis." },
+                { catalog:"GL0081", name:"SAA1", full:"Serum amyloid A1", desc:"Acute‑phase protein; marker of inflammation (especially in chronic amyloidosis)." },
+                { catalog:"GL0082", name:"TSHR", full:"Thyroid‑stimulating hormone receptor", desc:"Target of antibodies in Graves' disease and thyroiditis." },
+                { catalog:"GL0083", name:"TSHR", full:"Thyroid‑stimulating hormone receptor (alternative isoform)", desc:"Same as GL0082; alternative isoform reagent." },
+                { catalog:"GL0084", name:"KL‑6", full:"Krebs von den Lungen‑6 (duplicate)", desc:"Same as GL0073; marker of interstitial lung disease." },
+                { catalog:"GL0085", name:"Ri", full:"Neuronal antigen Ri (ANNA‑2)", desc:"Target of paraneoplastic antibodies (opsoclonus‑myoclonus syndrome)." },
+                { catalog:"GL0086", name:"SSB/La", full:"Sjögren's syndrome antigen B (La)", desc:"Autoantigen in Sjögren's syndrome and systemic lupus erythematosus." },
+                { catalog:"GL0087", name:"U1‑snRNP A", full:"U1 small nuclear ribonucleoprotein A", desc:"Autoantigen in mixed connective tissue disease (MCTD)." },
+                { catalog:"GL0088", name:"INHIBIN A", full:"Inhibin A", desc:"Suppresses FSH; marker of ovarian granulosa cell tumours and preeclampsia." },
+                { catalog:"GL0089", name:"CD42b‑CD62p", full:"CD42b (GPIbα) – CD62p (P‑selectin) complex", desc:"Marker of activated platelets (flow cytometry)." },
+                { catalog:"GL0090", name:"SARS‑CoV‑2 S‑NTD", full:"SARS‑CoV‑2 spike N‑terminal domain", desc:"Antigen for detection of neutralising antibodies." },
+                { catalog:"GL0091", name:"TGF‑β1", full:"Transforming growth factor β1", desc:"Pleiotropic cytokine; regulator of fibrosis, inflammation, immunosuppression." },
+                { catalog:"GL0092", name:"HuD", full:"Neuronal RNA‑binding protein HuD", desc:"Target of anti‑Hu antibodies in paraneoplastic syndrome (lung cancer)." },
+                { catalog:"GL0093", name:"PCNA", full:"Proliferating cell nuclear antigen", desc:"Cofactor of DNA polymerase δ; marker of proliferation (histology, IHC)." },
+                { catalog:"GL0094", name:"INHIBIN B", full:"Inhibin B", desc:"Marker of Sertoli cell function and ovarian reserve." },
+                { catalog:"GL0095", name:"CD42b‑CD63", full:"CD42b (GPIbα) – CD63 complex", desc:"Marker of platelet activation (lysosomal CD63 exposure)." }
+            ];
+            
+            // --------------------------------------------------------------
+            // 2) ПРОКАРИОТИЧЕСКИЕ АНТИГЕНЫ (GLP23001 – GLP23182, уникальные, без дублей)
+            // --------------------------------------------------------------
+            const prokaryoticAntigens = [
+                { catalog:"GLP23001", name:"CY21-1", full:"CYFRA 21‑1 (cytokeratin 19 fragment)", desc:"Oncomarker of non‑small cell lung cancer, especially squamous cell type." },
+                { catalog:"GLP23002", name:"NSE", full:"Neuron‑specific enolase", desc:"Glycolytic enzyme of neurons and neuroendocrine cells; marker of small cell lung cancer, neuroblastoma." },
+                { catalog:"GLP23003", name:"proGRP", full:"Pro‑gastrin‑releasing peptide", desc:"Precursor of GRP; highly specific marker of small cell lung cancer." },
+                { catalog:"GLP23004", name:"HE4", full:"Human epididymis protein 4", desc:"Ovarian cancer marker (more early than CA125), also elevated in endometrial cancer." },
+                { catalog:"GLP23005", name:"PGI", full:"Pepsinogen I", desc:"Produced by gastric chief cells; low level indicates atrophic gastritis, gastric cancer risk." },
+                { catalog:"GLP23006", name:"PGII", full:"Pepsinogen II", desc:"Secreted by all gastric compartments; PGI/PGII ratio screens for mucosal atrophy." },
+                { catalog:"GLP23007", name:"Gastrin", full:"Gastrin (G100)", desc:"Hormone stimulating gastric acid secretion; marker of gastrinoma (Zollinger‑Ellison syndrome)." },
+                { catalog:"GLP23008", name:"PRL", full:"Prolactin", desc:"Pituitary hormone stimulating lactation; marker of prolactinoma, hyperprolactinemia." },
+                { catalog:"GLP23009", name:"GH", full:"Growth hormone (somatotropin)", desc:"Marker of acromegaly, gigantism (elevated) and growth hormone deficiency (low)." },
+                { catalog:"GLP23010", name:"cTnI", full:"Cardiac troponin I", desc:"Cardiac‑specific protein; highly sensitive and specific marker of myocardial injury (infarction)." },
+                { catalog:"GLP23011", name:"NT‑proBNP", full:"N‑terminal pro‑brain natriuretic peptide", desc:"Marker of heart failure, more stable than BNP; reflects ventricular wall stress." },
+                { catalog:"GLP23012", name:"BNP", full:"Brain natriuretic peptide", desc:"Hormone released by ventricles under overload; marker of heart failure severity." },
+                { catalog:"GLP23013", name:"MYO", full:"Myoglobin", desc:"Early marker of muscle injury (myocardial infarction, trauma); low specificity." },
+                { catalog:"GLP23014", name:"H‑FABP", full:"Heart‑type fatty acid‑binding protein", desc:"Early marker of myocardial infarction (appears in blood within 1–2 hours)." },
+                { catalog:"GLP23015", name:"ST2", full:"Suppression of tumorigenicity 2 (IL‑33 receptor)", desc:"Marker of cardiac fibrosis and prognosis in heart failure." },
+                { catalog:"GLP23016", name:"PTH", full:"Parathyroid hormone", desc:"Regulator of calcium metabolism; marker of hyperparathyroidism, differential diagnosis of hypercalcemia." },
+                { catalog:"GLP23017", name:"PCT", full:"Procalcitonin", desc:"Precursor of calcitonin; highly specific marker of bacterial sepsis (unlike viral infection)." },
+                { catalog:"GLP23018", name:"NGAL", full:"Neutrophil gelatinase‑associated lipocalin", desc:"Early marker of acute kidney injury (acute renal failure)." },
+                { catalog:"GLP23019", name:"β2‑MG", full:"Beta‑2 microglobulin", desc:"Cell surface protein; marker of tubular kidney dysfunction, lymphoproliferative diseases." },
+                { catalog:"GLP23020", name:"Cys‑C", full:"Cystatin C", desc:"Marker of glomerular filtration rate; alternative to creatinine (independent of muscle mass)." },
+                { catalog:"GLP23021", name:"CP", full:"C‑peptide", desc:"Proinsulin fragment; reflects endogenous insulin secretion (diabetes, insulinoma)." },
+                { catalog:"GLP23022", name:"ADPN", full:"Adiponectin", desc:"Adipokine with insulin‑sensitizing effects; marker of metabolic syndrome, obesity." },
+                { catalog:"GLP23023", name:"HBeAg", full:"Hepatitis B e antigen", desc:"Marker of active HBV replication; high level indicates high contagiousness." },
+                { catalog:"GLP23024", name:"HBcAg", full:"Hepatitis B core antigen", desc:"Nucleocapsid protein of HBV; anti‑HBcAg antibodies are marker of past or current infection." },
+                { catalog:"GLP23025", name:"SLO", full:"Streptolysin O", desc:"Streptococcal toxin; anti‑SLO antibodies diagnose rheumatic fever, post‑streptococcal glomerulonephritis." },
+                { catalog:"GLP23026", name:"Fer", full:"Ferritin", desc:"Iron‑storing protein; marker of iron stores, also inflammation and tumours." },
+                { catalog:"GLP23027", name:"TK1", full:"Thymidine kinase 1", desc:"DNA synthesis enzyme; marker of tumour proliferation, prostate cancer, haematological malignancies." },
+                { catalog:"GLP23028", name:"SAA1", full:"Serum amyloid A1", desc:"Acute‑phase protein; more sensitive than CRP in viral infections and autoimmune flares." },
+                { catalog:"GLP23029", name:"TFF1", full:"Trefoil factor 1", desc:"Secreted peptide protecting gastric mucosa; marker of chronic gastritis and cancer." },
+                { catalog:"GLP23030", name:"TFF2", full:"Trefoil factor 2", desc:"Involved in epithelial regeneration of stomach and duodenum." },
+                { catalog:"GLP23031", name:"TFF3", full:"Trefoil factor 3", desc:"Secreted by intestinal goblet cells; marker of intestinal barrier damage (IBD)." },
+                { catalog:"GLP23032", name:"S100‑β", full:"S100 calcium‑binding protein B", desc:"Neuron‑specific protein; marker of blood‑brain barrier damage, TBI, stroke." },
+                { catalog:"GLP23033", name:"Lp‑PLA2", full:"Lipoprotein‑associated phospholipase A2", desc:"Enzyme linked to vulnerable atherosclerotic plaques; marker of cardiovascular risk." },
+                { catalog:"GLP23034", name:"TNF‑α", full:"Tumour necrosis factor α", desc:"Pro‑inflammatory cytokine; target in rheumatoid arthritis, Crohn's disease therapy." },
+                { catalog:"GLP23035", name:"HER2", full:"Receptor tyrosine‑protein kinase erbB‑2 (HER2/neu)", desc:"Oncomarker of breast and gastric cancer; predicts sensitivity to trastuzumab." },
+                { catalog:"GLP23036", name:"IL‑6", full:"Interleukin‑6", desc:"Key pro‑inflammatory cytokine; marker of sepsis, chronic inflammation, cytokine storm." },
+                { catalog:"GLP23037", name:"AMH", full:"Anti‑Müllerian hormone", desc:"Marker of ovarian reserve and testicular function (Sertoli cells in males)." },
+                { catalog:"GLP23038", name:"PA", full:"Prealbumin (transthyretin)", desc:"Negative acute‑phase protein; marker of nutritional status (decreased in protein deficiency)." },
+                { catalog:"GLP23039", name:"Proinsulin", full:"Proinsulin", desc:"Precursor of insulin; elevated in insulinoma and some forms of diabetes (MODY)." },
+                { catalog:"GLP23040", name:"H‑EGF", full:"Human epidermal growth factor", desc:"Stimulates cell proliferation; involved in wound healing, carcinogenesis." },
+                { catalog:"GLP23041", name:"ACTH", full:"Adrenocorticotropic hormone", desc:"Pituitary hormone stimulating adrenal cortex; marker of Cushing's disease, pituitary adenoma." },
+                { catalog:"GLP23042", name:"ApoA1", full:"Apolipoprotein A1", desc:"Main protein of HDL; decreased in atherosclerosis, elevated in some hyperlipidemias." },
+                { catalog:"GLP23043", name:"HSP", full:"Heat shock protein (H. pylori)", desc:"H. pylori antigen; used for serodiagnosis of infection." },
+                { catalog:"GLP23044", name:"UreB", full:"Urease B (H. pylori)", desc:"Enzyme splitting urea; antigen for infection diagnosis (antibodies, breath tests)." },
+                { catalog:"GLP23045", name:"VacA", full:"Vacuolating cytotoxin A (H. pylori)", desc:"Virulence factor associated with peptic ulcer and gastric cancer." },
+                { catalog:"GLP23046", name:"FlaA", full:"Flagellin A (H. pylori)", desc:"Flagellar protein; used in diagnostic panels." },
+                { catalog:"GLP23047", name:"FlaB", full:"Flagellin B (H. pylori)", desc:"Second flagellin antigen for serological detection of H. pylori." },
+                { catalog:"GLP23048", name:"CagA", full:"Cytotoxin‑associated protein A (H. pylori)", desc:"Marker of highly virulent strain; associated with atrophic gastritis and cancer risk." },
+                { catalog:"GLP23049", name:"OMP‑1", full:"Outer membrane protein 1 (H. pylori)", desc:"Adhesin involved in mucosal colonisation." },
+                { catalog:"GLP23050", name:"OMP‑2", full:"Outer membrane protein 2 (H. pylori)", desc:"Additional antigen for diagnostic panels." },
+                { catalog:"GLP23051", name:"CBS", full:"Cystathionine beta‑synthase", desc:"Key enzyme of transsulfuration; mutations cause homocystinuria." },
+                { catalog:"GLP23052", name:"CBL", full:"Cystathionine gamma‑lyase", desc:"Enzyme involved in cysteine synthesis from homocysteine." },
+                { catalog:"GLP23053", name:"SAHH", full:"S‑adenosylhomocysteine hydrolase", desc:"Regulates methylation; target for antiviral drugs." },
+                { catalog:"GLP23054", name:"S100‑A8", full:"S100 calcium‑binding protein A8 (calprotectin light chain)", desc:"Expressed by neutrophils; component of calprotectin – marker of intestinal inflammation." },
+                { catalog:"GLP23055", name:"S100‑A9", full:"S100 calcium‑binding protein A9 (calprotectin heavy chain)", desc:"Heterodimer with S100‑A8; elevated in faeces in Crohn's disease and ulcerative colitis." },
+                { catalog:"GLP23056", name:"AD7c‑NTP", full:"Alzheimer's disease‑associated neuronal thread protein", desc:"Associated with neurofibrillary tangles; potential urinary marker of Alzheimer's disease." },
+                { catalog:"GLP23057", name:"TrxR", full:"Thioredoxin reductase", desc:"Antioxidant enzyme; elevated in many tumours, marker of oxidative stress." },
+                { catalog:"GLP23058", name:"CK‑MB", full:"Creatine kinase MB isoenzyme", desc:"Cardiac isoenzyme; classic (but outdated) marker of myocardial infarction." },
+                { catalog:"GLP23059", name:"F‑SAA1", full:"Feline serum amyloid A1", desc:"Acute‑phase protein in cats; diagnosis of inflammation, infections." },
+                { catalog:"GLP23060", name:"Protein A", full:"Staphylococcal protein A", desc:"Bacterial protein binding Fc fragment of IgG; used in immunology as affinity reagent." },
+                { catalog:"GLP23061", name:"NGAL‑D", full:"NGAL homodimer", desc:"Dimeric form of lipocalin; marker of acute kidney injury (more specific than monomer)." },
+                { catalog:"GLP23062", name:"2019‑nCOV‑N", full:"SARS‑CoV‑2 nucleocapsid protein", desc:"Viral nucleocapsid antigen; used in test systems (antibody detection)." },
+                { catalog:"GLP23063", name:"M‑P1‑10", full:"Mycoplasma pneumoniae P1 adhesin", desc:"Protein mediating mycoplasma attachment to respiratory epithelium; ELISA antigen." },
+                { catalog:"GLP23064", name:"SCCA", full:"Squamous cell carcinoma antigen", desc:"Oncomarker of squamous cell carcinoma of cervix, lung, oesophagus." },
+                { catalog:"GLP23065", name:"SA", full:"Streptavidin", desc:"Bacterial protein with high affinity for biotin; used in immunochemical methods." },
+                { catalog:"GLP23066", name:"Copeptin", full:"Copeptin", desc:"C‑terminal part of vasopressin prohormone; marker of hyponatremia, MI, sepsis." },
+                { catalog:"GLP23067", name:"CDV‑F", full:"Canine distemper virus fusion protein", desc:"Fusion protein; antigen for vaccination and serodiagnosis of distemper." },
+                { catalog:"GLP23068", name:"CDV‑N", full:"Canine distemper virus nucleocapsid protein", desc:"Nucleocapsid antigen; diagnostic antigen for distemper." },
+                { catalog:"GLP23069", name:"F‑NT‑proBNP", full:"Feline NT‑proBNP", desc:"Veterinary marker of heart failure in cats." },
+                { catalog:"GLP23070", name:"C‑NT‑proBNP", full:"Canine NT‑proBNP", desc:"Veterinary marker of heart failure in dogs." },
+                { catalog:"GLP23071", name:"F‑CysC", full:"Feline cystatin C", desc:"Marker of glomerular filtration rate in cats (diagnosis of renal failure)." },
+                { catalog:"GLP23072", name:"C‑CysC", full:"Canine cystatin C", desc:"Analogous marker for dogs." },
+                { catalog:"GLP23073", name:"F‑NGAL", full:"Feline NGAL", desc:"Early marker of acute kidney injury in cats." },
+                { catalog:"GLP23074", name:"C‑NGAL", full:"Canine NGAL", desc:"Marker of acute kidney injury in dogs." },
+                { catalog:"GLP23075", name:"CPV‑VP2", full:"Canine parvovirus VP2 capsid protein", desc:"Major capsid protein; antigen for vaccines and diagnosis of parvoviral enteritis." },
+                { catalog:"GLP23076", name:"cTnT", full:"Cardiac troponin T", desc:"Cardiac troponin; marker of myocardial infarction (more sensitive than cTnI in some conditions)." },
+                { catalog:"GLP23077", name:"TOX‑Ag1", full:"Toxoplasma gondii recombinant antigen 1", desc:"Recombinant antigen for serodiagnosis of toxoplasmosis." },
+                { catalog:"GLP23078", name:"TOX‑Ag2", full:"Toxoplasma gondii recombinant antigen 2", desc:"Additional antigen, improves ELISA specificity." },
+                { catalog:"GLP23079", name:"TOX‑Ag3", full:"Toxoplasma gondii recombinant antigen 3", desc:"Third antigen panel for anti‑Toxoplasma antibody detection." },
+                { catalog:"GLP23080", name:"RV", full:"Rubella virus antigen", desc:"Antigen for rubella diagnosis (IgM, IgG detection)." },
+                { catalog:"GLP23081", name:"AI", full:"Angiotensin I", desc:"Decapeptide precursor of angiotensin II; measured in renin‑angiotensin system." },
+                { catalog:"GLP23082", name:"TOX‑Ag5", full:"Toxoplasma gondii recombinant antigen 5", desc:"Fifth antigen for toxoplasmosis serology." },
+                { catalog:"GLP23083", name:"PINP", full:"N‑terminal propeptide of type I procollagen", desc:"Marker of bone anabolism (bone formation); elevated in osteoporosis, Paget's disease." },
+                { catalog:"GLP23084", name:"N‑MID", full:"N‑mid fragment of osteocalcin", desc:"Marker of bone metabolism (formation and mineralisation)." },
+                { catalog:"GLP23085", name:"AII", full:"Angiotensin II", desc:"Vasoactive octapeptide; key effector of RAAS (vasoconstriction, aldosterone stimulation)." },
+                { catalog:"GLP23086", name:"ANP", full:"Atrial natriuretic peptide", desc:"Hormone released by atria under overload; marker of heart failure (less popular than BNP)." },
+                { catalog:"GLP23087", name:"CNP", full:"C‑type natriuretic peptide", desc:"Secreted by endothelium; regulator of vascular tone, not a cardiac marker." },
+                { catalog:"GLP23088", name:"UreA", full:"Urease A (H. pylori)", desc:"Urease subunit A; antigen for infection diagnosis." },
+                { catalog:"GLP23089", name:"REN", full:"Renin", desc:"Enzyme cleaving angiotensinogen; marker of renovascular hypertension." },
+                { catalog:"GLP23090", name:"Calprotectin", full:"Calprotectin (S100A8/A9 complex)", desc:"Neutrophil protein; marker of intestinal inflammation in faeces." },
+                { catalog:"GLP23091", name:"p24", full:"HIV‑1 p24 capsid protein", desc:"Capsid protein of HIV; marker of early infection (used in 4th generation tests)." },
+                { catalog:"GLP23092", name:"HCV‑Ag1", full:"Hepatitis C core antigen 1", desc:"HCV core antigen; used in combined antigen/antibody detection." },
+                { catalog:"GLP23093", name:"HCV‑Ag2", full:"Hepatitis C core antigen 2", desc:"Another epitope of core or NS3 antigen; increases serodiagnosis sensitivity." },
+                { catalog:"GLP23094", name:"HCV‑Ag3", full:"Hepatitis C non‑structural antigen", desc:"NS5 or NS4 antigen; part of multi‑antigen panels." },
+                { catalog:"GLP23095", name:"CK‑MM", full:"Creatine kinase MM isoenzyme", desc:"Skeletal muscle isoenzyme; marker of muscle injury (rhabdomyolysis, trauma)." },
+                { catalog:"GLP23096", name:"CK‑BB", full:"Creatine kinase BB isoenzyme", desc:"Brain isoenzyme; elevated in stroke, TBI, prostate cancer." },
+                { catalog:"GLP23097", name:"BGP", full:"Osteocalcin", desc:"Bone matrix protein; marker of osteoblast activity and bone metabolism." },
+                { catalog:"GLP23098", name:"FluA VP", full:"Influenza A capsid protein", desc:"Antigen for rapid immunochromatographic diagnosis of influenza A." },
+                { catalog:"GLP23099", name:"FluB VP", full:"Influenza B capsid protein", desc:"Antigen for rapid diagnosis of influenza B." },
+                { catalog:"GLP23100", name:"Aβ", full:"Beta‑amyloid", desc:"Main component of senile plaques in Alzheimer's disease; CSF marker." },
+                { catalog:"GLP23101", name:"HSV‑1", full:"Herpes simplex virus type 1 antigen", desc:"Recombinant antigen for serodiagnosis of HSV‑1." },
+                { catalog:"GLP23102", name:"HSV‑2", full:"Herpes simplex virus type 2 antigen", desc:"Antigen for differential serology of HSV‑2." },
+                { catalog:"GLP23103", name:"NoV VP1", full:"Norovirus VP1 capsid protein", desc:"Main capsid protein; antigen for norovirus detection." },
+                { catalog:"GLP23104", name:"NoV VP1p", full:"Norovirus VP1 fragment", desc:"Short antigenic fragment for more specific diagnosis." },
+                { catalog:"GLP23105", name:"RSV‑N", full:"Respiratory syncytial virus nucleocapsid protein", desc:"Nucleocapsid antigen; for RSV detection." },
+                { catalog:"GLP23106", name:"RSV‑F1", full:"Respiratory syncytial virus fusion protein", desc:"Fusion protein; target for neutralising antibodies and vaccines." },
+                { catalog:"GLP23107", name:"α1‑MG", full:"Alpha‑1 microglobulin", desc:"Marker of tubular kidney injury (elevated in interstitial nephritis)." },
+                { catalog:"GLP23108", name:"CT", full:"Calcitonin", desc:"Thyroid hormone (C‑cells); marker of medullary thyroid cancer." },
+                { catalog:"GLP23109", name:"PIIINP", full:"N‑terminal propeptide of type III procollagen", desc:"Marker of liver, lung, myocardial fibrosis (type III collagen formation)." },
+                { catalog:"GLP23110", name:"CP‑Ag1", full:"Chlamydia pneumoniae recombinant antigen", desc:"Antigen for serodiagnosis of C. pneumoniae pneumonia." },
+                { catalog:"GLP23111", name:"FPV", full:"Feline parvovirus antigen (panleukopenia)", desc:"Antigen for diagnosis of feline panleukopenia (feline distemper)." },
+                { catalog:"GLP23112", name:"IFN‑γ", full:"Interferon‑γ", desc:"Th1 cytokine; marker of cellular immunity (tuberculosis, lymphoproliferative diseases)." },
+                { catalog:"GLP23113", name:"IFN‑α", full:"Interferon‑α", desc:"Antiviral cytokine; used in therapy, elevated in SLE and viral infections." },
+                { catalog:"GLP23114", name:"MCM7", full:"Minichromosome maintenance protein 7", desc:"Replication licensing factor; marker of proliferation in tumours." },
+                { catalog:"GLP23115", name:"pFN2", full:"Fibronectin isoform FN2", desc:"Fibronectin isoform; potential marker of fibrosis and angiogenesis." },
+                { catalog:"GLP23116", name:"SOX2", full:"Transcription factor SOX2", desc:"Pluripotency factor; marker of germ cell tumours and lung cancer." },
+                { catalog:"GLP23117", name:"CAGE", full:"Cancer‑testis antigen CAGE", desc:"Expressed in many cancers; target for immunotherapy." },
+                { catalog:"GLP23118", name:"Pgp9.5", full:"Ubiquitin hydrolase UCHL1", desc:"Neuronal marker, also elevated in small cell lung cancer." },
+                { catalog:"GLP23119", name:"NNE", full:"Non‑neuronal enolase (αα dimer)", desc:"Mostly outside neural tissue; marker of haemolysis or muscle damage." },
+                { catalog:"GLP23120", name:"HPV 18L1", full:"Human papillomavirus type 18 L1 capsid protein", desc:"Major capsid protein; used in vaccines and serodiagnosis." },
+                { catalog:"GLP23121", name:"FHV‑1 gG", full:"Feline herpesvirus type 1 glycoprotein G", desc:"Antigen for diagnosis of feline rhinotracheitis." },
+                { catalog:"GLP23122", name:"IGF‑1", full:"Insulin‑like growth factor 1", desc:"Mediator of growth hormone action; marker of acromegaly, dwarfism." },
+                { catalog:"GLP23123", name:"p53", full:"Tumour suppressor p53", desc:"Transcription factor; mutant p53 is oncomarker." },
+                { catalog:"GLP23124", name:"GBM", full:"Glomerular basement membrane", desc:"Antigen targeted by antibodies in Goodpasture syndrome." },
+                { catalog:"GLP23125", name:"cTnC", full:"Cardiac troponin C", desc:"Calcium‑binding subunit of troponin complex; not cardiac‑specific (also in skeletal muscle)." },
+                { catalog:"GLP23126", name:"FerH", full:"Ferritin heavy chain", desc:"Ferritin subunit; marker of iron stores (often measured together with light chain)." },
+                { catalog:"GLP23127", name:"PRRSV N", full:"Porcine reproductive and respiratory syndrome virus nucleocapsid", desc:"Antigen for diagnosis of porcine blue ear disease." },
+                { catalog:"GLP23128", name:"HIV‑gp41", full:"HIV‑1 transmembrane glycoprotein gp41", desc:"Target for antibodies; used in HIV serology." },
+                { catalog:"GLP23129", name:"B21R", full:"Monkeypox virus protein B21R", desc:"Antigen for serodiagnosis of monkeypox (distinguishes from cowpox)." },
+                { catalog:"GLP23130", name:"A29L", full:"Monkeypox virus protein A29L", desc:"Viral protein homologue; used in diagnostic tests." },
+                { catalog:"GLP23131", name:"Protein G", full:"Streptococcal protein G", desc:"Bacterial protein binding Fc fragment of IgG; widely used in immunochemistry." },
+                { catalog:"GLP23132", name:"Protein L", full:"Peptostreptococcus magnus protein L", desc:"Binds light chains of immunoglobulins (via VL)." },
+                { catalog:"GLP23133", name:"MAGE A1", full:"Melanoma‑associated antigen A1", desc:"Cancer‑testis antigen; target for anticancer vaccines." },
+                { catalog:"GLP23134", name:"Tau 181", full:"Phosphorylated tau protein (threonine 181)", desc:"CSF biomarker of Alzheimer's disease (neurofibrillary tangles)." },
+                { catalog:"GLP23135", name:"SAHH‑P", full:"Phosphorylated S‑adenosylhomocysteine hydrolase", desc:"Phosphorylated form of SAHH; regulatory enzyme form." },
+                { catalog:"GLP23136", name:"SAHH‑H", full:"His‑tagged S‑adenosylhomocysteine hydrolase", desc:"Recombinant form with histidine tag for laboratory use." },
+                { catalog:"GLP23137", name:"HEV1", full:"Hepatitis E virus antigen 1 (ORF2 capsid)", desc:"ORF2 capsid antigen for HEV serodiagnosis." },
+                { catalog:"GLP23138", name:"HEV2", full:"Hepatitis E virus antigen 2 (ORF2/ORF3)", desc:"Additional epitope for improved sensitivity." },
+                { catalog:"GLP23139", name:"HCV‑Ag4", full:"Hepatitis C virus antigen 4 (NS3/NS4A)", desc:"Additional HCV antigen for diagnostic panels." },
+                { catalog:"GLP23140", name:"pLDH", full:"Plasmodium lactate dehydrogenase", desc:"Plasmodium enzyme; rapid malaria test (distinguishes species)." },
+                { catalog:"GLP23141", name:"GAD65", full:"Glutamate decarboxylase 65 kDa", desc:"Autoantigen in type 1 diabetes (anti‑GAD antibodies are early marker)." },
+                { catalog:"GLP23142", name:"INHA", full:"Inhibin A", desc:"Suppresses FSH; marker of ovarian granulosa cell tumours and preeclampsia." },
+                { catalog:"GLP23143", name:"RA33", full:"Heterogeneous nuclear ribonucleoprotein A2 (RA33)", desc:"Autoantigen in rheumatoid arthritis (anti‑RA33 antibodies)." },
+                { catalog:"GLP23144", name:"C‑cTnI", full:"Canine cardiac troponin I", desc:"Veterinary marker of myocardial injury in dogs." },
+                { catalog:"GLP23145", name:"F‑cTnI", full:"Feline cardiac troponin I", desc:"Veterinary marker of myocardial injury in cats." },
+                { catalog:"GLP23146", name:"GDF‑15", full:"Growth/differentiation factor‑15", desc:"Stress‑induced cytokine; marker of cardiotoxicity, heart failure, cancer." },
+                { catalog:"GLP23147", name:"SSA/Ro60", full:"Sjögren's syndrome A antigen (Ro60)", desc:"Autoantigen in SLE and Sjögren's syndrome." },
+                { catalog:"GLP23148", name:"SSA/Ro52", full:"Sjögren's syndrome A antigen (Ro52)", desc:"Another Ro complex protein; also an autoantigen." },
+                { catalog:"GLP23149", name:"SSB/La", full:"Sjögren's syndrome B antigen (La)", desc:"Autoantigen in Sjögren's syndrome and lupus (usually with Ro)." },
+                { catalog:"GLP23150", name:"Jo‑1", full:"Histidyl‑tRNA synthetase (Jo‑1)", desc:"Autoantigen in polymyositis/dermatomyositis (anti‑synthetase syndrome)." },
+                { catalog:"GLP23151", name:"FCV‑VP1", full:"Feline calicivirus VP1 capsid protein", desc:"Capsid antigen for diagnosis of feline respiratory infections." },
+                { catalog:"GLP23152", name:"Ri", full:"Neuronal antigen Ri (ANNA‑2)", desc:"Target of paraneoplastic antibodies in breast and lung cancer." },
+                { catalog:"GLP23153", name:"Yo", full:"Purkinje cell antigen Yo (PCA‑1)", desc:"Paraneoplastic marker (ovarian, breast cancer)." },
+                { catalog:"GLP23154", name:"PCNA", full:"Proliferating cell nuclear antigen", desc:"Cofactor of DNA polymerase δ; histological marker of proliferation." },
+                { catalog:"GLP23155", name:"SmB/B'", full:"Smith antigen B/B'", desc:"Nuclear autoantigen in SLE (anti‑Sm antibodies)." },
+                { catalog:"GLP23156", name:"P0", full:"Ribosomal phosphoprotein P0", desc:"Autoantigen in SLE (anti‑ribosomal antibodies, associated with lupus psychosis)." },
+                { catalog:"GLP23157", name:"ZnT8", full:"Zinc transporter 8", desc:"Autoantigen in type 1 diabetes (anti‑ZnT8 antibodies – late marker)." },
+                { catalog:"GLP23158", name:"FHV‑1 gB", full:"Feline herpesvirus type 1 glycoprotein B", desc:"Antigen for vaccination and serology." },
+                { catalog:"GLP23159", name:"FHV‑1 gD", full:"Feline herpesvirus type 1 glycoprotein D", desc:"Target of neutralising antibodies." },
+                { catalog:"GLP23160", name:"CAdV‑Hexon", full:"Canine adenovirus hexon protein", desc:"Major capsid protein; antigen for diagnosis of infectious hepatitis in dogs." },
+                { catalog:"GLP23161", name:"IA‑2", full:"Tyrosine phosphatase IA‑2", desc:"Autoantigen in type 1 diabetes (anti‑IA‑2 antibodies)." },
+                { catalog:"GLP23162", name:"IA‑2", full:"Tyrosine phosphatase IA‑2 (repeat)", desc:"Same as GLP23161." },
+                { catalog:"GLP23166", name:"FPV‑VP2", full:"Feline panleukopenia virus VP2 capsid protein", desc:"Capsid protein of feline parvovirus; diagnosis of panleukopenia." },
+                { catalog:"GLP23170", name:"dsDNA Peptide", full:"Synthetic dsDNA‑mimicking peptide", desc:"Synthetic peptide mimicking double‑stranded DNA; used for anti‑dsDNA antibody detection in SLE." },
+                { catalog:"GLP23171", name:"u1‑snRNP A", full:"U1 small nuclear ribonucleoprotein A", desc:"Autoantigen in mixed connective tissue disease (anti‑U1RNP)." },
+                { catalog:"GLP23172", name:"C‑SAA", full:"Canine serum amyloid A", desc:"Acute‑phase protein in dogs; marker of inflammation." },
+                { catalog:"GLP23173", name:"PRV gB", full:"Pseudorabies virus glycoprotein B", desc:"Antigen for vaccination and differential diagnosis in swine." },
+                { catalog:"GLP23174", name:"SmD1", full:"Smith antigen D1 subunit", desc:"Subunit of Sm complex; autoantigen in SLE." },
+                { catalog:"GLP23175", name:"SmD2", full:"Smith antigen D2 subunit", desc:"Another Sm subunit; target of anti‑Sm antibodies." },
+                { catalog:"GLP23176", name:"SmD3", full:"Smith antigen D3 subunit", desc:"Third Sm subunit; used in multi‑antigen panels." },
+                { catalog:"GLP23177", name:"HABP1", full:"Hyaluronan‑binding protein 1", desc:"Involved in cell adhesion, fibrosis; laboratory reagent." },
+                { catalog:"GLP23178", name:"S‑tag", full:"S‑peptide (S‑tag)", desc:"Short peptide (from RNase A); used as affinity tag." },
+                { catalog:"GLP23179", name:"GST", full:"Glutathione S‑transferase", desc:"Popular affinity tag for purification of recombinant proteins." }
+            ];
+            
+            // --------------------------------------------------------------
+            // ОТРИСОВКА
+            // --------------------------------------------------------------
+            let currentTooltip = null;
+            
+            function closeTooltip() {
+                if (currentTooltip) { currentTooltip.remove(); currentTooltip = null; }
+            }
+            
+            function attachClickHandler() {
+                document.querySelectorAll('.product-name').forEach(cell => {
+                    if (cell._clickHandler) cell.removeEventListener('click', cell._clickHandler);
+                    const handler = (e) => {
+                        e.stopPropagation();
+                        const desc = cell.getAttribute('data-desc');
+                        if (!desc) return;
+                        const abbrevCell = cell.closest('tr').querySelector('.abbrev-cell');
+                        if (!abbrevCell) return;
+                        if (currentTooltip && currentTooltip.parentNode === abbrevCell) { closeTooltip(); return; }
+                        closeTooltip();
+                        const tooltip = document.createElement('div');
+                        tooltip.className = 'tooltip-overlay';
+                        tooltip.innerText = desc;
+                        abbrevCell.style.position = 'relative';
+                        abbrevCell.appendChild(tooltip);
+                        currentTooltip = tooltip;
+                    };
+                    cell.addEventListener('click', handler);
+                    cell._clickHandler = handler;
+                });
+            }
+            
+            function renderTable(searchTerm = "") {
+                const term = searchTerm.trim().toLowerCase();
+                const filterFn = (item) => item.catalog.toLowerCase().includes(term) || item.name.toLowerCase().includes(term) || item.full.toLowerCase().includes(term);
+                let filteredEuk = eukaryoticAntigens;
+                let filteredProk = prokaryoticAntigens;
+                if (term) {
+                    filteredEuk = eukaryoticAntigens.filter(filterFn);
+                    filteredProk = prokaryoticAntigens.filter(filterFn);
+                }
+                const container = document.getElementById('tablesContainer');
+                if (!container) return;
+                let html = "";
+                
+                // Эукариотическая группа
+                if (filteredEuk.length) {
+                    html += `<div class="antigens-section"><div class="category-title">Eukaryotic cell expressed antigens</div><div class="result-count">Found: ${filteredEuk.length}</div>`;
+                    html += `<div class="table-wrapper"><table class="antigens-table"><thead><tr><th>Catalog #</th><th>Abbreviation</th><th>Full name / description</th></tr></thead><tbody>`;
+                    filteredEuk.forEach(item => {
+                        html += `<tr><td>${escapeHtml(item.catalog)}</td><td class="abbrev-cell">${escapeHtml(item.name)}</td><td class="product-name" data-desc="${escapeAttr(item.desc)}">${escapeHtml(item.full)}</td></tr>`;
+                    });
+                    html += `</tbody></table></div></div>`;
+                } else if (term) { html += `<div class="no-results">No eukaryotic antigens match your search.</div>`; }
+                
+                // Прокариотическая группа
+                if (filteredProk.length) {
+                    html += `<div class="antigens-section"><div class="category-title">Prokaryotic cell expressed antigens</div><div class="result-count">Found: ${filteredProk.length}</div>`;
+                    html += `<div class="table-wrapper"><table class="antigens-table"><thead><tr><th>Catalog #</th><th>Abbreviation</th><th>Full name / description</th></tr></thead><tbody>`;
+                    filteredProk.forEach(item => {
+                        html += `<tr><td>${escapeHtml(item.catalog)}</td><td class="abbrev-cell">${escapeHtml(item.name)}</td><td class="product-name" data-desc="${escapeAttr(item.desc)}">${escapeHtml(item.full)}</td></tr>`;
+                    });
+                    html += `</tbody></table></div></div>`;
+                } else if (term && filteredEuk.length === 0) { html = `<div class="no-results">No antigens match your search.</div>`; }
+                
+                container.innerHTML = html;
+                attachClickHandler();
+            }
+            
+            function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+            function escapeAttr(str) { return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+            
+            document.body.addEventListener('click', (e) => { if (currentTooltip && !e.target.closest('.product-name')) closeTooltip(); });
+            
+            const searchInput = document.getElementById('searchInput'), clearBtn = document.getElementById('clearSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', () => { renderTable(searchInput.value); if (clearBtn) clearBtn.style.display = searchInput.value ? 'block' : 'none'; });
+            }
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => { searchInput.value = ''; renderTable(''); clearBtn.style.display = 'none'; });
+            }
+            renderTable('');
+            
+            // Бургер
+            const burgerBtn = document.getElementById('burgerBtn'), menuPanel = document.getElementById('menuPanel'), closeMenuBtn = document.getElementById('closeMenuBtn');
+            if(burgerBtn) burgerBtn.addEventListener('click', () => menuPanel.classList.add('open'));
+            if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => menuPanel.classList.remove('open'));
+            document.addEventListener('click', (e) => { if(menuPanel && menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !burgerBtn.contains(e.target)) menuPanel.classList.remove('open'); });
+            
+            // Форма
+            const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxA5MueC0RXAhrR5oR74pDP3iM5CrNIPr_vtYydxyqm5mgz-RRuGEHgmVHRxphBW40rvA/exec';
+            const modal = document.getElementById('contactModal'), inquireBtn = document.getElementById('inquireBtnAg'), closeModalBtn = document.getElementById('closeModalBtn'), form = document.getElementById('contactForm'), statusDiv = document.getElementById('formStatus');
+            function openModal() { modal.style.display = 'flex'; statusDiv.innerHTML = ''; }
+            function closeModalFunc() { modal.style.display = 'none'; form.reset(); statusDiv.innerHTML = ''; }
+            if(inquireBtn) inquireBtn.addEventListener('click', openModal);
+            if(closeModalBtn) closeModalBtn.addEventListener('click', closeModalFunc);
+            window.addEventListener('click', (e) => { if(e.target === modal) closeModalFunc(); });
+            if(form) form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                let name = document.getElementById('name').value.trim(), company = document.getElementById('company').value.trim(), email = document.getElementById('email').value.trim(), message = document.getElementById('message').value.trim();
+                if (!name || !company || !email || !message) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Please fill in all fields.</span>'; return; }
+                if (!email.includes('@')) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Invalid email.</span>'; return; }
+                const submitBtn = form.querySelector('.modal-submit');
+                submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; statusDiv.innerHTML = 'Sending...';
+                try { await fetch(PROXY_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, company, email, message }) });
+                    statusDiv.innerHTML = '<span style="color:#2e7d32;">✓ Thank you! We will get back to you soon.</span>'; form.reset(); setTimeout(closeModalFunc, 2000);
+                } catch(err) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Error, please try again later.</span>'; }
+                finally { submitBtn.disabled = false; submitBtn.textContent = 'Send inquiry'; }
+            });
+        })();
+    </script>
+</body>
+</html>
