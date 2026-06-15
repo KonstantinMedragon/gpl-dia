@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>About | GPL Diagnostics</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>About | GPL Diagnostics – technology transfer for IVD</title>
+    <meta name="description" content="GPL Diagnostics: 30 years of IVD expertise. Technology transfer, reagent supply, custom development and market entry support for Southeast Asia.">
+    <meta name="keywords" content="technology transfer, IVD, immunoassay development, reagent supply, market entry SEA, diagnostic manufacturing, GPL Diagnostics">
+    <meta name="author" content="GPL Diagnostics">
+    <meta property="og:title" content="About | GPL Diagnostics – technology transfer for IVD">
+    <meta property="og:description" content="We save companies years of effort and hundreds of thousands of dollars in investment with proven technology transfer packages.">
+    <meta property="og:image" content="images/hero.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #2c2c2c; line-height: 1.5; }
@@ -14,6 +22,20 @@
         .content p { font-size: 1.1rem; font-weight: 400; color: #2c2c2c; margin-bottom: 24px; text-align: left; max-width: 780px; margin-left: auto; margin-right: auto; }
         .btn-inquire { display: inline-block; background-color: #00101c; color: white; font-weight: 600; font-size: 1rem; padding: 12px 40px; border-radius: 40px; border: none; cursor: pointer; transition: 0.25s; margin-top: 16px; margin-bottom: 20px; }
         .btn-inquire:hover { background-color: #002a3b; }
+        
+        /* Бургер-меню */
+        .burger { position: fixed; top: 32px; right: 32px; z-index: 1000; }
+        .burger-btn { background: rgba(0,16,28,0.7); backdrop-filter: blur(8px); border: none; border-radius: 40px; width: 52px; height: 52px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; }
+        .burger-btn span { width: 24px; height: 2px; background: white; border-radius: 4px; }
+        .menu-panel { position: fixed; top: 0; right: -420px; width: 380px; max-width: 85vw; height: 100%; background: rgba(10,15,26,0.96); backdrop-filter: blur(16px); border-left: 1px solid rgba(255,255,255,0.2); z-index: 1100; transition: right 0.4s; padding: 40px 28px; overflow-y: auto; }
+        .menu-panel.open { right: 0; }
+        .menu-panel .main-cat { font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 12px; border-left: 3px solid #00101c; padding-left: 14px; }
+        .sub-list { list-style: none; padding-left: 20px; }
+        .sub-list li { margin: 12px 0; }
+        .sub-list a { text-decoration: none; font-size: 1rem; color: #e0e4f0; transition: 0.2s; display: inline-block; }
+        .sub-list a:hover { color: white; transform: translateX(4px); }
+        .close-menu { background: none; border: none; color: white; font-size: 28px; cursor: pointer; position: absolute; top: 24px; left: 24px; }
+        
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: white; max-width: 520px; width: 90%; border-radius: 28px; padding: 36px 28px; position: relative; }
         .modal-content h3 { font-size: 1.8rem; font-weight: 600; color: #00101c; margin-bottom: 20px; }
@@ -27,11 +49,30 @@
         .form-status { margin-top: 16px; font-size: 0.9rem; text-align: center; }
         .footer { width: 100%; margin: 0; padding: 0; line-height: 0; }
         .footer img { width: 100%; display: block; }
-        @media (max-width: 768px) { .content { padding: 40px 20px; } .content p { font-size: 1rem; } .modal-content { padding: 28px 20px; } }
+        
+        @media (max-width: 768px) { 
+            .content { padding: 40px 20px; } 
+            .content p { font-size: 1rem; } 
+            .modal-content { padding: 28px 20px; }
+            .burger { top: 20px; right: 20px; }
+            .burger-btn { width: 44px; height: 44px; }
+        }
     </style>
 </head>
 <body>
     <img class="hero-image" src="images/hero.png" alt="GPL Diagnostics top">
+    
+    <!-- Бургер -->
+    <div class="burger"><div class="burger-btn" id="burgerBtn"><span></span><span></span><span></span></div></div>
+    <div class="menu-panel" id="menuPanel">
+        <button class="close-menu" id="closeMenuBtn">✕</button>
+        <div style="margin-top: 32px;"></div>
+        <div class="menu-section"><div class="main-cat">Mission</div><a href="about.html" style="margin-left: 18px; color:#e0e4f0;">About GPL →</a></div>
+        <div class="menu-section"><div class="main-cat">Products</div><ul class="sub-list"><li><a href="sub.html">Substances</a></li><li><a href="ab.html">Antibodies</a></li><li><a href="ag.html">Antigens</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Services</div><ul class="sub-list"><li><a href="serv.html">IVD Market Survey</a></li><li><a href="opt.html">IVD Web Optimisation</a></li><li><a href="soft.html">IVD Software Development</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Contacts</div><a href="contacts.html" style="margin-left: 18px; color:#e0e4f0;">Get in touch →</a></div>
+    </div>
+    
     <div class="content">
         <h1>About</h1>
         <p>Thinking about expanding your reagent portfolio or moving beyond a simple buy‑sell model — but don't want to spend years on in‑house development? There is a solution: <strong>technology transfer</strong>.</p>
@@ -39,6 +80,7 @@
         <p>All you have to do is bring the finished product to your market. And even there, we can support you — by building a website, analysing the competition, and solving the tough integration challenges of deploying your solution into the complex architecture of real‑world laboratories.</p>
         <button class="btn-inquire" id="inquireBtn">Inquire →</button>
     </div>
+    
     <div class="footer">
         <img src="images/bottom.png" alt="GPL Diagnostics bottom">
     </div>
@@ -64,9 +106,17 @@
 
     <script>
         (function() {
-            // ГОТОВЫЙ URL ОТ GOOGLE APPS SCRIPT
             const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxA5MueC0RXAhrR5oR74pDP3iM5CrNIPr_vtYydxyqm5mgz-RRuGEHgmVHRxphBW40rvA/exec';
             
+            // Бургер
+            const burgerBtn = document.getElementById('burgerBtn');
+            const menuPanel = document.getElementById('menuPanel');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            if (burgerBtn) burgerBtn.addEventListener('click', () => menuPanel.classList.add('open'));
+            if (closeMenuBtn) closeMenuBtn.addEventListener('click', () => menuPanel.classList.remove('open'));
+            document.addEventListener('click', (e) => { if (menuPanel && menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !burgerBtn.contains(e.target)) menuPanel.classList.remove('open'); });
+            
+            // Форма
             const modal = document.getElementById('contactModal');
             const inquireBtn = document.getElementById('inquireBtn');
             const closeBtn = document.getElementById('closeModalBtn');
