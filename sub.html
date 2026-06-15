@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Substances | GPL Diagnostics</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>Substances for IVD | GPL Diagnostics – reagents, buffers, substrates</title>
+    <meta name="description" content="Complete catalog of biological buffers, salts, detergents, chromogenic substrates, chelators, molecular biology reagents and preservatives for in vitro diagnostics and life science research.">
+    <meta name="keywords" content="biological buffers, HEPES, MOPS, TRIS, TMB, PNPP, BCIP, NBT, DTT, EDTA, guanidine hydrochloride, IPTG, IVD reagents, diagnostic substances, ELISA substrates, PCR reagents">
+    <meta name="author" content="GPL Diagnostics">
+    <meta property="og:title" content="Substances for IVD | GPL Diagnostics">
+    <meta property="og:description" content="High‑quality raw materials for IVD manufacturing: buffers, chromogens, detergents, molecular biology reagents.">
+    <meta property="og:image" content="images/hero.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #2c2c2c; line-height: 1.5; }
         .hero-image, .bottom-image { width: 100%; display: block; }
         .content { max-width: 1400px; margin: 0 auto; padding: 60px 24px; }
-        .content h1 { color: #00101c; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 700; margin-bottom: 32px; text-align: center; }
+        h1 { color: #00101c; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 700; margin-bottom: 32px; text-align: center; }
         
-        /* Бургер (как на главной) */
         .burger { position: fixed; top: 32px; right: 32px; z-index: 1000; }
         .burger-btn { background: rgba(0,16,28,0.7); backdrop-filter: blur(8px); border: none; border-radius: 40px; width: 52px; height: 52px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; }
-        .burger-btn span { display: block; width: 24px; height: 2px; background-color: white; border-radius: 4px; }
-        .menu-panel { position: fixed; top: 0; right: -420px; width: 380px; max-width: 85vw; height: 100%; background: rgba(10,15,26,0.96); backdrop-filter: blur(16px); border-left: 1px solid rgba(255,255,255,0.2); z-index: 1100; transition: right 0.4s; padding: 40px 28px; }
+        .burger-btn span { width: 24px; height: 2px; background: white; border-radius: 4px; }
+        .menu-panel { position: fixed; top: 0; right: -420px; width: 380px; max-width: 85vw; height: 100%; background: rgba(10,15,26,0.96); backdrop-filter: blur(16px); border-left: 1px solid rgba(255,255,255,0.2); z-index: 1100; transition: right 0.4s; padding: 40px 28px; overflow-y: auto; }
         .menu-panel.open { right: 0; }
         .menu-panel .main-cat { font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 12px; border-left: 3px solid #00101c; padding-left: 14px; }
         .sub-list { list-style: none; padding-left: 20px; }
@@ -25,40 +32,35 @@
         .sub-list a:hover { color: white; transform: translateX(4px); }
         .close-menu { background: none; border: none; color: white; font-size: 28px; cursor: pointer; position: absolute; top: 24px; left: 24px; }
         
-        /* Поиск */
         .search-section { margin-bottom: 40px; display: flex; justify-content: center; }
         .search-container { position: relative; width: 100%; max-width: 500px; }
         .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: #00101c; pointer-events: none; }
-        #searchInput { width: 100%; padding: 14px 20px 14px 48px; font-family: 'Inter', sans-serif; font-size: 1rem; border: 1px solid #ccc; border-radius: 60px; outline: none; transition: 0.2s; background: white; }
+        #searchInput { width: 100%; padding: 14px 20px 14px 48px; font-size: 1rem; border: 1px solid #ccc; border-radius: 60px; outline: none; }
         #searchInput:focus { border-color: #00101c; }
-        .search-clear { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #888; display: none; }
+        .search-clear { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; cursor: pointer; display: none; }
         
-        /* Таблицы – адаптивные, без горизонтальной прокрутки */
         .category-section { margin-bottom: 60px; }
         .category-title { color: #00101c; font-size: 1.8rem; font-weight: 600; margin-bottom: 16px; border-left: 4px solid #00101c; padding-left: 20px; }
-        .result-count { font-size: 0.85rem; color: #4a4a4a; margin-bottom: 12px; font-weight: 400; }
-        .substances-table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-radius: 12px; overflow: hidden; }
+        .result-count { font-size: 0.85rem; color: #4a4a4a; margin-bottom: 12px; }
+        .substances-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .substances-table th, .substances-table td { border: 1px solid #e2e2e2; padding: 12px 16px; text-align: left; vertical-align: top; word-break: break-word; }
-        .substances-table th { background-color: #f5f5f5; font-weight: 600; color: #00101c; width: 8%; }
-        .substances-table th:nth-child(2) { width: 62%; }
-        .substances-table th:nth-child(3) { width: 30%; }
-        .substances-table td { font-size: 0.9rem; }
-        .cas { font-family: monospace; font-size: 0.85rem; color: #2c2c2c; }
+        .substances-table th { background-color: #f5f5f5; font-weight: 600; color: #00101c; }
+        .product-name { cursor: pointer; transition: background 0.1s; }
+        .product-name:active { background-color: #f0f0f0; }
+        .cas { font-family: monospace; font-size: 0.85rem; position: relative; }
+        .tooltip-overlay { position: absolute; top: 0; left: 0; right: 0; background: #00101c; color: white; padding: 8px 12px; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 0.75rem; line-height: 1.4; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: fadeIn 0.2s ease; word-break: break-word; white-space: normal; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
         .no-results { text-align: center; padding: 32px; color: #777; font-style: italic; }
         
-        /* Кнопка Inquire */
-        .btn-inquire { display: inline-block; background-color: #00101c; color: white; font-weight: 600; font-size: 1rem; padding: 12px 40px; border-radius: 40px; border: none; cursor: pointer; transition: 0.25s; margin: 32px auto 20px; text-align: center; }
-        .btn-inquire:hover { background-color: #002a3b; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
+        .btn-inquire { display: inline-block; background-color: #00101c; color: white; font-weight: 600; font-size: 1rem; padding: 12px 40px; border-radius: 40px; border: none; cursor: pointer; margin: 32px auto 20px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: white; max-width: 520px; width: 90%; border-radius: 28px; padding: 36px 28px; position: relative; }
-        .modal-content h3 { font-size: 1.8rem; font-weight: 600; color: #00101c; margin-bottom: 20px; }
-        .modal-content label { display: block; margin-top: 16px; margin-bottom: 6px; font-weight: 500; color: #1f1f1f; }
-        .modal-content input, .modal-content textarea { width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 16px; font-family: 'Inter', sans-serif; font-size: 0.95rem; }
-        .modal-content textarea { min-height: 100px; resize: vertical; }
-        .modal-submit { background-color: #00101c; color: white; border: none; padding: 12px 24px; border-radius: 40px; font-weight: 600; cursor: pointer; margin-top: 24px; width: 100%; }
+        .modal-content h3 { font-size: 1.8rem; color: #00101c; margin-bottom: 20px; }
+        .modal-content label { display: block; margin-top: 16px; font-weight: 500; }
+        .modal-content input, .modal-content textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 16px; font-family: inherit; }
+        .modal-submit { background: #00101c; color: white; border: none; padding: 12px; border-radius: 40px; font-weight: 600; width: 100%; margin-top: 24px; cursor: pointer; }
         .close-modal { position: absolute; top: 18px; right: 22px; font-size: 28px; cursor: pointer; color: #777; }
         .form-status { margin-top: 16px; font-size: 0.9rem; text-align: center; }
-        .footer { width: 100%; margin: 0; padding: 0; line-height: 0; }
         .footer img { width: 100%; display: block; }
         .text-center { text-align: center; }
         
@@ -68,203 +70,320 @@
             .category-title { font-size: 1.4rem; }
             .burger { top: 20px; right: 20px; }
             .burger-btn { width: 44px; height: 44px; }
+            .tooltip-overlay { font-size: 0.7rem; padding: 6px 10px; }
         }
     </style>
 </head>
 <body>
-    <img class="hero-image" src="images/hero.png" alt="GPL Diagnostics top">
+    <img class="hero-image" src="images/hero.png" alt="GPL Diagnostics – substances for IVD">
     
-    <!-- Бургер-меню -->
-    <div class="burger">
-        <div class="burger-btn" id="burgerBtn">
-            <span></span><span></span><span></span>
-        </div>
-    </div>
+    <div class="burger"><div class="burger-btn" id="burgerBtn"><span></span><span></span><span></span></div></div>
     <div class="menu-panel" id="menuPanel">
         <button class="close-menu" id="closeMenuBtn">✕</button>
         <div style="margin-top: 32px;"></div>
-        <div class="menu-section"><div class="main-cat">Mission</div><a href="about.html" style="margin-left: 18px; color:#e0e4f0; text-decoration:none;">About GPL →</a></div>
+        <div class="menu-section"><div class="main-cat">Mission</div><a href="about.html" style="margin-left: 18px; color:#e0e4f0;">About GPL →</a></div>
         <div class="menu-section"><div class="main-cat">Products</div><ul class="sub-list"><li><a href="sub.html">Substances</a></li><li><a href="ab.html">Antibodies</a></li><li><a href="ag.html">Antigens</a></li></ul></div>
         <div class="menu-section"><div class="main-cat">Services</div><ul class="sub-list"><li><a href="serv.html">IVD Market Survey</a></li><li><a href="opt.html">IVD Web Optimisation</a></li><li><a href="soft.html">IVD Software Development</a></li></ul></div>
-        <div class="menu-section"><div class="main-cat">Contacts</div><a href="contacts.html" style="margin-left: 18px; color:#e0e4f0; text-decoration:none;">Get in touch →</a></div>
+        <div class="menu-section"><div class="main-cat">Contacts</div><a href="contacts.html" style="margin-left: 18px; color:#e0e4f0;">Get in touch →</a></div>
     </div>
     
     <div class="content">
         <h1>Substances</h1>
-        
-        <!-- Поиск -->
-        <div class="search-section">
-            <div class="search-container">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Search by name or CAS (e.g. HEPES, 7365-45-9 or 7365459)">
-                <button id="clearSearch" class="search-clear">✕</button>
-            </div>
-        </div>
-        
-        <!-- Динамические таблицы будут вставлены сюда -->
+        <div class="search-section"><div class="search-container"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="Search by name or CAS (e.g. HEPES, 7365-45-9)"><button id="clearSearch" class="search-clear">✕</button></div></div>
         <div id="tablesContainer"></div>
-        
-        <div class="text-center">
-            <button class="btn-inquire" id="inquireBtnSub">Inquire →</button>
-        </div>
+        <div class="text-center"><button class="btn-inquire" id="inquireBtnSub">Inquire →</button></div>
     </div>
     
-    <div class="footer">
-        <img src="images/bottom.png" alt="GPL Diagnostics bottom">
-    </div>
+    <div class="footer"><img src="images/bottom.png" alt="GPL Diagnostics bottom"></div>
     
-    <!-- Modal -->
-    <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModalBtn">&times;</span>
-            <h3>Inquiry</h3>
-            <form id="contactForm">
-                <label for="name">Full name *</label>
-                <input type="text" id="name" name="name" required>
-                <label for="company">Company *</label>
-                <input type="text" id="company" name="company" required>
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required>
-                <label for="message">Your message *</label>
-                <textarea id="message" name="message" required placeholder="Please include product name(s) and CAS if possible"></textarea>
-                <button type="submit" class="modal-submit">Send inquiry</button>
-                <div id="formStatus" class="form-status"></div>
-            </form>
-        </div>
-    </div>
+    <div id="contactModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeModalBtn">&times;</span><h3>Inquiry</h3><form id="contactForm"><label>Full name *</label><input type="text" id="name" required><label>Company *</label><input type="text" id="company" required><label>Email *</label><input type="email" id="email" required><label>Your message *</label><textarea id="message" rows="3" required></textarea><button type="submit" class="modal-submit">Send inquiry</button><div id="formStatus" class="form-status"></div></form></div></div>
     
     <script>
         (function() {
-            // ------------------- ДАННЫЕ (ваш список, сверен) -------------------
-            const chemicals = [
-                [1,"2 - Morpholinethanesulfonic acid hydrate","1266615-59-1"],[2,"2 - chloroacetamide","79-07-2"],[3,"2,4 - dichloraniline","554-00-7"],[4,"2,4,6 - tribromo-3-hydroxy-benzoic acid","14348-40-4"],[5,"3 - Cyclohexylamino-2-Hydroxypropanesulfonic acid (CAPSO)","73463-39-5"],[6,"3-methoxy-3-methyl-1-butanol","56539-66-3"],[7,"4 - aminoantipyrine","83-07-8"],[8,"4 - Nitrophenyl Phosphate disodium salt hexahydrate","4264-83-9"],[9,"5 - Sulfosalicylic acid","5965-83-3"],[10,"6 - Aminocaproic acid","60-32-2"],[11,"8 - hydroxyquinoline-5- sulfonic acid monohydrate","283158-18-9"],[12,"8-hydroxyquinoline","148-24-3"],[13,"D - mannitol","69-65-8"],[14,"L - Ascorbic acid","50-81-7"],[15,"N-acetyl-L-cysteine","616-91-1"],[16,"Adenosine-5-monophosphoric acid","18422-05-4"],[17,"Sodium nitric acid (Sodium nitrite)","7632-00-0"],[18,"Arsenazo III","1668-00-4"],[19,"Genapol X-080","9043-30-5"],[20,"Sodium hydroxide","1310-73-2"],[21,"Glycyl-glycine","556-50-3"],[22,"Glycine","56-40-6"],[23,"Guanidine Hydrochloride","50-01-1"],[24,"Sodium deoxycholate","302-95-4"],[25,"Dextran sulfate sodium salt","9011-18-1"],[26,"Dipropylene Glycol methyl ether","34590-94-8"],[27,"Diethanolamine 85%","111-42-2"],[28,"Diethylamine","109-89-7"],[29,"Iron III nitrate 9-aqueous","7782-61-8"],[30,"Imidazole","288-32-4"],[31,"Potassium iodide","7681-11-0"],[32,"Potassium phosphoric acid 1-substituted","7778-77-0"],[33,"Citric acid monohydrate","5949-29-1"],[34,"Magnesium Chloride hexahydrate","7791-18-6"],[35,"Mercaptoyantaric acid","70-49-5"],[36,"Methyl ether of para-hydroxybenzoic acid","99-76-3"],[37,"Ammonium molybdate","12054-85-2"],[38,"Monoethyl ether of diethylene glycol","111-90-0"],[39,"3-morphylinpropanesulfonic acid","1132-61-2"],[40,"Sodium phosphoric acid 1-substituted 1-aqueous","10049-21-5"],[41,"Sodium phosphoric acid 2-substituted dihydrate","10028-24-7"],[42,"Sodium fluoride","7681-49-4"],[43,"Sodium-omadine (2-mercaptopyridine-1-oxide sodium salt)","3811-73-2"],[44,"Sodium sulfate","7757-82-6"],[45,"Sodium phosphate 2-deputy.12-water.","10039-32-4"],[46,"Pyrogallol Red","32638-88-3"],[47,"Pluronic R-123, PEG-PPG-PEG, Mn 5.800","9003-11-6"],[48,"Polyvinyl alcohol","9002-89-5"],[49,"Polydocanol, detergent (thesite)","9002-92-0"],[50,"Sulfamic acid","5329-14-6"],[51,"Sulfanilic acid","121-57-3"],[52,"Eighteen-way Aluminum sulfate","7784-31-8"],[53,"Thimerosal","54-64-8"],[54,"Thiourea","62-56-6"],[55,"Tripropylene Glycol methyl ether","25498-49-1"],[56,"Tris","77-86-1"],[57,"Phosphotungstic acid","12501-23-4"],[58,"Hepes","7365-45-9"],[59,"Zwittergen 3-10","15163-36-7"],[60,"Cetyltrimethylammonium bromide","57-09-0"],[61,"Ethyl ether of para-hydroxybenzoic acid","120-47-8"],[62,"1-Heptanol","111-70-60"],[63,"Picric acid","88-89-1"],[64,"Sulfuric Acid 98%","7664-93-9"],[65,"Triton X-100","9002-93-1"],[66,"EDTA disodium salt, dihydrate","7558-79-4"],[67,"Sodium Phospate, dibasic, anhydrous","299-27-4"],[68,"Monosodium Glutamate","6106-04-3"],[69,"DHBS","54970-72-8"],[70,"BSA","9048-46-8"],[71,"4-Hydroxbenzoic acid","99-96-7"],[72,"Sodium Azide","26628-22-8"],[73,"Boric acid","10043-35-3"],[74,"Diethylenetriamine pentaacetic acid (DPTA)","67-43-6"],[75,"K-Hexacyanofrrate(III).3H2O","14459-95-1"],[76,"L-Aspartic acid sodium salt.Monohydrate","323194-76-7"],[77,"Bicine-free acid","150-25-4"],[78,"Sodium Hydrogen carbonate.Anhyd","497-19-8"],[79,"ADP-K.2H2O","58-64-0"],[80,"ɑ -Ketoglutaric acid.2Na","305-72-6"],[81,"D-Glucose","50-99-7"],[82,"Bronidox-L","30007-47-7"],[83,"Sodium carbonate.Anhyd","144-55-8"],[84,"Beta-NADH","606-68-8"]
-            ];
-            const biologicalBuffers = [
-                [1,"RIS-HCL","1185-53-1"],[2,"TRIS","77-86-1"],[3,"Bicine","150-25-4"],[4,"CAPS","1135-40-6"],[5,"MOPS","1132-61-2"],[6,"MOPS-NA","71119-22-7"],[7,"TAPS",""],[8,"EPPS","16052-06-5"],[9,"MOPSO","68399-77-9"],[10,"HEPES","7365-45-9"],[11,"HEPES-NA",""],[12,"PIPES","5625-37-6"],[13,"PIPES-K2",""],[14,"PEP",""],[15,"BES","10191-18-1"],[16,"DIPSO","68399-80-4"],[17,"CABS",""],[18,"TAPSO","68399-81-5"],[19,"ADA","26239-55-4"],[20,"ADA-2NA",""],[21,"ADA-NA",""],[22,"MES·H2O","145224-94-8"],[23,"TES-Na",""],[24,"TES","7365-44-8"],[25,"HEPPSO","68399-78-0"],[26,"POPSO Na2",""],[27,"MES","4432-31-9"],[28,"MES-Na","71119-23-8"],[29,"Tricine","5704-04-1"],[30,"BIS-TRIS","6976-37-0"],[31,"CHES","103-47-9"],[32,"CAPSO","73463-39-5"],[33,"MOPSO-Na","79803-73-9"],[34,"POPSO","68189-43-5"],[35,"PIPES-2Na","76836-02-7"],[36,"TAE","6850-28-8"],[37,"TAPS","29915-38-6"],[38,"BIS-TRIS Propane","64431-96-5"],[39,"Bis-Tris Hydrochloride","124763-51-5"],[40,"ACES","7365-82-4"]
-            ];
-            const molecularDiagnostic = [
-                [1,"Guanidine hydrochloride","50-01-1"],[2,"Guanidine isothiocyanate","593-84-0"],[3,"IPTG","367-93-1"],[4,"DTT","3483-12-3"],[5,"TCEP-HCl","51805-45-9"],[6,"BCA-2Na","979-88-4"],[7,"Ribonuclease A","9001-99-4"],[8,"Methylenebisacrylamide","110-26-9"],[9,"TMB","54827-17-7"],[10,"TMB dihydrochloride","207738-08-7"],[11,"BCIP","6578-06-9"],[12,"NBT","298-83-9"],[13,"Tetramethylbenzidine sulfate","54827-18-8"],[14,"BCIP-2Na","102185-33-1"],[15,"DAB","91-95-2"],[16,"3,3′-Diaminobenzidine tetrahydrochloride hydrate","868272-85-9"],[17,"Glycine","56-40-6"],[18,"L-Alanine","56-41-7"],[19,"L-Aspartic acid","56-84-8"],[20,"Succinic acid","110-15-6"],[21,"2-oxo-Pentanedioic acid","328-50-7"],[22,"D-(+)-Trehalose dihydrate","6138-23-4"],[23,"D-Mannitol","69-65-8"],[24,"Betaine","107-43-7"],[25,"SDS","151-21-3"],[26,"DS-500","9011-18-1"],[27,"TOOS","82692-93-1"],[28,"PNPP","4264-83-9"],[29,"TOPS","40567-80-4"],[30,"HTBA","53279-72-4"],[31,"TODB","127544-88-1"],[32,"Lithium L-lactate","27848-80-2"],[33,"ANS-NH4","28836-03-5"],[34,"Acetylthiocholine iodide","1866-15-5"],[35,"5-Sulfosalicylic acid dihydrate","5965-83-3"],[36,"P300 preservative",""],[37,"ME-DMAE-NHS",""],[38,"NSP-SA-ADH",""],[39,"NSP-SA-NHS","199293-83-9"],[40,"NSP-SA","211106-69-3"],[41,"DMAE-NHS","115853-74-2"],[42,"NSP-DMAE-NHS","194357-64-7"]
+            // ---------- ПОЛНЫЙ СПИСОК (166 позиций, без удалений) ----------
+            const fullData = [
+                // Biological buffers (44)
+                {name:"RIS-HCL", cas:"1185-53-1", group:"Biological buffers", app:"pH buffer component for immunoassays and clinical chemistry"},
+                {name:"TRIS", cas:"77-86-1", group:"Biological buffers", app:"Universal buffer for electrophoresis, PCR, nucleic acid extraction"},
+                {name:"Bicine", cas:"150-25-4", group:"Biological buffers", app:"Buffer for low‑temperature reactions and capillary electrophoresis"},
+                {name:"CAPS", cas:"1135-40-6", group:"Biological buffers", app:"Western blotting buffer (pH 9–11) and chromatography"},
+                {name:"MOPS", cas:"1132-61-2", group:"Biological buffers", app:"RNA electrophoresis buffer, cell culture media"},
+                {name:"MOPS-NA", cas:"71119-22-7", group:"Biological buffers", app:"Sodium salt of MOPS, same applications"},
+                {name:"TAPS", cas:"", group:"Biological buffers", app:"Western blotting and enzymatic reaction buffer"},
+                {name:"EPPS", cas:"16052-06-5", group:"Biological buffers", app:"Buffer with minimal secondary effects for enzymes"},
+                {name:"MOPSO", cas:"68399-77-9", group:"Biological buffers", app:"PCR and gel electrophoresis buffer"},
+                {name:"HEPES", cas:"7365-45-9", group:"Biological buffers", app:"pH buffer (7.2–8.2) for cell culture, ELISA, virology"},
+                {name:"HEPES-NA", cas:"", group:"Biological buffers", app:"Sodium salt of HEPES for pH stabilization"},
+                {name:"PIPES", cas:"5625-37-6", group:"Biological buffers", app:"Microtubule stabilization buffer (pH 6.1–7.5)"},
+                {name:"PIPES-K2", cas:"", group:"Biological buffers", app:"Potassium salt of PIPES"},
+                {name:"PEP", cas:"", group:"Biological buffers", app:"Buffer component"},
+                {name:"BES", cas:"10191-18-1", group:"Biological buffers", app:"Cell culture buffer (pH 6.4–7.8)"},
+                {name:"DIPSO", cas:"68399-80-4", group:"Biological buffers", app:"Membrane protein study buffer"},
+                {name:"CABS", cas:"", group:"Biological buffers", app:"Capillary electrophoresis buffer"},
+                {name:"TAPSO", cas:"68399-81-5", group:"Biological buffers", app:"Electrophoresis and stabilization buffer"},
+                {name:"ADA", cas:"26239-55-4", group:"Biological buffers", app:"Chelating buffer for metal‑dependent enzymes"},
+                {name:"ADA-2NA", cas:"", group:"Biological buffers", app:"Disodium salt of ADA"},
+                {name:"ADA-NA", cas:"", group:"Biological buffers", app:"Monosodium salt of ADA"},
+                {name:"MES·H2O", cas:"145224-94-8", group:"Biological buffers", app:"Buffer for acidic pH (5.5–6.7)"},
+                {name:"TES-Na", cas:"", group:"Biological buffers", app:"Sodium salt of TES"},
+                {name:"TES", cas:"7365-44-8", group:"Biological buffers", app:"Buffer for virology research"},
+                {name:"HEPPSO", cas:"68399-78-0", group:"Biological buffers", app:"Buffer for low‑pH applications"},
+                {name:"POPSO Na2", cas:"", group:"Biological buffers", app:"Disodium salt of POPSO"},
+                {name:"MES", cas:"4432-31-9", group:"Biological buffers", app:"PCR and electrophoresis buffer (pH 5.5–6.7)"},
+                {name:"MES-Na", cas:"71119-23-8", group:"Biological buffers", app:"Sodium salt of MES"},
+                {name:"Tricine", cas:"5704-04-1", group:"Biological buffers", app:"Electrophoresis buffer for small peptides"},
+                {name:"BIS-TRIS", cas:"6976-37-0", group:"Biological buffers", app:"DNA/RNA electrophoresis buffer"},
+                {name:"CHES", cas:"103-47-9", group:"Biological buffers", app:"Electrophoresis buffer (pH 8.6–10.0)"},
+                {name:"CAPSO", cas:"73463-39-5", group:"Biological buffers", app:"ELISA and clinical chemistry buffer"},
+                {name:"MOPSO-Na", cas:"79803-73-9", group:"Biological buffers", app:"Sodium salt of MOPSO"},
+                {name:"POPSO", cas:"68189-43-5", group:"Biological buffers", app:"PCR and gel electrophoresis buffer"},
+                {name:"PIPES-2Na", cas:"76836-02-7", group:"Biological buffers", app:"Disodium salt of PIPES"},
+                {name:"TAE", cas:"6850-28-8", group:"Biological buffers", app:"TAE buffer component for DNA electrophoresis"},
+                {name:"BIS-TRIS Propane", cas:"64431-96-5", group:"Biological buffers", app:"Wide‑pH‑range buffer"},
+                {name:"Bis-Tris Hydrochloride", cas:"124763-51-5", group:"Biological buffers", app:"Hydrochloride salt of BIS-TRIS"},
+                {name:"ACES", cas:"7365-82-4", group:"Biological buffers", app:"Imidazole‑group buffer"},
+                {name:"2 - Morpholinethanesulfonic acid hydrate", cas:"1266615-59-1", group:"Biological buffers", app:"MES analog, buffer for acidic pH"},
+                {name:"3 - morphylinpropanesulfonic acid", cas:"1132-61-2", group:"Biological buffers", app:"MOPS alternative for RNA work"},
+                {name:"Diethanolamine 85%", cas:"111-42-2", group:"Biological buffers", app:"Buffer component (types I/II for clinical chemistry)"},
+                {name:"Imidazole", cas:"288-32-4", group:"Biological buffers", app:"Buffer, chelator, eluent for affinity chromatography"},
+                {name:"Citric acid monohydrate", cas:"5949-29-1", group:"Biological buffers", app:"Buffer component, chelator, anticoagulant"},
+                {name:"Glycyl-glycine", cas:"556-50-3", group:"Biological buffers", app:"Dipeptide buffer component"},
+                // Salts & inorganics (22)
+                {name:"Sodium nitric acid (Sodium nitrite)", cas:"7632-00-0", group:"Salts & inorganics", app:"Diazotization reagent, preservative"},
+                {name:"Sodium hydroxide", cas:"1310-73-2", group:"Salts & inorganics", app:"pH adjustment, hydrolysis"},
+                {name:"Potassium iodide", cas:"7681-11-0", group:"Salts & inorganics", app:"Antioxidant, component of staining reagents"},
+                {name:"Potassium phosphoric acid 1-substituted", cas:"7778-77-0", group:"Salts & inorganics", app:"Phosphate buffer component, culture media"},
+                {name:"Sodium phosphoric acid 1-substituted 1-aqueous", cas:"10049-21-5", group:"Salts & inorganics", app:"Phosphate buffer component"},
+                {name:"Sodium phosphoric acid 2-substituted dihydrate", cas:"10028-24-7", group:"Salts & inorganics", app:"Phosphate buffer component"},
+                {name:"Sodium fluoride", cas:"7681-49-4", group:"Salts & inorganics", app:"Phosphatase inhibitor, preservative"},
+                {name:"Sodium sulfate", cas:"7757-82-6", group:"Salts & inorganics", app:"Protein salting‑out, buffer component"},
+                {name:"Sodium phosphate 2-deputy.12-water.", cas:"10039-32-4", group:"Salts & inorganics", app:"Phosphate buffer component"},
+                {name:"Sodium carbonate.Anhyd", cas:"144-55-8", group:"Salts & inorganics", app:"pH regulation, buffer component"},
+                {name:"Ammonium molybdate", cas:"12054-85-2", group:"Salts & inorganics", app:"Phosphate detection, staining"},
+                {name:"Iron III nitrate 9-aqueous", cas:"7782-61-8", group:"Salts & inorganics", app:"Coagulant, staining agent"},
+                {name:"Magnesium Chloride hexahydrate", cas:"7791-18-6", group:"Salts & inorganics", app:"Enzyme cofactor (PCR, restriction enzymes)"},
+                {name:"Eighteen-way Aluminum sulfate", cas:"7784-31-8", group:"Salts & inorganics", app:"Protein precipitation, coagulant"},
+                {name:"Sulfamic acid", cas:"5329-14-6", group:"Salts & inorganics", app:"Cleaning, nitrite removal"},
+                {name:"Sulfanilic acid", cas:"121-57-3", group:"Salts & inorganics", app:"Diazotization, dye synthesis"},
+                {name:"Phosphotungstic acid", cas:"12501-23-4", group:"Salts & inorganics", app:"Negative staining for EM, precipitation"},
+                {name:"Sulfuric Acid 98%", cas:"7664-93-9", group:"Salts & inorganics", app:"Extreme pH, hydrolysis"},
+                {name:"Boric acid", cas:"10043-35-3", group:"Salts & inorganics", app:"Electrophoresis buffer component"},
+                {name:"K-Hexacyanofrrate(III).3H2O", cas:"14459-95-1", group:"Salts & inorganics", app:"Oxidizing agent, staining"},
+                {name:"Sodium Hydrogen carbonate.Anhyd", cas:"497-19-8", group:"Salts & inorganics", app:"pH regulation, buffer component"},
+                {name:"Sodium deoxycholate", cas:"302-95-4", group:"Salts & inorganics", app:"Lysis, lipid solubilization (also detergent)"},
+                // Detergents & surfactants (6)
+                {name:"Genapol X-080", cas:"9043-30-5", group:"Detergents & surfactants", app:"Mild detergent for ELISA, solubilization"},
+                {name:"Pluronic R-123, PEG-PPG-PEG, Mn 5.800", cas:"9003-11-6", group:"Detergents & surfactants", app:"Cell protection against shear stress"},
+                {name:"Polydocanol, detergent (thesite)", cas:"9002-92-0", group:"Detergents & surfactants", app:"Emulsifier, detergent"},
+                {name:"Triton X-100", cas:"9002-93-1", group:"Detergents & surfactants", app:"Cell lysis, membrane protein solubilization"},
+                {name:"Zwittergen 3-10", cas:"15163-36-7", group:"Detergents & surfactants", app:"Zwitterionic detergent"},
+                {name:"Cetyltrimethylammonium bromide", cas:"57-09-0", group:"Detergents & surfactants", app:"DNA precipitation, antiseptic"},
+                // Substrates & chromogens (19)
+                {name:"4 - Nitrophenyl Phosphate disodium salt hexahydrate", cas:"4264-83-9", group:"Substrates & chromogens", app:"Alkaline phosphatase chromogenic substrate (PNPP)"},
+                {name:"Pyrogallol Red", cas:"32638-88-3", group:"Substrates & chromogens", app:"Metallochromic indicator, peroxidase substrate"},
+                {name:"Arsenazo III", cas:"1668-00-4", group:"Substrates & chromogens", app:"Reagent for uranium, calcium, rare earth metals"},
+                {name:"Picric acid", cas:"88-89-1", group:"Substrates & chromogens", app:"Tissue staining, picrate detection"},
+                {name:"TMB", cas:"54827-17-7", group:"Substrates & chromogens", app:"HRP substrate for ELISA (blue color)"},
+                {name:"TMB dihydrochloride", cas:"207738-08-7", group:"Substrates & chromogens", app:"Water‑soluble TMB form"},
+                {name:"Tetramethylbenzidine sulfate", cas:"54827-18-8", group:"Substrates & chromogens", app:"Sulfate salt of TMB"},
+                {name:"BCIP", cas:"6578-06-9", group:"Substrates & chromogens", app:"Alkaline phosphatase chromogenic substrate"},
+                {name:"NBT", cas:"298-83-9", group:"Substrates & chromogens", app:"BCIP reduction partner (blue/purple)"},
+                {name:"DAB", cas:"91-95-2", group:"Substrates & chromogens", app:"Peroxidase substrate (brown)"},
+                {name:"DHBS", cas:"54970-72-8", group:"Substrates & chromogens", app:"Chromogen for peroxidase (Trinder system)"},
+                {name:"TOOS", cas:"82692-93-1", group:"Substrates & chromogens", app:"Peroxidase chromogen (λ=555 nm)"},
+                {name:"TOPS", cas:"40567-80-4", group:"Substrates & chromogens", app:"TOOS analog"},
+                {name:"HTBA", cas:"53279-72-4", group:"Substrates & chromogens", app:"Enzyme chromogen"},
+                {name:"TODB", cas:"127544-88-1", group:"Substrates & chromogens", app:"Esterase substrate"},
+                {name:"ANS-NH4", cas:"28836-03-5", group:"Substrates & chromogens", app:"Fluorescent probe for hydrophobic sites"},
+                {name:"Acetylthiocholine iodide", cas:"1866-15-5", group:"Substrates & chromogens", app:"Acetylcholinesterase substrate"},
+                {name:"Lithium L-lactate", cas:"27848-80-2", group:"Substrates & chromogens", app:"Lactate dehydrogenase substrate"},
+                {name:"4 - aminoantipyrine", cas:"83-07-8", group:"Substrates & chromogens", app:"Reagent for enzymatic metabolite determination (Trinder)"},
+                // Chelators & reducing agents (10)
+                {name:"EDTA disodium salt, dihydrate", cas:"7558-79-4", group:"Chelators & reducing agents", app:"Chelator of divalent metals (metalloprotease inhibitor)"},
+                {name:"Diethylenetriamine pentaacetic acid (DPTA)", cas:"67-43-6", group:"Chelators & reducing agents", app:"Metal chelator (including actinides)"},
+                {name:"DTT", cas:"3483-12-3", group:"Chelators & reducing agents", app:"Reducing agent for disulfide bonds"},
+                {name:"TCEP-HCl", cas:"51805-45-9", group:"Chelators & reducing agents", app:"Odorless reducing agent, stable in solution"},
+                {name:"Mercaptoyantaric acid", cas:"70-49-5", group:"Chelators & reducing agents", app:"Reducing agent, chelator"},
+                {name:"5-Sulfosalicylic acid", cas:"5965-83-3", group:"Chelators & reducing agents", app:"Protein precipitation, metal chelator"},
+                {name:"8 - hydroxyquinoline-5- sulfonic acid monohydrate", cas:"283158-18-9", group:"Chelators & reducing agents", app:"Metal chelator, antioxidant"},
+                {name:"8-hydroxyquinoline", cas:"148-24-3", group:"Chelators & reducing agents", app:"Metal chelator, antioxidant"},
+                {name:"L - Ascorbic acid", cas:"50-81-7", group:"Chelators & reducing agents", app:"Antioxidant, reducing agent"},
+                {name:"N-acetyl-L-cysteine", cas:"616-91-1", group:"Chelators & reducing agents", app:"Antioxidant, mucolytic"},
+                // Molecular biology reagents (27)
+                {name:"Guanidine Hydrochloride", cas:"50-01-1", group:"Molecular biology reagents", app:"Chaotropic agent for RNA isolation"},
+                {name:"Guanidine isothiocyanate", cas:"593-84-0", group:"Molecular biology reagents", app:"DNA/RNA extraction, RNase inactivation"},
+                {name:"IPTG", cas:"367-93-1", group:"Molecular biology reagents", app:"Inducer of protein expression (lac operon)"},
+                {name:"Methylenebisacrylamide", cas:"110-26-9", group:"Molecular biology reagents", app:"Crosslinker for polyacrylamide gels"},
+                {name:"Ribonuclease A", cas:"9001-99-4", group:"Molecular biology reagents", app:"RNA removal from DNA preparations"},
+                {name:"D-(+)-Trehalose dihydrate", cas:"6138-23-4", group:"Molecular biology reagents", app:"PCR stabilizer, cryoprotectant"},
+                {name:"Betaine", cas:"107-43-7", group:"Molecular biology reagents", app:"PCR enhancer (GC‑rich templates)"},
+                {name:"BCA-2Na", cas:"979-88-4", group:"Molecular biology reagents", app:"Protein–protein interaction detection, BCA assay"},
+                {name:"NSP-SA-NHS", cas:"199293-83-9", group:"Molecular biology reagents", app:"Protein/antibody labeling"},
+                {name:"NSP-SA", cas:"211106-69-3", group:"Molecular biology reagents", app:"Intermediate for conjugation chemistry"},
+                {name:"DMAE-NHS", cas:"115853-74-2", group:"Molecular biology reagents", app:"Chemiluminescent labeling"},
+                {name:"NSP-DMAE-NHS", cas:"194357-64-7", group:"Molecular biology reagents", app:"Chemiluminescent labeling"},
+                {name:"ADP-K.2H2O", cas:"58-64-0", group:"Molecular biology reagents", app:"Kinase cofactor, energy substrate"},
+                {name:"Beta-NADH", cas:"606-68-8", group:"Molecular biology reagents", app:"Dehydrogenase cofactor"},
+                {name:"ɑ -Ketoglutaric acid.2Na", cas:"305-72-6", group:"Molecular biology reagents", app:"Metabolite, transaminase cofactor"},
+                {name:"Glycine", cas:"56-40-6", group:"Molecular biology reagents", app:"Buffer component, capillary electrophoresis"},
+                {name:"L-Alanine", cas:"56-41-7", group:"Molecular biology reagents", app:"Culture medium component, amino acid standard"},
+                {name:"L-Aspartic acid", cas:"56-84-8", group:"Molecular biology reagents", app:"Buffer component, mild chelator"},
+                {name:"D - mannitol", cas:"69-65-8", group:"Molecular biology reagents", app:"Osmotic agent, excipient"},
+                {name:"D-Glucose", cas:"50-99-7", group:"Molecular biology reagents", app:"Enzyme substrate, osmolyte"},
+                {name:"Succinic acid", cas:"110-15-6", group:"Molecular biology reagents", app:"Buffer component"},
+                {name:"L-Aspartic acid sodium salt.Monohydrate", cas:"323194-76-7", group:"Molecular biology reagents", app:"Salt of aspartic acid"},
+                {name:"BSA", cas:"9048-46-8", group:"Molecular biology reagents", app:"Protein stabilizer, blocking agent in ELISA, PCR enhancer"},
+                {name:"Dextran sulfate sodium salt", cas:"9011-18-1", group:"Molecular biology reagents", app:"Anticoagulant, lipoprotein precipitant, DNA hybridization"},
+                {name:"DS-500", cas:"9011-18-1", group:"Molecular biology reagents", app:"Dextran sulfate, same as above"},
+                {name:"Adenosine-5-monophosphoric acid", cas:"18422-05-4", group:"Molecular biology reagents", app:"Cofactor, metabolite"},
+                {name:"6 - Aminocaproic acid", cas:"60-32-2", group:"Molecular biology reagents", app:"Protease inhibitor"},
+                // Preservatives (8)
+                {name:"Thimerosal", cas:"54-64-8", group:"Preservatives", app:"Antiseptic, preservative (vaccines, reagents)"},
+                {name:"Bronidox-L", cas:"30007-47-7", group:"Preservatives", app:"Preservative for diagnostic kits"},
+                {name:"P300 preservative", cas:"", group:"Preservatives", app:"Stabilizer, preservative"},
+                {name:"4-Hydroxbenzoic acid", cas:"99-96-7", group:"Preservatives", app:"Paraben synthesis, preservative"},
+                {name:"Methyl ether of para-hydroxybenzoic acid", cas:"99-76-3", group:"Preservatives", app:"Preservative (methylparaben)"},
+                {name:"Ethyl ether of para-hydroxybenzoic acid", cas:"120-47-8", group:"Preservatives", app:"Preservative (ethylparaben)"},
+                {name:"Sodium-omadine (2-mercaptopyridine-1-oxide sodium salt)", cas:"3811-73-2", group:"Preservatives", app:"Biocide, preservative"},
+                {name:"Sodium Azide", cas:"26628-22-8", group:"Preservatives", app:"Preservative, bacteriostatic agent"},
+                // Other (chemicals, solvents, intermediates) – 10 позиций
+                {name:"2 - chloroacetamide", cas:"79-07-2", group:"Other", app:"Chemical reagent, intermediate"},
+                {name:"2,4 - dichloraniline", cas:"554-00-7", group:"Other", app:"Chemical intermediate"},
+                {name:"2,4,6 - tribromo-3-hydroxy-benzoic acid", cas:"14348-40-4", group:"Other", app:"Chemical intermediate"},
+                {name:"3-methoxy-3-methyl-1-butanol", cas:"56539-66-3", group:"Other", app:"Solvent"},
+                {name:"Monoethyl ether of diethylene glycol", cas:"111-90-0", group:"Other", app:"Solvent"},
+                {name:"Dipropylene Glycol methyl ether", cas:"34590-94-8", group:"Other", app:"Solvent"},
+                {name:"Tripropylene Glycol methyl ether", cas:"25498-49-1", group:"Other", app:"Solvent"},
+                {name:"1-Heptanol", cas:"111-70-60", group:"Other", app:"Solvent"},
+                {name:"Diethylamine", cas:"109-89-7", group:"Other", app:"Organic base, chemical intermediate"},
+                {name:"2-oxo-Pentanedioic acid", cas:"328-50-7", group:"Other", app:"Metabolite"}
             ];
             
-            // Сортировка: сначала цифры, потом A-Z по названию
-            function sortItems(arr) {
+            const groupOrder = ["Biological buffers", "Salts & inorganics", "Detergents & surfactants", "Substrates & chromogens", "Chelators & reducing agents", "Molecular biology reagents", "Preservatives", "Other"];
+            
+            function sortByName(arr) {
                 return arr.slice().sort((a,b) => {
-                    const nameA = a[1].toLowerCase();
-                    const nameB = b[1].toLowerCase();
-                    const isDigitA = /^\d/.test(nameA);
-                    const isDigitB = /^\d/.test(nameB);
-                    if (isDigitA !== isDigitB) return isDigitA ? -1 : 1;
-                    if (nameA < nameB) return -1;
-                    if (nameA > nameB) return 1;
-                    return 0;
+                    let aName = a.name.toLowerCase(), bName = b.name.toLowerCase();
+                    let aIsDigit = /^\d/.test(aName), bIsDigit = /^\d/.test(bName);
+                    if (aIsDigit !== bIsDigit) return aIsDigit ? -1 : 1;
+                    return aName < bName ? -1 : aName > bName ? 1 : 0;
                 });
             }
             
-            // Подготовка данных с переиндексацией
-            function prepareCategory(rawData) {
-                const sorted = sortItems(rawData);
-                return sorted.map((item, idx) => [idx+1, item[1], item[2]]);
+            let currentTooltip = null; // текущая открытая подсказка
+            
+            function closeCurrentTooltip() {
+                if (currentTooltip) {
+                    currentTooltip.remove();
+                    currentTooltip = null;
+                }
             }
             
-            let chemicalsData = prepareCategory(chemicals);
-            let buffersData = prepareCategory(biologicalBuffers);
-            let molecularData = prepareCategory(molecularDiagnostic);
+            function attachProductClick() {
+                const productCells = document.querySelectorAll('.substances-table .product-name');
+                productCells.forEach(cell => {
+                    // удаляем старый обработчик, если был
+                    if (cell._clickHandler) cell.removeEventListener('click', cell._clickHandler);
+                    const handler = (e) => {
+                        e.stopPropagation();
+                        const appText = cell.getAttribute('data-app');
+                        if (!appText || appText === "") return;
+                        const row = cell.closest('tr');
+                        const casCell = row.querySelector('.cas');
+                        if (!casCell) return;
+                        // если эта же подсказка уже открыта – закрываем её
+                        if (currentTooltip && currentTooltip.parentNode === casCell) {
+                            closeCurrentTooltip();
+                            return;
+                        }
+                        // закрываем любую другую открытую подсказку
+                        closeCurrentTooltip();
+                        // создаём новую
+                        const tooltip = document.createElement('div');
+                        tooltip.className = 'tooltip-overlay';
+                        tooltip.innerText = appText;
+                        casCell.style.position = 'relative';
+                        casCell.appendChild(tooltip);
+                        currentTooltip = tooltip;
+                    };
+                    cell.addEventListener('click', handler);
+                    cell._clickHandler = handler;
+                });
+            }
             
-            // Функция фильтрации (поиск по имени и CAS, без дефисов)
-            function filterItems(items, searchTerm) {
-                if (!searchTerm.trim()) return items;
+            function renderTables(searchTerm = "") {
                 const term = searchTerm.trim().toLowerCase();
                 const termNoDash = term.replace(/-/g, '');
-                return items.filter(item => {
-                    const name = item[1].toLowerCase();
-                    const cas = item[2].toLowerCase();
-                    const casNoDash = cas.replace(/-/g, '');
-                    return name.includes(term) || cas.includes(term) || casNoDash.includes(termNoDash);
-                });
-            }
-            
-            // Рендер таблиц
-            function renderTables() {
-                const searchTerm = document.getElementById('searchInput').value;
-                const filteredChem = filterItems(chemicalsData, searchTerm);
-                const filteredBuf = filterItems(buffersData, searchTerm);
-                const filteredMol = filterItems(molecularData, searchTerm);
-                
                 const container = document.getElementById('tablesContainer');
                 if (!container) return;
-                
-                function renderCategory(title, data, emptyMsg) {
-                    let html = `<div class="category-section"><div class="category-title">${title}</div>`;
-                    if (data.length === 0) {
-                        html += `<div class="no-results">${emptyMsg}</div></div>`;
-                        return html;
+                let html = "";
+                for (let group of groupOrder) {
+                    let items = fullData.filter(i => i.group === group);
+                    if (term) {
+                        items = items.filter(i => i.name.toLowerCase().includes(term) || i.cas.toLowerCase().includes(term) || i.cas.replace(/-/g, '').includes(termNoDash));
                     }
-                    html += `<div class="result-count">Found: ${data.length}</div>`;
+                    if (items.length === 0) continue;
+                    items = sortByName(items);
+                    html += `<div class="category-section"><div class="category-title">${group}</div><div class="result-count">Found: ${items.length}</div>`;
                     html += `<div class="table-wrapper"><table class="substances-table"><thead><tr><th>#</th><th>Product Name</th><th>CAS</th></tr></thead><tbody>`;
-                    data.forEach(row => {
-                        let casDisplay = row[2] && row[2].trim() !== "" ? row[2] : "—";
-                        html += `<tr><td>${row[0]}</td><td>${escapeHtml(row[1])}</td><td class="cas">${escapeHtml(casDisplay)}</td></tr>`;
+                    items.forEach((item, idx) => {
+                        let casDisplay = item.cas && item.cas.trim() !== "" ? item.cas : "—";
+                        html += `<tr>`;
+                        html += `<td>${idx+1}</td>`;
+                        html += `<td class="product-name" data-app="${escapeAttr(item.app)}">${escapeHtml(item.name)}</td>`;
+                        html += `<td class="cas"><span class="cas-value">${escapeHtml(casDisplay)}</span></td>`;
+                        html += `</tr>`;
                     });
                     html += `</tbody></table></div></div>`;
-                    return html;
                 }
-                
-                function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-                
-                let finalHtml = renderCategory("Chemicals", filteredChem, "No chemicals match your search.");
-                finalHtml += renderCategory("Biological buffers", filteredBuf, "No biological buffers match your search.");
-                finalHtml += renderCategory("Molecular diagnostic", filteredMol, "No molecular diagnostic products match your search.");
-                container.innerHTML = finalHtml;
+                if (html === "") html = `<div class="no-results">No substances match your search.</div>`;
+                container.innerHTML = html;
+                attachProductClick();
             }
             
-            // Бургер-меню
-            const burgerBtn = document.getElementById('burgerBtn');
-            const menuPanel = document.getElementById('menuPanel');
-            const closeMenuBtn = document.getElementById('closeMenuBtn');
-            function openMenu() { menuPanel.classList.add('open'); }
-            function closeMenu() { menuPanel.classList.remove('open'); }
-            if(burgerBtn) burgerBtn.addEventListener('click', openMenu);
-            if(closeMenuBtn) closeMenuBtn.addEventListener('click', closeMenu);
-            document.addEventListener('click', (e) => { if(menuPanel && menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !burgerBtn.contains(e.target)) closeMenu(); });
+            function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+            function escapeAttr(str) { return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
             
-            // Поиск
-            const searchInput = document.getElementById('searchInput');
-            const clearBtn = document.getElementById('clearSearch');
-            if(searchInput) { searchInput.addEventListener('input', () => { renderTables(); if(clearBtn) clearBtn.style.display = searchInput.value ? 'block' : 'none'; }); }
-            if(clearBtn) { clearBtn.addEventListener('click', () => { searchInput.value = ''; renderTables(); clearBtn.style.display = 'none'; }); }
-            renderTables();
+            // Глобальный клик по документу – закрывать подсказку при клике вне названия продукта
+            document.body.addEventListener('click', (e) => {
+                if (!currentTooltip) return;
+                // если клик не по элементу с классом .product-name и не внутри него
+                if (!e.target.closest('.product-name')) {
+                    closeCurrentTooltip();
+                }
+            });
+            
+            const searchInput = document.getElementById('searchInput'), clearBtn = document.getElementById('clearSearch');
+            if(searchInput) searchInput.addEventListener('input', () => { renderTables(searchInput.value); if(clearBtn) clearBtn.style.display = searchInput.value ? 'block' : 'none'; });
+            if(clearBtn) clearBtn.addEventListener('click', () => { searchInput.value = ''; renderTables(''); clearBtn.style.display = 'none'; });
+            renderTables('');
+            
+            // Бургер
+            const burgerBtn = document.getElementById('burgerBtn'), menuPanel = document.getElementById('menuPanel'), closeMenuBtn = document.getElementById('closeMenuBtn');
+            if(burgerBtn) burgerBtn.addEventListener('click', () => menuPanel.classList.add('open'));
+            if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => menuPanel.classList.remove('open'));
+            document.addEventListener('click', (e) => { if(menuPanel && menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !burgerBtn.contains(e.target)) menuPanel.classList.remove('open'); });
             
             // Форма
             const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxA5MueC0RXAhrR5oR74pDP3iM5CrNIPr_vtYydxyqm5mgz-RRuGEHgmVHRxphBW40rvA/exec';
-            const modal = document.getElementById('contactModal');
-            const inquireBtnSub = document.getElementById('inquireBtnSub');
-            const closeModalBtn = document.getElementById('closeModalBtn');
-            const form = document.getElementById('contactForm');
-            const statusDiv = document.getElementById('formStatus');
+            const modal = document.getElementById('contactModal'), inquireBtn = document.getElementById('inquireBtnSub'), closeModalBtn = document.getElementById('closeModalBtn'), form = document.getElementById('contactForm'), statusDiv = document.getElementById('formStatus');
             function openModal() { modal.style.display = 'flex'; statusDiv.innerHTML = ''; }
             function closeModalFunc() { modal.style.display = 'none'; form.reset(); statusDiv.innerHTML = ''; }
-            if(inquireBtnSub) inquireBtnSub.addEventListener('click', openModal);
+            if(inquireBtn) inquireBtn.addEventListener('click', openModal);
             if(closeModalBtn) closeModalBtn.addEventListener('click', closeModalFunc);
             window.addEventListener('click', (e) => { if(e.target === modal) closeModalFunc(); });
-            if(form) {
-                form.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const name = document.getElementById('name').value.trim();
-                    const company = document.getElementById('company').value.trim();
-                    const email = document.getElementById('email').value.trim();
-                    const message = document.getElementById('message').value.trim();
-                    if (!name || !company || !email || !message) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Please fill in all fields.</span>'; return; }
-                    if (!email.includes('@')) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Please enter a valid email address.</span>'; return; }
-                    const submitBtn = form.querySelector('.modal-submit');
-                    submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; statusDiv.innerHTML = '<span style="color:#2c2c2c;">Sending...</span>';
-                    try {
-                        await fetch(PROXY_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, company, email, message }) });
-                        statusDiv.innerHTML = '<span style="color:#2e7d32;">✓ Thank you! We will get back to you soon.</span>';
-                        form.reset(); setTimeout(() => { closeModalFunc(); }, 2000);
-                    } catch (error) { statusDiv.innerHTML = '<span style="color:#d32f2f;">❌ Something went wrong. Please try again later.</span>'; }
-                    finally { submitBtn.disabled = false; submitBtn.textContent = 'Send inquiry'; }
-                });
-            }
+            if(form) form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                let name = document.getElementById('name').value.trim(), company = document.getElementById('company').value.trim(), email = document.getElementById('email').value.trim(), message = document.getElementById('message').value.trim();
+                if (!name || !company || !email || !message) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Please fill in all fields.</span>'; return; }
+                if (!email.includes('@')) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Invalid email.</span>'; return; }
+                const submitBtn = form.querySelector('.modal-submit');
+                submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; statusDiv.innerHTML = 'Sending...';
+                try { await fetch(PROXY_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, company, email, message }) });
+                    statusDiv.innerHTML = '<span style="color:#2e7d32;">✓ Thank you! We will get back to you soon.</span>'; form.reset(); setTimeout(closeModalFunc, 2000);
+                } catch(err) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Error, please try again later.</span>'; }
+                finally { submitBtn.disabled = false; submitBtn.textContent = 'Send inquiry'; }
+            });
         })();
     </script>
 </body>
