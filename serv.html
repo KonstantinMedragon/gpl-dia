@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>IVD Market Survey | GPL Diagnostics – Thailand market intelligence</title>
+    <meta name="description" content="Complete market intelligence for Thailand IVD market: clinical chemistry opportunities, Thai FDA registration pathways, and strategic Representative Office setup guide.">
+    <meta name="keywords" content="Thailand IVD market, clinical chemistry, representative office Thailand, Thai FDA registration, medical devices Thailand, IVD reagents, diagnostic market Thailand, foreign ownership Thailand, GPL Diagnostics">
+    <meta name="author" content="GPL Diagnostics">
+    <meta property="og:title" content="IVD Market Survey | GPL Diagnostics – Thailand market intelligence">
+    <meta property="og:description" content="Complete market analysis: IVD market structure, clinical chemistry opportunities, Thai FDA pathways, and step-by-step Representative Office setup in Thailand.">
+    <meta property="og:image" content="images/hero.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #2c2c2c; line-height: 1.6; overflow-x: hidden; }
+        .hero-image, .bottom-image { width: 100%; display: block; }
+        
+        /* Бургер-меню (как на других страницах) */
+        .burger { position: fixed; top: 32px; right: 32px; z-index: 1000; }
+        .burger-btn { background: rgba(0,16,28,0.7); backdrop-filter: blur(8px); border: none; border-radius: 40px; width: 52px; height: 52px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; }
+        .burger-btn span { width: 24px; height: 2px; background: white; border-radius: 4px; }
+        .menu-panel { position: fixed; top: 0; right: -420px; width: 380px; max-width: 85vw; height: 100%; background: rgba(10,15,26,0.96); backdrop-filter: blur(16px); border-left: 1px solid rgba(255,255,255,0.2); z-index: 1100; transition: right 0.4s; padding: 40px 28px; overflow-y: auto; }
+        .menu-panel.open { right: 0; }
+        .menu-panel .main-cat { font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 12px; border-left: 3px solid #00101c; padding-left: 14px; }
+        .sub-list { list-style: none; padding-left: 20px; }
+        .sub-list li { margin: 12px 0; }
+        .sub-list a { text-decoration: none; font-size: 1rem; color: #e0e4f0; transition: 0.2s; display: inline-block; }
+        .sub-list a:hover { color: white; transform: translateX(4px); }
+        .close-menu { background: none; border: none; color: white; font-size: 28px; cursor: pointer; position: absolute; top: 24px; left: 24px; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 60px 0; scroll-margin-top: 20px; }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h2 { color: #00101c; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 12px; }
+        .section-header p { color: #4a4a4a; font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+        .accent-line { width: 60px; height: 3px; background: #00101c; margin: 12px auto 0; }
+        
+        .card { background: #fafafa; border: 1px solid #e5e5e5; border-radius: 20px; padding: 24px 28px; margin-bottom: 24px; transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -12px rgba(0,0,0,0.1); border-color: #d4d4d4; }
+        .card .badge-card { background: #00101c; color: white; padding: 4px 14px; border-radius: 20px; font-size: 0.7rem; display: inline-block; margin-bottom: 12px; font-weight: 600; }
+        .stat-value-card { font-size: 1.8rem; font-weight: 700; color: #00101c; margin: 8px 0; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin: 24px 0; }
+        
+        .demo-note { background: #eef2fa; padding: 14px 20px; border-radius: 12px; margin-bottom: 24px; font-size: 0.9rem; border-left: 4px solid #00101c; color: #2c2c2c; }
+        .blur-data { filter: blur(4px); background-color: rgba(0,0,0,0.05); display: inline-block; padding: 2px 10px; border-radius: 12px; user-select: none; pointer-events: none; }
+        .insight { background: #f5f5f5; padding: 16px 20px; border-radius: 16px; margin: 16px 0; border-left: 3px solid #00101c; }
+        .insight strong { color: #00101c; }
+        
+        .table-wrapper { width: 100%; overflow-x: auto; margin: 16px 0; -webkit-overflow-scrolling: touch; }
+        .data-table { width: 100%; background: #fafafa; border-collapse: collapse; border-radius: 16px; overflow: hidden; min-width: 500px; }
+        .data-table th, .data-table td { padding: 14px 18px; text-align: left; border-bottom: 1px solid #e5e5e5; }
+        .data-table th { background: #f0f0f0; font-weight: 600; color: #00101c; }
+        .data-table tr:last-child td { border-bottom: none; }
+        
+        .chart-container { margin: 16px 0; position: relative; max-width: 100%; }
+        canvas { max-height: 280px; max-width: 100%; }
+        
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: #00101c; color: white; text-decoration: none; border-radius: 40px; font-weight: 500; transition: all 0.3s ease; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.95rem; }
+        .btn:hover { background: #002a3b; transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 2px solid #e5e5e5; color: #00101c; }
+        .btn-outline:hover { border-color: #00101c; background: transparent; color: #00101c; }
+        
+        .note { font-size: 0.8rem; color: #777; margin-top: 8px; font-style: italic; }
+        h4 { color: #00101c; font-size: 1.2rem; margin: 20px 0 12px; font-weight: 600; }
+        
+        .btn-inquire { display: inline-block; background-color: #00101c; color: white; font-weight: 600; font-size: 1rem; padding: 12px 40px; border-radius: 40px; border: none; cursor: pointer; transition: 0.25s; margin: 16px auto 20px; }
+        .btn-inquire:hover { background-color: #002a3b; }
+        .text-center { text-align: center; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; max-width: 520px; width: 90%; border-radius: 28px; padding: 36px 28px; position: relative; }
+        .modal-content h3 { font-size: 1.8rem; font-weight: 600; color: #00101c; margin-bottom: 20px; }
+        .modal-content label { display: block; margin-top: 16px; margin-bottom: 6px; font-weight: 500; color: #1f1f1f; }
+        .modal-content input, .modal-content textarea { width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 16px; font-family: 'Inter', sans-serif; font-size: 0.95rem; }
+        .modal-content input:focus, .modal-content textarea:focus { outline: none; border-color: #00101c; }
+        .modal-content textarea { min-height: 100px; resize: vertical; }
+        .modal-submit { background-color: #00101c; color: white; border: none; padding: 12px 24px; border-radius: 40px; font-weight: 600; cursor: pointer; margin-top: 24px; width: 100%; font-size: 1rem; }
+        .close-modal { position: absolute; top: 18px; right: 22px; font-size: 28px; cursor: pointer; color: #777; }
+        .close-modal:hover { color: black; }
+        .form-status { margin-top: 16px; font-size: 0.9rem; text-align: center; }
+        
+        .footer { width: 100%; margin: 0; padding: 0; line-height: 0; }
+        .footer img { width: 100%; display: block; }
+        
+        @media (max-width: 768px) {
+            .burger { top: 20px; right: 20px; }
+            .burger-btn { width: 44px; height: 44px; }
+            .menu-panel { width: 280px; padding: 32px 20px; }
+            section { padding: 40px 0; }
+            .card { padding: 20px 16px; }
+            .card-grid { grid-template-columns: 1fr; }
+            .data-table { font-size: 0.8rem; min-width: 400px; }
+        }
+    </style>
+</head>
+<body>
+    <img class="hero-image" src="images/hero.png" alt="GPL Diagnostics – IVD market survey">
+    
+    <!-- Бургер -->
+    <div class="burger"><div class="burger-btn" id="burgerBtn"><span></span><span></span><span></span></div></div>
+    <div class="menu-panel" id="menuPanel">
+        <button class="close-menu" id="closeMenuBtn">✕</button>
+        <div style="margin-top: 32px;"></div>
+        <div class="menu-section"><div class="main-cat">Mission</div><a href="about.html" style="margin-left: 18px; color:#e0e4f0;">About GPL →</a></div>
+        <div class="menu-section"><div class="main-cat">Products</div><ul class="sub-list"><li><a href="sub.html">Substances</a></li><li><a href="ab.html">Antibodies</a></li><li><a href="ag.html">Antigens</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Services</div><ul class="sub-list"><li><a href="serv.html">IVD Market Survey</a></li><li><a href="opt.html">IVD Web Optimisation</a></li><li><a href="soft.html">IVD Software Development</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Contacts</div><a href="contacts.html" style="margin-left: 18px; color:#e0e4f0;">Get in touch →</a></div>
+    </div>
+    
+    <!-- Основной контент -->
+    <div class="container" style="padding-top: 40px;">
+        <h1 style="color: #00101c; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; text-align: center; margin-bottom: 16px;">IVD Market Survey</h1>
+        <p style="text-align: center; color: #4a4a4a; font-size: 1.1rem; max-width: 800px; margin: 0 auto 24px;">Thailand IVD market intelligence: clinical chemistry opportunities, Thai FDA pathways, and strategic Representative Office setup</p>
+        
+        <div class="demo-note">
+            📊 <strong>Demonstration version</strong> — Complete analytical structure. All specific client data, company names, and exact figures are replaced with <span class="blur-data">blurred placeholders</span>.
+        </div>
+        
+        <!-- SECTION 1: OVERVIEW -->
+        <section id="overview">
+            <div class="section-header"><h2>1. Thailand Medical Market & IVD Share</h2><div class="accent-line"></div></div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="badge-card">TOTAL MEDICAL MARKET</div>
+                    <div class="stat-value-card"><span class="blur-data">€X.XX billion</span></div>
+                    <p>IVD accounts for <strong><span class="blur-data">20%</span></strong> of total medical market. Other segments: <span class="blur-data">80%</span>.</p>
+                    <div class="chart-container"><canvas id="pieTotalMarket" width="450" height="250"></canvas></div>
+                    <div class="insight" style="margin-top: 8px; font-size: 0.8rem;">Source: aggregated market research (illustrative).</div>
+                </div>
+                <div class="card">
+                    <div class="badge-card">IVD MARKET BREAKDOWN</div>
+                    <div class="stat-value-card"><span class="blur-data">€XXXM total IVD</span></div>
+                    <p>Reagents & Kits = <span class="blur-data">70%</span><br><strong style="color: #0f9a67;">Clinical Chemistry</strong> = <span class="blur-data">15% of reagents</span><br>Instruments & Services = <span class="blur-data">30%</span></p>
+                    <div class="chart-container"><canvas id="pieIvdBreakdown" width="450" height="250"></canvas></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 2: GROWTH -->
+        <section id="dynamics" style="background: #fafafa; border-radius: 20px; padding: 40px 24px; margin-bottom: 40px;">
+            <div class="section-header"><h2>2. Thailand IVD Market Growth (2016–2030)</h2><div class="accent-line"></div></div>
+            <div class="card">
+                <div class="badge-card">Revenue forecast — illustrative trend (actual figures blurred)</div>
+                <div class="chart-container"><canvas id="ivdGrowthChart" width="900" height="350"></canvas></div>
+                <div class="insight">
+                    <p><strong>Key market drivers:</strong> aging population, chronic diseases, healthcare investments, medical tourism. Demand for decentralized diagnostics and early detection programs fuels expansion.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 3: COMPETITIVE LANDSCAPE -->
+        <section id="players">
+            <div class="section-header"><h2>3. Regulatory Context & Competitive Landscape</h2><div class="accent-line"></div></div>
+            <div class="card">
+                <p>Thailand's medical device framework aligns with IMDRF and ASEAN Medical Device Directive. Thai FDA offers Concise Pathway, Reliance Program, and Full Evaluation, accepting approvals from reference countries (US FDA, EU Notified Bodies, Health Canada, TGA, MHLW). This creates a natural commercial advantage for established European and American IVD manufacturers.</p>
+                <p><strong>Market Structure:</strong> Import-driven IVD market. Western manufacturers dominate premium segments. Specific share data available upon engagement.</p>
+                <div class="insight">Opportunity focus: <strong style="color: #0f9a67;">clinical chemistry pre-mixes</strong> (glucose, LDH, creatinine, ALT, AST), modular reagent systems, and raw material supply to local manufacturers/distributors.</div>
+                <div class="chart-container"><canvas id="pieImportMarketShare" width="900" height="350"></canvas></div>
+                <p class="note">* Illustrative market structure — exact figures blurred.</p>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: REGISTRATION PATHWAYS -->
+        <section id="registration" style="background: #fafafa; border-radius: 20px; padding: 40px 24px; margin-bottom: 40px;">
+            <div class="section-header"><h2>4. Thai FDA Registration Pathways for IVD Products</h2><div class="accent-line"></div></div>
+            <div class="card">
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead><tr><th>Pathway</th><th>Description</th><th>Timeline</th><th>Suitability</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Concise Pathway</strong></td><td>For products with prior approval from reference country (US FDA, EU CE, Health Canada, TGA, MHLW)</td><td>~90-180 days</td><td>Best if manufacturer holds EU CE or US FDA</td></tr>
+                            <tr><td><strong>Full Evaluation</strong></td><td>No reference country approval; complete technical file required</td><td>~180-365 days</td><td>Longer but viable</td></tr>
+                            <tr><td><strong>Reliance Program</strong></td><td>Already registered in ASEAN reference countries (Singapore, Malaysia, Philippines)</td><td>~60-120 days</td><td>Fast if ASEAN presence</td></tr>
+                            <tr><td><strong>OEM/Private Label Registration</strong></td><td>Local importer registers product under their name using manufacturer as contract manufacturer</td><td>~90-180 days</td><td>Recommended — distributor holds license</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="insight"><strong>Recommendation:</strong> Partner with a local Thai distributor who will hold Thai FDA registration under OEM/Private Label pathway.</div>
+            </div>
+        </section>
+        
+        <!-- SECTION 5: PRICING -->
+        <section id="pricing">
+            <div class="section-header"><h2>5. Estimated Pricing for Thai Distributor (Clinical Chemistry)</h2><div class="accent-line"></div></div>
+            <div class="card">
+                <p>Below is the pricing table structure based on hospital price lists and distributor margin models. All specific figures are blurred — actual benchmark data available in full report.</p>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead><tr><th>Test / Panel</th><th>Price to Lab (USD)</th><th>Target Price to Distributor (USD)</th><th>Typical Margin Range</th></tr></thead>
+                        <tbody>
+                            <tr><td>Glucose (per test)</td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">XX-XX%</span></td></tr>
+                            <tr><td>Creatinine (per test)</td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">XX-XX%</span></td></tr>
+                            <tr><td>ALT / AST (each)</td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">XX-XX%</span></td></tr>
+                            <tr><td>Uric Acid</td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">XX-XX%</span></td></tr>
+                            <tr><td>Lipid Panel (TC, TG, HDL, LDL)</td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">XX-XX%</span></td></tr>
+                            <tr><td>HbA1c</td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">$X.XX</span></td><td><span class="blur-data">XX-XX%</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="insight">For a 500-test kit: detailed per-kit pricing structure available. Actual figures blurred for confidentiality.</div>
+            </div>
+        </section>
+        
+        <!-- SECTION 6: POTENTIAL PARTNERS -->
+        <section id="partners" style="background: #fafafa; border-radius: 20px; padding: 40px 24px; margin-bottom: 40px;">
+            <div class="section-header"><h2>6. Potential Partners in Thailand (Manufacturers & Distributors)</h2><div class="accent-line"></div></div>
+            <div class="card">
+                <p>Based on Thai FDA database and market research, the following types of companies are active in the Thai IVD market. Specific names are blurred.</p>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead><tr><th>Company Type / Category</th><th>Activity / Role</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="blur-data">[Manufacturer Type A]</span></td><td>Clinical chemistry reagents, rapid tests</td></tr>
+                            <tr><td><span class="blur-data">[Manufacturer Type B]</span></td><td>Reagents, pregnancy tests, home test kits</td></tr>
+                            <tr><td><span class="blur-data">[Manufacturer Type C]</span></td><td>Immunoassay, rapid tests, enzymes</td></tr>
+                            <tr><td><span class="blur-data">[Distributor Type D]</span></td><td>Laboratory reagents, distribution</td></tr>
+                            <tr><td><span class="blur-data">[Manufacturer Type E]</span></td><td>Assay kits, blood collection devices</td></tr>
+                            <tr><td><span class="blur-data">[Research Center]</span></td><td>Thalassemia screening, R&amp;D</td></tr>
+                            <tr><td><span class="blur-data">[OEM Provider]</span></td><td>Serology, infectious disease tests, OEM</td></tr>
+                            <tr><td><span class="blur-data">[Chinese Manufacturer 1]</span></td><td>Biochemistry, urinalysis, hematology instruments</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="insight">A systematic analysis of local production capacities and distribution partnerships is available. Full list with contact details provided in complete report.</div>
+            </div>
+        </section>
+        
+        <!-- SECTION 7: REPRESENTATIVE OFFICE -->
+        <section id="representative">
+            <div class="section-header"><h2>7. Representative Office in Thailand — Strategic Market Entry</h2><div class="accent-line"></div><p>🇹🇭 100% foreign ownership · Brand positioning · Local trust</p></div>
+            <div class="card">
+                <p><strong>What is a Representative Office?</strong> A legal structure that allows a foreign company to establish a non-trading presence in Thailand for market research, product promotion, technical support, and distributor liaison. Direct sales are prohibited — commercial transactions go through local distributors.</p>
+                <div class="insight">
+                    <strong>Why open a Representative Office?</strong><br>
+                    ✓ <strong>100% foreign ownership</strong> — no Thai partner required<br>
+                    ✓ <strong>Brand positioning</strong> — physical presence builds credibility in the Thai market<br>
+                    ✓ <strong>Local client trust</strong> — Thai hospitals and distributors prefer partners with local offices<br>
+                    ✓ <strong>Direct control</strong> over distributor relationships, pricing, and market strategy<br>
+                    ✓ <strong>Cost-effective entry</strong> — lower setup costs than a full subsidiary
+                </div>
+                
+                <h4>📋 Eligibility Requirements</h4>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead><tr><th>Requirement</th><th>Details</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Parent company age</strong></td><td>Must be <strong>at least 3 years old</strong> (established for minimum 3 years)</td></tr>
+                            <tr><td><strong>Minimum investment</strong></td><td>Thai government requires <strong>3 million THB (~€83,000)</strong> in investments (including salaries) over the first 2 years of operation</td></tr>
+                            <tr><td><strong>Physical office</strong></td><td><strong>Mandatory</strong> — registered address with lease agreement (minimum 1 year)</td></tr>
+                            <tr><td><strong>Staffing</strong></td><td>At least 1 Thai employee (e.g., office coordinator or manager)</td></tr>
+                            <tr><td><strong>Permitted activities</strong></td><td>Market research, technical support, quality control, promotional activities, liaison with HQ. <strong>No direct sales, no revenue in Thailand</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4>📋 Step-by-Step Registration Procedure</h4>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead><tr><th>Step</th><th>Action</th><th>Timeline</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>Prepare head office documents — notarized, legalized, translated to Thai</td><td>2-3 weeks</td></tr>
+                            <tr><td>2</td><td>Reserve company name at DBD (must end with "Representative Office")</td><td>1-3 days</td></tr>
+                            <tr><td>3</td><td>Submit registration form (Phor.Khor. 01) with lease agreement, documents</td><td>5-7 days</td></tr>
+                            <tr><td>4</td><td>Obtain Tax ID (TIN) and VAT registration at Revenue Department</td><td>1-2 weeks</td></tr>
+                            <tr><td>5</td><td>Register with Social Security Office (SSO) for Thai employee(s)</td><td>1-2 weeks</td></tr>
+                            <tr><td>6</td><td>Open corporate bank account in Thailand</td><td>5-10 days</td></tr>
+                            <tr><td>7</td><td>Apply for Work Permit and Non-Immigrant B visa for foreign manager (if applicable)</td><td>2-4 weeks</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4>💰 Estimated First-Year Budget</h4>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead><tr><th>Expense category</th><th>Amount (THB)</th><th>Amount (EUR ~36 THB/EUR)</th></tr></thead>
+                        <tbody>
+                            <tr><td>DBD registration fees + government charges</td><td>10,000 - 25,000</td><td>€280 - €700</td></tr>
+                            <tr><td>Legal services (turnkey registration)</td><td>80,000 - 150,000</td><td>€2,200 - €4,200</td></tr>
+                            <tr><td>Office rent (small office, Bangkok, 1 year)</td><td>180,000 - 360,000</td><td>€5,000 - €10,000</td></tr>
+                            <tr><td>Accounting & tax compliance (monthly)</td><td>8,000 - 15,000/month</td><td>€220 - €420/month</td></tr>
+                            <tr><td>Thai employee salary (1 staff, minimum + SSO)</td><td>180,000 - 300,000/year</td><td>€5,000 - €8,300</td></tr>
+                            <tr><td>Visa & Work Permit fees (if foreign manager)</td><td>30,000 - 50,000</td><td>€830 - €1,400</td></tr>
+                            <tr style="background: #f0f0f0;"><td><strong>TOTAL FIRST YEAR</strong></td><td><strong>~500,000 - 900,000 THB</strong></td><td><strong>~€14,000 - €25,000</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="note">* The 3 million THB minimum investment (including salaries) must be demonstrated within the first 2 years of operation.</p>
+            </div>
+        </section>
+        
+        <!-- SECTION 8: FDA CODES -->
+        <section id="fda-list" style="background: #fafafa; border-radius: 20px; padding: 40px 24px; margin-bottom: 40px;">
+            <div class="section-header"><h2>8. Thai FDA — Relevant Codes for IVD Reagents / Pre-mixes</h2><div class="accent-line"></div></div>
+            <div class="card">
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead><tr><th>Code / Category (Thai FDA)</th><th>Description</th><th>Product Type</th></tr></thead>
+                        <tbody>
+                            <tr><td>10-1-034</td><td>In Vitro Diagnostic Medical Device (general)</td><td>Reagents, kits, calibrators</td></tr>
+                            <tr><td>10-1-035</td><td>Clinical Chemistry reagents</td><td>Glucose, lipids, enzymes, electrolytes</td></tr>
+                            <tr><td>10-1-038</td><td>Quality control material for clinical chemistry</td><td>Control sera, calibrators</td></tr>
+                            <tr><td>10-1-041</td><td>Immunoassay reagents</td><td>Infectious diseases, hormones</td></tr>
+                            <tr><td>10-1-050</td><td>Specimen collection / transport devices</td><td>Blood collection tubes, swabs</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>For OEM products, registration by a local importer referencing the manufacturer's ISO13485 certificate is sufficient. Thai FDA encourages local reagent production under "Thailand 4.0".</p>
+            </div>
+        </section>
+        
+        <div class="text-center">
+            <button class="btn-inquire" id="inquireBtnServ">Inquire →</button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <img src="images/bottom.png" alt="GPL Diagnostics bottom">
+    </div>
+    
+    <!-- Модальное окно формы -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModalBtn">&times;</span>
+            <h3>Inquiry</h3>
+            <form id="contactForm">
+                <label for="name">Full name *</label>
+                <input type="text" id="name" name="name" required>
+                <label for="company">Company *</label>
+                <input type="text" id="company" name="company" required>
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Your message *</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit" class="modal-submit">Send inquiry</button>
+                <div id="formStatus" class="form-status"></div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        (function() {
+            // Бургер
+            const burgerBtn = document.getElementById('burgerBtn');
+            const menuPanel = document.getElementById('menuPanel');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            if (burgerBtn) burgerBtn.addEventListener('click', () => menuPanel.classList.add('open'));
+            if (closeMenuBtn) closeMenuBtn.addEventListener('click', () => menuPanel.classList.remove('open'));
+            document.addEventListener('click', (e) => { if (menuPanel && menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !burgerBtn.contains(e.target)) menuPanel.classList.remove('open'); });
+            
+            // Форма
+            const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxA5MueC0RXAhrR5oR74pDP3iM5CrNIPr_vtYydxyqm5mgz-RRuGEHgmVHRxphBW40rvA/exec';
+            const modal = document.getElementById('contactModal');
+            const inquireBtn = document.getElementById('inquireBtnServ');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const form = document.getElementById('contactForm');
+            const statusDiv = document.getElementById('formStatus');
+            
+            if (inquireBtn) {
+                inquireBtn.addEventListener('click', () => {
+                    modal.style.display = 'flex';
+                    statusDiv.innerHTML = '';
+                });
+            }
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    form.reset();
+                    statusDiv.innerHTML = '';
+                });
+            }
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    form.reset();
+                    statusDiv.innerHTML = '';
+                }
+            });
+            
+            if (form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value.trim();
+                    const company = document.getElementById('company').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const message = document.getElementById('message').value.trim();
+                    
+                    if (!name || !company || !email || !message) {
+                        statusDiv.innerHTML = '<span style="color: #d32f2f;">Please fill in all fields.</span>';
+                        return;
+                    }
+                    if (!email.includes('@')) {
+                        statusDiv.innerHTML = '<span style="color: #d32f2f;">Please enter a valid email address.</span>';
+                        return;
+                    }
+                    
+                    const submitBtn = form.querySelector('.modal-submit');
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Sending...';
+                    statusDiv.innerHTML = '<span style="color: #2c2c2c;">Sending...</span>';
+                    
+                    try {
+                        await fetch(PROXY_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name, company, email, message })
+                        });
+                        statusDiv.innerHTML = '<span style="color: #2e7d32;">✓ Thank you! We will get back to you soon.</span>';
+                        form.reset();
+                        setTimeout(() => {
+                            modal.style.display = 'none';
+                            statusDiv.innerHTML = '';
+                        }, 2000);
+                    } catch (error) {
+                        console.error(error);
+                        statusDiv.innerHTML = '<span style="color: #d32f2f;">❌ Something went wrong. Please try again later.</span>';
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Send inquiry';
+                    }
+                });
+            }
+        })();
+        
+        // Charts
+        // Chart 1: Total Market - 20% IVD / 80% Other
+        const ctx1 = document.getElementById('pieTotalMarket').getContext('2d');
+        new Chart(ctx1, { 
+            type: 'pie', 
+            data: { labels: ['IVD (20%)', 'Other Medical Segments (80%)'], datasets: [{ data: [20, 80], backgroundColor: ['#0f9a67', '#d4d4d4'], borderColor: '#FFFFFF', borderWidth: 2 }] }, 
+            options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw}%` } } } } 
+        });
+        
+        // Chart 2: IVD Breakdown - Clinical Chemistry выделен цветом #0f9a67
+        const ctx2 = document.getElementById('pieIvdBreakdown').getContext('2d');
+        new Chart(ctx2, { 
+            type: 'doughnut', 
+            data: { labels: ['Reagents & Kits (70%)', 'Clinical Chemistry (15% of IVD reagents)', 'Other Reagents (55% of IVD reagents)', 'Instruments & Others (30%)'], 
+            datasets: [{ data: [70, 15, 55, 30], backgroundColor: ['#d4d4d4', '#0f9a67', '#b8b8b8', '#e5e5e5'], borderColor: '#FFFFFF', borderWidth: 1.5 }] }, 
+            options: { responsive: true, cutout: '50%', plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } }, tooltip: { callbacks: { label: (ctx) => { if (ctx.label.includes('Clinical Chemistry')) return 'Clinical Chemistry: 15% of IVD reagents'; if (ctx.label.includes('Reagents & Kits')) return 'Reagents & Kits: 70% of IVD'; if (ctx.label.includes('Other Reagents')) return 'Other Reagents: 55% of IVD reagents'; return 'Instruments & Others: 30% of IVD'; } } } } } 
+        });
+        
+        // Chart 3: Import market share (illustrative)
+        const ctxImport = document.getElementById('pieImportMarketShare').getContext('2d');
+        new Chart(ctxImport, { 
+            type: 'pie', 
+            data: { labels: ['Global Leader A', 'Global Leader B', 'Major Player C', 'Major Player D', 'Asian Manufacturer', 'Others & Local'], 
+            datasets: [{ data: [15, 12, 10, 8, 7, 48], backgroundColor: ['#00101c', '#0f9a67', '#d4d4d4', '#b8b8b8', '#e5e5e5', '#f0f0f0'], borderColor: '#FFFFFF', borderWidth: 2 }] }, 
+            options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { font: { size: 9 } } }, tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw}% estimated import share` } } } } 
+        });
+        
+        // Growth chart
+        const years = ['2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026','2027','2028','2029','2030'];
+        const revenueIndex = [100, 108, 116, 126, 135, 153, 175, 196, 224, 252, 282, 315, 350, 388, 428];
+        const ctxLine = document.getElementById('ivdGrowthChart').getContext('2d');
+        new Chart(ctxLine, { 
+            type: 'line', 
+            data: { labels: years, datasets: [{ label: 'Market Growth Index (baseline confidential)', data: revenueIndex, borderColor: '#00101c', backgroundColor: 'rgba(15, 154, 103, 0.08)', borderWidth: 3, fill: true, pointBackgroundColor: '#0f9a67', pointBorderColor: '#FFFFFF', pointRadius: 4, tension: 0.2 }] }, 
+            options: { responsive: true, maintainAspectRatio: true, plugins: { tooltip: { callbacks: { label: (ctx) => `Relative index: ${ctx.raw} (actual values blurred)` } }, legend: { position: 'top', labels: { font: { size: 10 } } } }, scales: { y: { title: { display: true, text: 'Relative Market Index', font: { size: 10 } } }, x: { title: { display: true, text: 'Year', font: { size: 10 } } } } } 
+        });
+    </script>
+</body>
+</html>
