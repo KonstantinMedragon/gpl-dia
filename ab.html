@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Antibodies | GPL Diagnostics – monoclonal antibodies for IVD</title>
+    <meta name="description" content="Full catalog of monoclonal antibodies for IVD: hormones, antibiotics, pesticides, mycotoxins, biomarkers, toxins and allergens.">
+    <meta name="keywords" content="monoclonal antibodies, IVD antibodies, small molecule antibodies, biomarker antibodies, toxin antibodies, GPL Diagnostics">
+    <meta name="author" content="GPL Diagnostics">
+    <meta property="og:title" content="Antibodies | GPL Diagnostics – monoclonal antibodies for IVD">
+    <meta property="og:description" content="High‑quality monoclonal antibodies for diagnostic applications: hormones, antibiotics, toxins, allergens and more.">
+    <meta property="og:image" content="images/hero.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #2c2c2c; line-height: 1.5; }
+        .hero-image, .bottom-image { width: 100%; display: block; }
+        .content { max-width: 1400px; margin: 0 auto; padding: 60px 24px; }
+        h1 { color: #00101c; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 700; margin-bottom: 32px; text-align: center; }
+        
+        .burger { position: fixed; top: 32px; right: 32px; z-index: 1000; }
+        .burger-btn { background: rgba(0,16,28,0.7); backdrop-filter: blur(8px); border: none; border-radius: 40px; width: 52px; height: 52px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; }
+        .burger-btn span { width: 24px; height: 2px; background: white; border-radius: 4px; }
+        .menu-panel { position: fixed; top: 0; right: -420px; width: 380px; max-width: 85vw; height: 100%; background: rgba(10,15,26,0.96); backdrop-filter: blur(16px); border-left: 1px solid rgba(255,255,255,0.2); z-index: 1100; transition: right 0.4s; padding: 40px 28px; overflow-y: auto; }
+        .menu-panel.open { right: 0; }
+        .menu-panel .main-cat { font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 12px; border-left: 3px solid #00101c; padding-left: 14px; }
+        .sub-list { list-style: none; padding-left: 20px; }
+        .sub-list li { margin: 12px 0; }
+        .sub-list a { text-decoration: none; font-size: 1rem; color: #e0e4f0; transition: 0.2s; display: inline-block; }
+        .sub-list a:hover { color: white; transform: translateX(4px); }
+        .close-menu { background: none; border: none; color: white; font-size: 28px; cursor: pointer; position: absolute; top: 24px; left: 24px; }
+        
+        .search-section { margin-bottom: 40px; display: flex; justify-content: center; }
+        .search-container { position: relative; width: 100%; max-width: 500px; }
+        .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: #00101c; pointer-events: none; }
+        #searchInput { width: 100%; padding: 14px 20px 14px 48px; font-size: 1rem; border: 1px solid #ccc; border-radius: 60px; outline: none; }
+        #searchInput:focus { border-color: #00101c; }
+        .search-clear { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; cursor: pointer; display: none; }
+        
+        .antibodies-section { margin-bottom: 60px; }
+        .category-title { color: #00101c; font-size: 1.8rem; font-weight: 600; margin-bottom: 16px; border-left: 4px solid #00101c; padding-left: 20px; }
+        .result-count { font-size: 0.85rem; color: #4a4a4a; margin-bottom: 12px; }
+        .antibodies-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .antibodies-table th, .antibodies-table td { border: 1px solid #e2e2e2; padding: 12px 16px; text-align: left; vertical-align: top; word-break: break-word; }
+        .antibodies-table th { background-color: #f5f5f5; font-weight: 600; color: #00101c; }
+        .product-name { cursor: pointer; transition: background 0.1s; }
+        .product-name:active { background-color: #f0f0f0; }
+        .abbrev-cell { font-family: monospace; font-weight: 500; position: relative; }
+        .tooltip-overlay { position: absolute; top: 0; left: 0; right: 0; background: #00101c; color: white; padding: 8px 12px; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 0.75rem; line-height: 1.4; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: fadeIn 0.2s ease; word-break: break-word; white-space: normal; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+        .no-results { text-align: center; padding: 32px; color: #777; font-style: italic; }
+        
+        .btn-inquire { display: inline-block; background-color: #00101c; color: white; font-weight: 600; font-size: 1rem; padding: 12px 40px; border-radius: 40px; border: none; cursor: pointer; margin: 32px auto 20px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; max-width: 520px; width: 90%; border-radius: 28px; padding: 36px 28px; position: relative; }
+        .modal-content h3 { font-size: 1.8rem; color: #00101c; margin-bottom: 20px; }
+        .modal-content label { display: block; margin-top: 16px; font-weight: 500; }
+        .modal-content input, .modal-content textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 16px; font-family: inherit; }
+        .modal-submit { background: #00101c; color: white; border: none; padding: 12px; border-radius: 40px; font-weight: 600; width: 100%; margin-top: 24px; cursor: pointer; }
+        .close-modal { position: absolute; top: 18px; right: 22px; font-size: 28px; cursor: pointer; color: #777; }
+        .form-status { margin-top: 16px; font-size: 0.9rem; text-align: center; }
+        .footer img { width: 100%; display: block; }
+        .text-center { text-align: center; }
+        
+        @media (max-width: 768px) {
+            .content { padding: 40px 16px; }
+            .antibodies-table th, .antibodies-table td { padding: 8px 12px; font-size: 0.8rem; }
+            .category-title { font-size: 1.4rem; }
+            .burger { top: 20px; right: 20px; }
+            .burger-btn { width: 44px; height: 44px; }
+            .tooltip-overlay { font-size: 0.7rem; padding: 6px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <img class="hero-image" src="images/hero.png" alt="GPL Diagnostics – antibodies">
+    
+    <div class="burger"><div class="burger-btn" id="burgerBtn"><span></span><span></span><span></span></div></div>
+    <div class="menu-panel" id="menuPanel">
+        <button class="close-menu" id="closeMenuBtn">✕</button>
+        <div style="margin-top: 32px;"></div>
+        <div class="menu-section"><div class="main-cat">Mission</div><a href="about.html" style="margin-left: 18px; color:#e0e4f0;">About GPL →</a></div>
+        <div class="menu-section"><div class="main-cat">Products</div><ul class="sub-list"><li><a href="sub.html">Substances</a></li><li><a href="comp.html">Components</a></li><li><a href="ag.html">Antigens</a></li><li><a href="ab.html">Antibodies</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Services</div><ul class="sub-list"><li><a href="serv.html">IVD Market Survey</a></li><li><a href="opt.html">IVD Web Optimisation</a></li><li><a href="soft.html">IVD Software Development</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Contacts</div><a href="contacts.html" style="margin-left: 18px; color:#e0e4f0;">Get in touch →</a></div>
+    </div>
+    
+    <div class="content">
+        <h1>Antibodies</h1>
+        <div class="search-section"><div class="search-container"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="Search by catalog number, abbreviation or name (e.g. GLA0001, CRP)"><button id="clearSearch" class="search-clear">✕</button></div></div>
+        <div id="tablesContainer"></div>
+        <div class="text-center"><button class="btn-inquire" id="inquireBtnAb">Inquire →</button></div>
+    </div>
+    
+    <div class="footer"><img src="images/bottom.png" alt="GPL Diagnostics bottom"></div>
+    
+    <div id="contactModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeModalBtn">&times;</span><h3>Inquiry</h3><form id="contactForm"><label>Full name *</label><input type="text" id="name" required><label>Company *</label><input type="text" id="company" required><label>Email *</label><input type="email" id="email" required><label>Your message *</label><textarea id="message" rows="3" required></textarea><button type="submit" class="modal-submit">Send inquiry</button><div id="formStatus" class="form-status"></div></form></div></div>
+    
+    <script>
+        (function() {
+            // =================================================================
+            // ДАННЫЕ: АНТИТЕЛА (GLA0001 – GLA....)
+            // =================================================================
+            
+            // ---------- 1. Гормоны, стероиды и биомаркеры малых молекул ----------
+            const hormoneAbs = [
+                { catalog:"GLA0001", name:"Anti‑Calcitonin", full:"Mouse monoclonal antibody to calcitonin", desc:"For detection of calcitonin in biological samples." },
+                { catalog:"GLA0002", name:"Anti‑Cortisol", full:"Mouse monoclonal antibody to cortisol", desc:"For detection of cortisol in serum and saliva." },
+                { catalog:"GLA0003", name:"Anti‑Testosterone", full:"Mouse monoclonal antibody to testosterone (T)", desc:"For detection of testosterone in serum and urine." },
+                { catalog:"GLA0004", name:"Anti‑Progesterone", full:"Mouse monoclonal antibody to progesterone (P)", desc:"For detection of progesterone in serum and milk." },
+                { catalog:"GLA0005", name:"Anti‑Luteinizing hormone", full:"Mouse monoclonal antibody to luteinizing hormone (LH)", desc:"For detection of LH in serum and urine." },
+                { catalog:"GLA0006", name:"Anti‑Prolactin", full:"Mouse monoclonal antibody to prolactin", desc:"For detection of prolactin in serum." },
+                { catalog:"GLA0007", name:"Anti‑Estrone", full:"Mouse monoclonal antibody to estrone (E1)", desc:"For detection of estrone in biological samples." },
+                { catalog:"GLA0008", name:"Anti‑Estradiol/Estriol", full:"Mouse monoclonal antibody to estradiol/estriol (E2/E3)", desc:"For detection of E2 and E3 in serum and urine." },
+                { catalog:"GLA0009", name:"Anti‑Growth hormone", full:"Mouse monoclonal antibody to growth hormone (hGH)", desc:"For detection of hGH in serum." },
+                { catalog:"GLA0010", name:"Anti‑HCG", full:"Mouse monoclonal antibody to human chorionic gonadotropin (HCG)", desc:"For detection of HCG in pregnancy and tumour markers." },
+                { catalog:"GLA0011", name:"Anti‑Thyroxin T4", full:"Mouse monoclonal antibody to thyroxin T4", desc:"For detection of T4 in serum." },
+                { catalog:"GLA0012", name:"Anti‑Thyroxin T3", full:"Mouse monoclonal antibody to triiodothyronine (T3)", desc:"For detection of T3 in serum." },
+                { catalog:"GLA0013", name:"Anti‑Erythropoietin", full:"Mouse monoclonal antibody to erythropoietin (EPO)", desc:"For detection of EPO in serum and urine." },
+                { catalog:"GLA0014", name:"Anti‑Dexamethasone", full:"Mouse monoclonal antibody to dexamethasone (DEX)", desc:"For detection of dexamethasone in meat and milk." },
+                { catalog:"GLA0015", name:"Anti‑Betamethasone", full:"Mouse monoclonal antibody to betamethasone", desc:"For detection of betamethasone in meat." },
+                { catalog:"GLA0016", name:"Anti‑Hydrocortisone", full:"Mouse monoclonal antibody to hydrocortisone", desc:"For detection of hydrocortisone in biological samples." },
+                { catalog:"GLA0017", name:"Anti‑Norethisterone", full:"Mouse monoclonal antibody to norethisterone", desc:"For detection of norethisterone in serum." },
+                { catalog:"GLA0018", name:"Anti‑Flugestone Acetate", full:"Mouse monoclonal antibody to flugestone acetate", desc:"For detection of flugestone acetate in livestock." },
+                { catalog:"GLA0019", name:"Anti‑Diethylstilbestrol", full:"Mouse monoclonal antibody to diethylstilbestrol (DES)", desc:"For detection of DES in livestock products." },
+                { catalog:"GLA0020", name:"Anti‑Hexestrol", full:"Mouse monoclonal antibody to hexestrol (HES)", desc:"For detection of hexestrol in food." },
+                { catalog:"GLA0021", name:"Anti‑Bisphenol A", full:"Mouse monoclonal antibody to bisphenol A", desc:"For detection of bisphenol A in water and food." }
+            ];
+            
+            // ---------- 2. Антибиотики и ветеринарные препараты ----------
+            const antibioticAbs = [
+                // Сульфаниламиды
+                { catalog:"GLA0022", name:"Anti‑Sulfadoxine (SAS1)", full:"Mouse monoclonal antibody to sulfadoxine (five‑member ring)", desc:"For detection of sulfadoxine residues in food and feed samples." },
+                { catalog:"GLA0023", name:"Anti‑Sulfadoxine (SAS2)", full:"Mouse monoclonal antibody to sulfadoxine (six‑member ring)", desc:"Alternative epitope for sulfadoxine detection." },
+                { catalog:"GLA0024", name:"Anti‑Sulfamethazine", full:"Mouse monoclonal antibody to sulfamethazine (SD)", desc:"For detection of sulfamethazine residues in milk, meat and eggs." },
+                { catalog:"GLA0025", name:"Anti‑Sulfaquinoxaline", full:"Mouse monoclonal antibody to sulfaquinoxaline (SQX)", desc:"For detection of sulfaquinoxaline in poultry and feed." },
+                { catalog:"GLA0026", name:"Anti‑Sulfamethazine (SM2)", full:"Mouse monoclonal antibody to sulfamethazine (SM2)", desc:"Broad‑specificity antibody for sulfonamide detection." },
+                { catalog:"GLA0027", name:"Anti‑Sulfadimethoxine", full:"Mouse monoclonal antibody to sulfadimethoxine (SMD)", desc:"For detection of sulfadimethoxine in aquaculture and livestock." },
+                { catalog:"GLA0028", name:"Anti‑Sulfachloropyramine", full:"Mouse monoclonal antibody to sulfachloropyramine", desc:"For detection of sulfachloropyramine residues." },
+                // Хлорамфеникол и аналоги
+                { catalog:"GLA0029", name:"Anti‑Florfenicol", full:"Mouse monoclonal antibody to florfenicol (FF)", desc:"For detection of florfenicol residues in food products." },
+                { catalog:"GLA0030", name:"Anti‑Chloramphenicol", full:"Mouse monoclonal antibody to chloramphenicol (CAP)", desc:"Highly sensitive antibody for chloramphenicol detection in milk, meat and honey." },
+                { catalog:"GLA0031", name:"Anti‑Thiamphenicol", full:"Mouse monoclonal antibody to thiamphenicol (TAP)", desc:"For detection of thiamphenicol residues." },
+                { catalog:"GLA0032", name:"Anti‑Chloramphenicols (broad)", full:"Mouse monoclonal antibody to chloramphenicol group", desc:"Broad‑specificity antibody for chloramphenicol, thiamphenicol and florfenicol." },
+                // Аминогликозиды
+                { catalog:"GLA0033", name:"Anti‑Kanamycin", full:"Mouse monoclonal antibody to kanamycin (KAN)", desc:"For detection of kanamycin residues in milk and meat." },
+                { catalog:"GLA0034", name:"Anti‑Gentamicin", full:"Mouse monoclonal antibody to gentamicin (GM)", desc:"For detection of gentamicin in food and feed samples." },
+                { catalog:"GLA0035", name:"Anti‑Amikacin", full:"Mouse monoclonal antibody to amikacin (AMK)", desc:"For detection of amikacin residues." },
+                { catalog:"GLA0036", name:"Anti‑Streptomycin", full:"Mouse monoclonal antibody to streptomycin (STR)", desc:"For detection of streptomycin in honey and milk." },
+                { catalog:"GLA0037", name:"Anti‑Apramycin", full:"Mouse monoclonal antibody to apramycin (APM)", desc:"For detection of apramycin in livestock products." },
+                { catalog:"GLA0038", name:"Anti‑Spectinomycin", full:"Mouse monoclonal antibody to spectinomycin (SPM)", desc:"For detection of spectinomycin residues." },
+                { catalog:"GLA0039", name:"Anti‑Tobramycin", full:"Mouse monoclonal antibody to tobramycin", desc:"For detection of tobramycin in biological samples." },
+                { catalog:"GLA0040", name:"Anti‑Neomycin", full:"Mouse monoclonal antibody to neomycin (NM)", desc:"For detection of neomycin in milk and meat." },
+                { catalog:"GLA0041", name:"Anti‑Paromomycin", full:"Mouse monoclonal antibody to paromomycin", desc:"For detection of paromomycin residues." },
+                // Макролиды и другие
+                { catalog:"GLA0042", name:"Anti‑Lincomycin", full:"Mouse monoclonal antibody to lincomycin (LM)", desc:"For detection of lincomycin in food products." },
+                { catalog:"GLA0043", name:"Anti‑Pirilomycin", full:"Mouse monoclonal antibody to pirilomycin (PIR)", desc:"For detection of pirilomycin residues." },
+                { catalog:"GLA0044", name:"Anti‑Erythromycin", full:"Mouse monoclonal antibody to erythromycin (EM)", desc:"For detection of erythromycin in milk and honey." },
+                { catalog:"GLA0045", name:"Anti‑Avermectin", full:"Mouse monoclonal antibody to avermectin (AVM)", desc:"For detection of avermectin in livestock products." },
+                { catalog:"GLA0046", name:"Anti‑Doramectin", full:"Mouse monoclonal antibody to doramectin (DOR)", desc:"For detection of doramectin residues." },
+                { catalog:"GLA0047", name:"Anti‑Tylosin", full:"Mouse monoclonal antibody to tylosin (TYL)", desc:"For detection of tylosin in feed and food." },
+                { catalog:"GLA0048", name:"Anti‑Ivermectin", full:"Mouse monoclonal antibody to ivermectin (IVM)", desc:"For detection of ivermectin in livestock." },
+                { catalog:"GLA0049", name:"Anti‑Tilmicosin", full:"Mouse monoclonal antibody to tilmicosin (TIM)", desc:"For detection of tilmicosin in animal tissues." },
+                { catalog:"GLA0050", name:"Anti‑Tiamulin", full:"Mouse monoclonal antibody to tiamulin", desc:"For detection of tiamulin residues." },
+                { catalog:"GLA0051", name:"Anti‑Acetylisovaleryltylosin", full:"Mouse monoclonal antibody to acetylisovaleryltylosin", desc:"For detection of acetylisovaleryltylosin in feed." },
+                { catalog:"GLA0052", name:"Anti‑Telamycin", full:"Mouse monoclonal antibody to telamycin", desc:"For detection of telamycin residues." },
+                { catalog:"GLA0053", name:"Anti‑Kitasamycin", full:"Mouse monoclonal antibody to kitasamycin", desc:"For detection of kitasamycin in food products." },
+                // Тетрациклины
+                { catalog:"GLA0054", name:"Anti‑Tetracycline", full:"Mouse monoclonal antibody to tetracycline (TC)", desc:"For detection of tetracycline in milk, meat and honey." },
+                { catalog:"GLA0055", name:"Anti‑Oxytetracycline", full:"Mouse monoclonal antibody to oxytetracycline (OTC)", desc:"For detection of oxytetracycline residues." },
+                { catalog:"GLA0056", name:"Anti‑Chlortetracycline", full:"Mouse monoclonal antibody to chlortetracycline", desc:"For detection of chlortetracycline in food products." },
+                { catalog:"GLA0057", name:"Anti‑Doxycycline", full:"Mouse monoclonal antibody to doxycycline", desc:"For detection of doxycycline residues." },
+                // Фторхинолоны
+                { catalog:"GLA0058", name:"Anti‑Norfloxacin", full:"Mouse monoclonal antibody to norfloxacin", desc:"For detection of norfloxacin in aquaculture." },
+                { catalog:"GLA0059", name:"Anti‑Ciprofloxacin", full:"Mouse monoclonal antibody to ciprofloxacin (CIP)", desc:"For detection of ciprofloxacin in food and feed." },
+                { catalog:"GLA0060", name:"Anti‑Sarafloxacin", full:"Mouse monoclonal antibody to sarafloxacin (SAR)", desc:"For detection of sarafloxacin residues." },
+                { catalog:"GLA0061", name:"Anti‑Ofloxacin", full:"Mouse monoclonal antibody to ofloxacin (OFX)", desc:"For detection of ofloxacin in biological samples." },
+                { catalog:"GLA0062", name:"Anti‑Enrofloxacin", full:"Mouse monoclonal antibody to enrofloxacin (ENOR)", desc:"For detection of enrofloxacin in livestock." },
+                { catalog:"GLA0063", name:"Anti‑Danofloxacin", full:"Mouse monoclonal antibody to danofloxacin", desc:"For detection of danofloxacin residues." },
+                { catalog:"GLA0064", name:"Anti‑Difloxacin", full:"Mouse monoclonal antibody to difloxacin", desc:"For detection of difloxacin in food products." },
+                { catalog:"GLA0065", name:"Anti‑Levofloxacin", full:"Mouse monoclonal antibody to levofloxacin", desc:"For detection of levofloxacin residues." },
+                // Противогельминтные и кокцидиостатики
+                { catalog:"GLA0066", name:"Anti‑Albendazole", full:"Mouse monoclonal antibody to albendazole (ABZ)", desc:"For detection of albendazole residues in meat and milk." },
+                { catalog:"GLA0067", name:"Anti‑Metronidazole", full:"Mouse monoclonal antibody to metronidazole", desc:"For detection of metronidazole in food and feed." },
+                { catalog:"GLA0068", name:"Anti‑DNC (nicarbazin metabolite)", full:"Mouse monoclonal antibody to 4,4′‑dinitrocarbanilide (DNC)", desc:"For detection of nicarbazin residues in poultry." },
+                { catalog:"GLA0069", name:"Anti‑Natamycin", full:"Mouse monoclonal antibody to natamycin (NTM)", desc:"For detection of natamycin in dairy products." },
+                { catalog:"GLA0070", name:"Anti‑Salinomycin", full:"Mouse monoclonal antibody to salinomycin (SLM)", desc:"For detection of salinomycin in feed and meat." },
+                { catalog:"GLA0071", name:"Anti‑Monensin", full:"Mouse monoclonal antibody to monensin (MON)", desc:"For detection of monensin in animal tissues." },
+                { catalog:"GLA0072", name:"Anti‑Vancomycin", full:"Mouse monoclonal antibody to vancomycin (VM)", desc:"For detection of vancomycin residues." },
+                { catalog:"GLA0073", name:"Anti‑Albendazole metabolite", full:"Mouse monoclonal antibody to albendazole metabolite", desc:"For detection of albendazole sulfoxide and sulfone." },
+                { catalog:"GLA0074", name:"Anti‑Maduramicin", full:"Mouse monoclonal antibody to maduramicin", desc:"For detection of maduramicin in poultry." },
+                { catalog:"GLA0075", name:"Anti‑Diclazuril", full:"Mouse monoclonal antibody to diclazuril", desc:"For detection of diclazuril residues." },
+                { catalog:"GLA0076", name:"Anti‑Toltrazuril", full:"Mouse monoclonal antibody to toltrazuril", desc:"For detection of toltrazuril and its metabolite." },
+                { catalog:"GLA0077", name:"Anti‑Levamisole", full:"Mouse monoclonal antibody to levamisole", desc:"For detection of levamisole in meat." },
+                { catalog:"GLA0078", name:"Anti‑Mebendazole", full:"Mouse monoclonal antibody to mebendazole", desc:"For detection of mebendazole residues." },
+                { catalog:"GLA0079", name:"Anti‑Triclabendazole", full:"Mouse monoclonal antibody to triclabendazole", desc:"For detection of triclabendazole in livestock." },
+                { catalog:"GLA0080", name:"Anti‑Clopidol", full:"Mouse monoclonal antibody to clopidol", desc:"For detection of clopidol in poultry." },
+                { catalog:"GLA0081", name:"Anti‑Amprolium", full:"Mouse monoclonal antibody to amprolium", desc:"For detection of amprolium in feed." },
+                // Пенициллины и цефалоспорины
+                { catalog:"GLA0082", name:"Anti‑Penicillin G", full:"Mouse monoclonal antibody to penicillin G (PG)", desc:"For detection of penicillin G in milk and meat." },
+                { catalog:"GLA0083", name:"Anti‑Ceftiofur", full:"Mouse monoclonal antibody to ceftiofur (CEF)", desc:"For detection of ceftiofur in food products." },
+                { catalog:"GLA0084", name:"Anti‑Cefquinome", full:"Mouse monoclonal antibody to cefquinome (CEQ)", desc:"For detection of cefquinome in livestock." },
+                { catalog:"GLA0085", name:"Anti‑Cephalosporin", full:"Mouse monoclonal antibody to cephalosporin (CEP)", desc:"Broad‑specificity for cephalosporin antibiotics." },
+                { catalog:"GLA0086", name:"Anti‑Cephalexin", full:"Mouse monoclonal antibody to cephalexin (CEX)", desc:"For detection of cephalexin in food." },
+                { catalog:"GLA0087", name:"Anti‑Hygromycin B", full:"Mouse monoclonal antibody to hygromycin B (HMB)", desc:"For detection of hygromycin B in feed." },
+                { catalog:"GLA0088", name:"Anti‑Bacitracin", full:"Mouse monoclonal antibody to bacitracin (BCT)", desc:"For detection of bacitracin in food." },
+                { catalog:"GLA0089", name:"Anti‑Polymyxin B", full:"Mouse monoclonal antibody to polymyxin B (PMB)", desc:"For detection of polymyxin B in food and feed." },
+                { catalog:"GLA0090", name:"Anti‑Cyclosporin A", full:"Mouse monoclonal antibody to cyclosporin A", desc:"For detection of cyclosporin A in blood." },
+                { catalog:"GLA0091", name:"Anti‑Polymyxin E", full:"Mouse monoclonal antibody to polymyxin E (PME)", desc:"For detection of polymyxin E in food." },
+                { catalog:"GLA0092", name:"Anti‑Cloxacillin", full:"Mouse monoclonal antibody to cloxacillin", desc:"For detection of cloxacillin in milk." },
+                { catalog:"GLA0093", name:"Anti‑Oxacillin", full:"Mouse monoclonal antibody to oxacillin", desc:"For detection of oxacillin in food." },
+                { catalog:"GLA0094", name:"Anti‑Ampicillin", full:"Mouse monoclonal antibody to ampicillin (AMP)", desc:"For detection of ampicillin and amoxicillin in milk and meat." }
+            ];
+            
+            // ---------- 3. Пищевые добавки, красители и контаминанты ----------
+            const foodAdditiveAbs = [
+                { catalog:"GLA0095", name:"Anti‑Malachite Green", full:"Mouse monoclonal antibody to malachite green (MG)", desc:"For detection of malachite green in aquaculture." },
+                { catalog:"GLA0096", name:"Anti‑Leucomalachite", full:"Mouse monoclonal antibody to leucomalachite (LMG)", desc:"For detection of leucomalachite (MG metabolite) in fish." },
+                { catalog:"GLA0097", name:"Anti‑β‑Lactamase", full:"Mouse monoclonal antibody to β‑lactamase", desc:"For detection of β‑lactamase in dairy products." },
+                { catalog:"GLA0098", name:"Anti‑Melamine", full:"Mouse monoclonal antibody to melamine (MEL)", desc:"For detection of melamine in milk and food." },
+                { catalog:"GLA0099", name:"Anti‑Benzoic Acid", full:"Mouse monoclonal antibody to benzoic acid (BZA)", desc:"For detection of benzoic acid in food and beverages." },
+                { catalog:"GLA0100", name:"Anti‑Alkaline Phosphatase", full:"Mouse monoclonal antibody to alkaline phosphatase (AP)", desc:"For detection of AP activity in dairy products." },
+                { catalog:"GLA0101", name:"Anti‑Tartrazine", full:"Mouse monoclonal antibody to tartrazine (TAR)", desc:"For detection of tartrazine in food." },
+                { catalog:"GLA0102", name:"Anti‑Erythrosine", full:"Mouse monoclonal antibody to erythrosine (ERY)", desc:"For detection of erythrosine in food products." },
+                { catalog:"GLA0103", name:"Anti‑Basic Orange", full:"Mouse monoclonal antibody to basic orange (BO/CSD)", desc:"For detection of basic orange in food." },
+                { catalog:"GLA0104", name:"Anti‑Sudan I", full:"Mouse monoclonal antibody to Sudan I (Su I)", desc:"For detection of Sudan I in spices and food." },
+                { catalog:"GLA0105", name:"Anti‑Rhodamine B", full:"Mouse monoclonal antibody to rhodamine B", desc:"For detection of rhodamine B in food and feed." },
+                { catalog:"GLA0106", name:"Anti‑Capsaicin", full:"Mouse monoclonal antibody to capsaicin", desc:"For detection of capsaicin in food products." },
+                { catalog:"GLA0107", name:"Anti‑Metoclopramide", full:"Mouse monoclonal antibody to metoclopramide", desc:"For detection of metoclopramide in food." },
+                { catalog:"GLA0108", name:"Anti‑Trimethoprim", full:"Mouse monoclonal antibody to trimethoprim (TMP)", desc:"For detection of TMP in food." },
+                { catalog:"GLA0109", name:"Anti‑Antipyrine", full:"Mouse monoclonal antibody to antipyrine (AP)", desc:"For detection of antipyrine in food and feed." },
+                { catalog:"GLA0110", name:"Anti‑Indometacin", full:"Mouse monoclonal antibody to indometacin", desc:"For detection of indometacin in meat." },
+                { catalog:"GLA0111", name:"Anti‑Meloxicam", full:"Mouse monoclonal antibody to meloxicam", desc:"For detection of meloxicam in animal tissues." },
+                { catalog:"GLA0112", name:"Anti‑Hydrochlorothiazide", full:"Mouse monoclonal antibody to hydrochlorothiazide (DCT)", desc:"For detection of hydrochlorothiazide in urine." },
+                { catalog:"GLA0113", name:"Anti‑Amlodipine", full:"Mouse monoclonal antibody to amlodipine (ADP)", desc:"For detection of amlodipine in serum." },
+                { catalog:"GLA0114", name:"Anti‑Sildenafil", full:"Mouse monoclonal antibody to sildenafil (SDN)", desc:"For detection of sildenafil in supplements." },
+                { catalog:"GLA0115", name:"Anti‑Benzophenone", full:"Mouse monoclonal antibody to benzophenone (BZP)", desc:"For detection of benzophenone in food packaging." },
+                { catalog:"GLA0116", name:"Anti‑DBP", full:"Mouse monoclonal antibody to dibutylphthalate (DBP)", desc:"For detection of DBP in food and plastics." },
+                { catalog:"GLA0117", name:"Anti‑DMP", full:"Mouse monoclonal antibody to dimethylphthalate (DMP)", desc:"For detection of DMP in environmental samples." },
+                { catalog:"GLA0118", name:"Anti‑Clonazepam", full:"Mouse monoclonal antibody to clonazepam (C2P)", desc:"For detection of clonazepam in serum and urine." },
+                { catalog:"GLA0119", name:"Anti‑Diazepam", full:"Mouse monoclonal antibody to diazepam (DZP)", desc:"For detection of diazepam in biological fluids." },
+                { catalog:"GLA0120", name:"Anti‑Tolfenamic acid", full:"Mouse monoclonal antibody to tolfenamic acid", desc:"For detection of tolfenamic acid in food." },
+                { catalog:"GLA0121", name:"Anti‑Carprofen", full:"Mouse monoclonal antibody to carprofen", desc:"For detection of carprofen in meat." },
+                { catalog:"GLA0122", name:"Anti‑Flunixin meglumine", full:"Mouse monoclonal antibody to flunixin meglumine", desc:"For detection of flunixin residues." },
+                { catalog:"GLA0123", name:"Anti‑Metamizole", full:"Mouse monoclonal antibody to metamizole sodium", desc:"For detection of metamizole in food products." }
+            ];
+            
+            // ---------- 4. Пестициды и регуляторы роста растений ----------
+            const pesticideAbs = [
+                { catalog:"GLA0124", name:"Anti‑Cypermethrin", full:"Mouse monoclonal antibody to cypermethrin", desc:"For detection of cypermethrin in agricultural products." },
+                { catalog:"GLA0125", name:"Anti‑6‑Benzylaminopurine", full:"Mouse monoclonal antibody to 6‑benzylaminopurine (6‑BA)", desc:"For detection of 6‑BA in plant tissues." },
+                { catalog:"GLA0126", name:"Anti‑DA‑6", full:"Mouse monoclonal antibody to DA‑6 (diethyl aminoethyl hexanoate)", desc:"For detection of DA‑6 in agricultural samples." },
+                { catalog:"GLA0127", name:"Anti‑ETH", full:"Mouse monoclonal antibody to ethephon (ETH)", desc:"For detection of ethephon residues." },
+                { catalog:"GLA0128", name:"Anti‑Forchlorfenuron", full:"Mouse monoclonal antibody to forchlorfenuron", desc:"For detection of forchlorfenuron in fruits." },
+                { catalog:"GLA0129", name:"Anti‑Paclobutrazol", full:"Mouse monoclonal antibody to paclobutrazol (PBZ)", desc:"For detection of paclobutrazol in crops." },
+                { catalog:"GLA0130", name:"Anti‑2,4,5‑T", full:"Mouse monoclonal antibody to 2,4,5‑trimethoxyphenoxyacetic acid", desc:"For detection of 2,4,5‑T herbicide residues." },
+                { catalog:"GLA0131", name:"Anti‑Paraquat", full:"Mouse monoclonal antibody to paraquat (PQ)", desc:"For detection of paraquat in food and water." },
+                { catalog:"GLA0132", name:"Anti‑Armerectin", full:"Mouse monoclonal antibody to armerectin", desc:"For detection of armerectin residues." },
+                { catalog:"GLA0133", name:"Anti‑Metalaxyl", full:"Mouse monoclonal antibody to metalaxyl", desc:"For detection of metalaxyl in agricultural products." },
+                { catalog:"GLA0134", name:"Anti‑Organophosphorus", full:"Mouse monoclonal antibody to organophosphorus compounds", desc:"Broad‑specificity antibody for organophosphate pesticides." },
+                { catalog:"GLA0135", name:"Anti‑Carbamate", full:"Mouse monoclonal antibody to carbamate pesticides", desc:"Broad‑specificity antibody for carbamate pesticides." },
+                { catalog:"GLA0136", name:"Anti‑Thiamethoxam", full:"Mouse monoclonal antibody to thiamethoxam", desc:"For detection of thiamethoxam in crops." },
+                { catalog:"GLA0137", name:"Anti‑Thiamethoxan", full:"Mouse monoclonal antibody to thiamethoxan", desc:"For detection of thiamethoxan residues." },
+                { catalog:"GLA0138", name:"Anti‑Triadimefon", full:"Mouse monoclonal antibody to triadimefon", desc:"For detection of triadimefon in agricultural products." },
+                { catalog:"GLA0139", name:"Anti‑Procymidone", full:"Mouse monoclonal antibody to procymidone", desc:"For detection of procymidone in fruits and vegetables." },
+                { catalog:"GLA0140", name:"Anti‑Isocarbophos", full:"Mouse monoclonal antibody to isocarbophos", desc:"For detection of isocarbophos residues." },
+                { catalog:"GLA0141", name:"Anti‑Chlorpyrifos", full:"Mouse monoclonal antibody to chlorpyrifos", desc:"For detection of chlorpyrifos in agricultural products." },
+                { catalog:"GLA0142", name:"Anti‑Pendimethalin", full:"Mouse monoclonal antibody to pendimethalin", desc:"For detection of pendimethalin in crops." },
+                { catalog:"GLA0143", name:"Anti‑4‑Chlorophenoxyacetic acid", full:"Mouse monoclonal antibody to 4‑chlorophenoxyacetic acid", desc:"For detection of 4‑CPA residues." },
+                { catalog:"GLA0144", name:"Anti‑Bifenthrin", full:"Mouse monoclonal antibody to bifenthrin", desc:"For detection of bifenthrin in agricultural products." },
+                { catalog:"GLA0145", name:"Anti‑Imidacloprid", full:"Mouse monoclonal antibody to imidacloprid (ICP)", desc:"For detection of imidacloprid in agricultural products." },
+                { catalog:"GLA0146", name:"Anti‑Carbendazim", full:"Mouse monoclonal antibody to carbendazim (CBD)", desc:"For detection of carbendazim in fruits and vegetables." },
+                { catalog:"GLA0147", name:"Anti‑Chlorothalonil", full:"Mouse monoclonal antibody to chlorothalonil (CTL)", desc:"For detection of chlorothalonil in agricultural products." },
+                { catalog:"GLA0148", name:"Anti‑Methyl parathion", full:"Mouse monoclonal antibody to methyl parathion (MP)", desc:"For detection of methyl parathion residues." },
+                { catalog:"GLA0149", name:"Anti‑Carbaryl", full:"Mouse monoclonal antibody to carbaryl (CBR)", desc:"For detection of carbaryl in food samples." },
+                { catalog:"GLA0150", name:"Anti‑Acetochlor", full:"Mouse monoclonal antibody to acetochlor (ATC)", desc:"For detection of acetochlor in agricultural products." },
+                { catalog:"GLA0151", name:"Anti‑Acetamiprid", full:"Mouse monoclonal antibody to acetamiprid (AAP)", desc:"For detection of acetamiprid in crops." },
+                { catalog:"GLA0152", name:"Anti‑Nitenpyram", full:"Mouse monoclonal antibody to nitenpyram (NIT)", desc:"For detection of nitenpyram residues." },
+                { catalog:"GLA0153", name:"Anti‑Carbofuran", full:"Mouse monoclonal antibody to carbofuran (CAR)", desc:"For detection of carbofuran in agricultural products." },
+                { catalog:"GLA0154", name:"Anti‑Aldicarb", full:"Mouse monoclonal antibody to aldicarb (ADC)", desc:"For detection of aldicarb in crops." },
+                { catalog:"GLA0155", name:"Anti‑Fenpropathrin", full:"Mouse monoclonal antibody to fenpropathrin (FPP)", desc:"For detection of fenpropathrin in food samples." },
+                { catalog:"GLA0156", name:"Anti‑Isoprocarb", full:"Mouse monoclonal antibody to isoprocarb", desc:"For detection of isoprocarb in agricultural products." },
+                { catalog:"GLA0157", name:"Anti‑FCJ (fipronil)", full:"Mouse monoclonal antibody to fipronil (FCJ)", desc:"For detection of fipronil in food and feed." },
+                { catalog:"GLA0158", name:"Anti‑Gibberellin", full:"Rabbit anti‑gibberellin antibody", desc:"For detection of gibberellin in plant tissues." }
+            ];
+            
+            // ---------- 5. Микотоксины ----------
+            const mycotoxinAbs = [
+                { catalog:"GLA0159", name:"Anti‑Aflatoxin M1", full:"Mouse monoclonal antibody to aflatoxin M1", desc:"For detection of aflatoxin M1 in milk and dairy." },
+                { catalog:"GLA0160", name:"Anti‑Total Aflatoxin", full:"Mouse monoclonal antibody to total aflatoxin (AFT)", desc:"Broad‑specificity for aflatoxin B1, B2, G1, G2." },
+                { catalog:"GLA0161", name:"Anti‑Ochratoxin A", full:"Mouse monoclonal antibody to ochratoxin A (OTA)", desc:"For detection of OTA in cereals and feed." },
+                { catalog:"GLA0162", name:"Anti‑Zearalenone", full:"Mouse monoclonal antibody to zearalenone (ZEN)", desc:"For detection of ZEN in grains and feed." },
+                { catalog:"GLA0163", name:"Anti‑Fumonisin B1", full:"Mouse monoclonal antibody to fumonisin B1 (FB1)", desc:"For detection of FB1 in corn and feed." },
+                { catalog:"GLA0164", name:"Anti‑T‑2 Toxin", full:"Mouse monoclonal antibody to T‑2 toxin", desc:"For detection of T‑2 toxin in grains." },
+                { catalog:"GLA0165", name:"Anti‑Deoxynivalenol", full:"Mouse monoclonal antibody to deoxynivalenol (DON)", desc:"For detection of DON in wheat and cereals." },
+                { catalog:"GLA0166", name:"Anti‑Citrinin", full:"Mouse monoclonal antibody to citrinin", desc:"For detection of citrinin in food and feed." },
+                { catalog:"GLA0167", name:"Anti‑Sterigmatocystin", full:"Mouse monoclonal antibody to sterigmatocystin (STG)", desc:"For detection of STG in grains." },
+                { catalog:"GLA0168", name:"Anti‑Alternariol", full:"Mouse monoclonal antibody to alternariol (AOH)", desc:"For detection of AOH in fruits and vegetables." },
+                { catalog:"GLA0169", name:"Anti‑Patulin", full:"Mouse monoclonal antibody to patulin", desc:"For detection of patulin in fruit juices and cereals." },
+                { catalog:"GLA0170", name:"Anti‑Patulin (rabbit)", full:"Rabbit anti‑patulin antibody", desc:"For detection of patulin in food products." },
+                { catalog:"GLA0171", name:"Anti‑Ribavirin", full:"Mouse monoclonal antibody to ribavirin (RBV)", desc:"For detection of ribavirin in clinical samples." },
+                { catalog:"GLA0172", name:"Anti‑Amantadine", full:"Mouse monoclonal antibody to amantadine (AM)", desc:"For detection of amantadine in food and clinical samples." }
+            ];
+            
+            // ---------- 6. Тяжёлые металлы ----------
+            const heavyMetalAbs = [
+                { catalog:"GLA0173", name:"Anti‑Cadmium", full:"Mouse monoclonal antibody to cadmium (Cd)", desc:"For detection of cadmium in food and environmental samples." },
+                { catalog:"GLA0174", name:"Anti‑Lead", full:"Mouse monoclonal antibody to lead (Pb)", desc:"For detection of lead in food and water." },
+                { catalog:"GLA0175", name:"Anti‑Mercury", full:"Mouse monoclonal antibody to mercury (Hg)", desc:"For detection of mercury in food and environmental samples." },
+                { catalog:"GLA0176", name:"Anti‑Methyl Mercury", full:"Mouse monoclonal antibody to methyl mercury (CH3HgCl)", desc:"For detection of methyl mercury in fish and water." },
+                { catalog:"GLA0177", name:"Anti‑Copper", full:"Mouse monoclonal antibody to copper (Cu)", desc:"For detection of copper in food and feed." },
+                { catalog:"GLA0178", name:"Anti‑Chromium", full:"Mouse monoclonal antibody to chromium (Cr)", desc:"For detection of chromium in environmental samples." }
+            ];
+            
+            // ---------- 7. Белковые маркеры (CRP, SAA, IL‑6, PCT, IFN) ----------
+            const proteinBiomarkerAbs = [
+                { catalog:"GLA0179", name:"Anti‑CRP", full:"Mouse monoclonal antibody to C‑reactive protein", desc:"For detection of CRP in serum and plasma; marker of inflammation and infection." },
+                { catalog:"GLA0180", name:"Anti‑SAA", full:"Mouse monoclonal antibody to serum amyloid A", desc:"For detection of SAA in serum; acute‑phase protein marker." },
+                { catalog:"GLA0181", name:"Anti‑IL‑6", full:"Mouse monoclonal antibody to interleukin‑6", desc:"For detection of IL‑6 in serum and plasma; marker of systemic inflammation." },
+                { catalog:"GLA0182", name:"Anti‑PCT", full:"Mouse monoclonal antibody to procalcitonin", desc:"For detection of PCT in serum; marker of bacterial sepsis." },
+                { catalog:"GLA0183", name:"Anti‑IFN‑α", full:"Mouse monoclonal antibody to interferon‑α", desc:"For detection of IFN‑α in serum and cell culture supernatants." },
+                { catalog:"GLA0184", name:"Anti‑IFN‑β", full:"Mouse monoclonal antibody to interferon‑β", desc:"For detection of IFN‑β in biological samples." },
+                { catalog:"GLA0185", name:"Anti‑IFN‑γ", full:"Mouse monoclonal antibody to interferon‑γ", desc:"For detection of IFN‑γ in serum; marker of cellular immunity." },
+                { catalog:"GLA0186", name:"Anti‑IL‑1β", full:"Mouse monoclonal antibody to interleukin‑1β", desc:"For detection of IL‑1β in serum and plasma." },
+                { catalog:"GLA0187", name:"Anti‑mAb1b", full:"Mouse monoclonal antibody to urinary microalbumin (mAb1b)", desc:"For detection of urinary microalbumin; marker of kidney damage." },
+                { catalog:"GLA0188", name:"Anti‑IGFBP‑1", full:"Mouse monoclonal antibody to insulin‑like growth factor‑binding protein 1", desc:"For detection of IGFBP‑1 in serum." },
+                { catalog:"GLA0189", name:"Anti‑Lactoferrin", full:"Mouse monoclonal antibody to lactoferrin (LF)", desc:"For detection of lactoferrin in milk and biological fluids." },
+                { catalog:"GLA0190", name:"Anti‑FITC", full:"Rabbit anti‑fluorescein isothiocyanate (FITC)", desc:"For detection of FITC‑labelled probes in immunoassays." }
+            ];
+            
+            // ---------- 8. Токсины (ботулизм, холера, дифтерия, столбняк, рицин и др.) ----------
+            const toxinAbs = [
+                { catalog:"GLA0191", name:"Anti‑Ricin", full:"Mouse monoclonal antibody to ricin", desc:"For detection of ricin in food and environmental samples." },
+                { catalog:"GLA0192", name:"Anti‑Microcystin LR", full:"Mouse monoclonal antibody to microcystin LR (MC‑LR)", desc:"For detection of MC‑LR in water and algae." },
+                { catalog:"GLA0193", name:"Anti‑Microcystin RR", full:"Mouse monoclonal antibody to microcystin RR (MC‑RR)", desc:"For detection of MC‑RR in water samples." },
+                { catalog:"GLA0194", name:"Anti‑Microcystin YR", full:"Mouse monoclonal antibody to microcystin YR (MC‑YR)", desc:"For detection of MC‑YR in environmental samples." },
+                { catalog:"GLA0195", name:"Anti‑Diphtheria toxin", full:"Mouse monoclonal antibody to diphtheria toxin", desc:"For detection of diphtheria toxin in clinical and environmental samples." },
+                { catalog:"GLA0196", name:"Anti‑Cholera toxin", full:"Mouse monoclonal antibody to cholera toxin", desc:"For detection of cholera toxin in clinical and environmental samples." },
+                { catalog:"GLA0197", name:"Anti‑Botulinum toxin", full:"Mouse monoclonal antibody to Clostridium botulinum toxin (A/B/D/E)", desc:"For detection of botulinum neurotoxins in food and clinical samples." },
+                { catalog:"GLA0198", name:"Anti‑E. coli enterotoxin", full:"Mouse monoclonal antibody to E. coli heat‑labile enterotoxin", desc:"For detection of LT enterotoxin in food and clinical samples." },
+                { catalog:"GLA0199", name:"Anti‑Staphylococcal enterotoxin", full:"Mouse monoclonal antibody to S. aureus enterotoxin (A, B, I, G)", desc:"For detection of enterotoxins in food." },
+                { catalog:"GLA0200", name:"Anti‑Tetanus toxin", full:"Mouse monoclonal antibody to tetanus toxin", desc:"For detection of tetanus toxin in clinical samples." },
+                { catalog:"GLA0201", name:"Anti‑Diphtheria toxin A", full:"Mouse monoclonal antibody to diphtheria toxin A‑subunit", desc:"For detection of diphtheria toxin A subunit." },
+                { catalog:"GLA0202", name:"Anti‑TTX (tetrodotoxin)", full:"Mouse monoclonal antibody to tetrodotoxin (TTX)", desc:"For detection of TTX in seafood." },
+                { catalog:"GLA0203", name:"Anti‑STX (saxitoxin)", full:"Mouse monoclonal antibody to saxitoxin (STX)", desc:"For detection of STX in shellfish." },
+                { catalog:"GLA0204", name:"Anti‑Abrin", full:"Mouse monoclonal antibody to abrin", desc:"For detection of abrin in environmental and clinical samples." },
+                { catalog:"GLA0205", name:"Anti‑Ricin (pairing)", full:"Mouse monoclonal antibody to ricin (pairing pair)", desc:"For ricin detection in immunoassays (matched pair)." },
+                { catalog:"GLA0206", name:"Anti‑Microcystin LR (pair)", full:"Mouse monoclonal antibody to microcystin LR (pairing)", desc:"For MC‑LR detection in water (matched pair)." },
+                { catalog:"GLA0207", name:"Anti‑Botulinum toxin A", full:"Mouse monoclonal antibody to botulinum toxin A", desc:"For detection of botulinum toxin A." },
+                { catalog:"GLA0208", name:"Anti‑Botulinum toxin B", full:"Mouse monoclonal antibody to botulinum toxin B", desc:"For detection of botulinum toxin B." },
+                { catalog:"GLA0209", name:"Anti‑Botulinum toxin D", full:"Mouse monoclonal antibody to botulinum toxin D", desc:"For detection of botulinum toxin D." },
+                { catalog:"GLA0210", name:"Anti‑Botulinum toxin E", full:"Mouse monoclonal antibody to botulinum toxin E", desc:"For detection of botulinum toxin E." },
+                { catalog:"GLA0211", name:"Anti‑Staphylococcal enterotoxin A", full:"Mouse monoclonal antibody to S. aureus enterotoxin A", desc:"For detection of enterotoxin A in food." },
+                { catalog:"GLA0212", name:"Anti‑Staphylococcal enterotoxin B", full:"Mouse monoclonal antibody to S. aureus enterotoxin B", desc:"For detection of enterotoxin B in food." },
+                { catalog:"GLA0213", name:"Anti‑Staphylococcal enterotoxin I", full:"Mouse monoclonal antibody to S. aureus enterotoxin I", desc:"For detection of enterotoxin I in food." },
+                { catalog:"GLA0214", name:"Anti‑Staphylococcal enterotoxin G", full:"Mouse monoclonal antibody to S. aureus enterotoxin G", desc:"For detection of enterotoxin G in food." },
+                { catalog:"GLA0215", name:"Anti‑E. coli LT", full:"Mouse monoclonal antibody to E. coli heat‑labile enterotoxin A", desc:"For detection of LT‑A subunit." },
+                { catalog:"GLA0216", name:"Anti‑E. coli LT (B)", full:"Mouse monoclonal antibody to E. coli heat‑labile enterotoxin B", desc:"For detection of LT‑B subunit." }
+            ];
+            
+            // ---------- 9. Аллергены ----------
+            const allergenAbs = [
+                { catalog:"GLA0217", name:"Anti‑Peanut Ara h1", full:"Mouse monoclonal antibody to peanut allergen Ara h1", desc:"For detection of Ara h1 in food products." },
+                { catalog:"GLA0218", name:"Anti‑PNA", full:"Mouse monoclonal antibody to peanut agglutinin (PNA)", desc:"For detection of PNA in food." },
+                { catalog:"GLA0219", name:"Anti‑Casein", full:"Mouse monoclonal antibody to casein (from cow)", desc:"For detection of casein in milk and dairy products." },
+                { catalog:"GLA0220", name:"Anti‑BSA", full:"Mouse monoclonal antibody to bovine serum albumin (BSA)", desc:"For detection of BSA in food and biological samples." },
+                { catalog:"GLA0221", name:"Anti‑HSA", full:"Mouse monoclonal antibody to human serum albumin (HSA)", desc:"For detection of HSA in serum and urine." },
+                { catalog:"GLA0222", name:"Anti‑Gliadin", full:"Mouse monoclonal antibody to gliadin (GD)", desc:"For detection of gliadin in gluten‑containing products." },
+                { catalog:"GLA0223", name:"Anti‑Parvalbumin", full:"Mouse monoclonal antibody to parvalbumin (PVA)", desc:"For detection of parvalbumin in fish products (allergen)." },
+                { catalog:"GLA0224", name:"Anti‑Ovalbumin", full:"Mouse monoclonal antibody to ovalbumin (OVA)", desc:"For detection of ovalbumin in egg products." }
+            ];
+            
+            // =================================================================
+            // ОБЪЕДИНЕНИЕ ВСЕХ КАТЕГОРИЙ (порядок: гормоны → антибиотики → пищевые добавки → пестициды → микотоксины → тяжёлые металлы → белковые маркеры → токсины → аллергены)
+            // =================================================================
+            const categories = [
+                { name: "Hormones, steroids & small molecule biomarkers", data: hormoneAbs },
+                { name: "Antibiotics & veterinary drugs", data: antibioticAbs },
+                { name: "Food additives, dyes & contaminants", data: foodAdditiveAbs },
+                { name: "Pesticides & plant growth regulators", data: pesticideAbs },
+                { name: "Mycotoxins", data: mycotoxinAbs },
+                { name: "Heavy metals", data: heavyMetalAbs },
+                { name: "Protein biomarkers (CRP, SAA, IL‑6, PCT, IFN)", data: proteinBiomarkerAbs },
+                { name: "Toxins (botulinum, cholera, diphtheria, ricin, microcystins)", data: toxinAbs },
+                { name: "Allergens (food & environmental)", data: allergenAbs }
+            ];
+            
+            // =================================================================
+            // ФУНКЦИИ ОТРИСОВКИ
+            // =================================================================
+            let currentTooltip = null;
+            
+            function closeTooltip() {
+                if (currentTooltip) { currentTooltip.remove(); currentTooltip = null; }
+            }
+            
+            function attachClickHandler() {
+                document.querySelectorAll('.product-name').forEach(cell => {
+                    if (cell._clickHandler) cell.removeEventListener('click', cell._clickHandler);
+                    const handler = (e) => {
+                        e.stopPropagation();
+                        const desc = cell.getAttribute('data-desc');
+                        if (!desc) return;
+                        const abbrevCell = cell.closest('tr').querySelector('.abbrev-cell');
+                        if (!abbrevCell) return;
+                        if (currentTooltip && currentTooltip.parentNode === abbrevCell) { closeTooltip(); return; }
+                        closeTooltip();
+                        const tooltip = document.createElement('div');
+                        tooltip.className = 'tooltip-overlay';
+                        tooltip.innerText = desc;
+                        abbrevCell.style.position = 'relative';
+                        abbrevCell.appendChild(tooltip);
+                        currentTooltip = tooltip;
+                    };
+                    cell.addEventListener('click', handler);
+                    cell._clickHandler = handler;
+                });
+            }
+            
+            function renderTable(searchTerm = "") {
+                const term = searchTerm.trim().toLowerCase();
+                const filterFn = (item) => item.catalog.toLowerCase().includes(term) || item.name.toLowerCase().includes(term) || item.full.toLowerCase().includes(term);
+                
+                const container = document.getElementById('tablesContainer');
+                if (!container) return;
+                
+                let html = "";
+                let anyFound = false;
+                
+                for (let cat of categories) {
+                    let items = cat.data.filter(filterFn);
+                    if (items.length === 0) continue;
+                    anyFound = true;
+                    html += `<div class="antibodies-section"><div class="category-title">${cat.name}</div><div class="result-count">Found: ${items.length}</div>`;
+                    html += `<div class="table-wrapper"><table class="antibodies-table"><thead><tr><th>Catalog #</th><th>Antibody name</th><th>Target / description</th></tr></thead><tbody>`;
+                    items.forEach(item => {
+                        html += `<tr><td>${escapeHtml(item.catalog)}</td><td class="abbrev-cell">${escapeHtml(item.name)}</td><td class="product-name" data-desc="${escapeAttr(item.desc)}">${escapeHtml(item.full)}</td></tr>`;
+                    });
+                    html += `</tbody></table></div></div>`;
+                }
+                
+                if (!anyFound) html = `<div class="no-results">No antibodies match your search.</div>`;
+                container.innerHTML = html;
+                attachClickHandler();
+            }
+            
+            function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+            function escapeAttr(str) { return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+            
+            document.body.addEventListener('click', (e) => { if (currentTooltip && !e.target.closest('.product-name')) closeTooltip(); });
+            
+            const searchInput = document.getElementById('searchInput'), clearBtn = document.getElementById('clearSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', () => { renderTable(searchInput.value); if (clearBtn) clearBtn.style.display = searchInput.value ? 'block' : 'none'; });
+            }
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => { searchInput.value = ''; renderTable(''); clearBtn.style.display = 'none'; });
+            }
+            renderTable('');
+            
+            // Бургер
+            const burgerBtn = document.getElementById('burgerBtn'), menuPanel = document.getElementById('menuPanel'), closeMenuBtn = document.getElementById('closeMenuBtn');
+            if(burgerBtn) burgerBtn.addEventListener('click', () => menuPanel.classList.add('open'));
+            if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => menuPanel.classList.remove('open'));
+            document.addEventListener('click', (e) => { if(menuPanel && menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !burgerBtn.contains(e.target)) menuPanel.classList.remove('open'); });
+            
+            // Форма
+            const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxA5MueC0RXAhrR5oR74pDP3iM5CrNIPr_vtYydxyqm5mgz-RRuGEHgmVHRxphBW40rvA/exec';
+            const modal = document.getElementById('contactModal'), inquireBtn = document.getElementById('inquireBtnAb'), closeModalBtn = document.getElementById('closeModalBtn'), form = document.getElementById('contactForm'), statusDiv = document.getElementById('formStatus');
+            function openModal() { modal.style.display = 'flex'; statusDiv.innerHTML = ''; }
+            function closeModalFunc() { modal.style.display = 'none'; form.reset(); statusDiv.innerHTML = ''; }
+            if(inquireBtn) inquireBtn.addEventListener('click', openModal);
+            if(closeModalBtn) closeModalBtn.addEventListener('click', closeModalFunc);
+            window.addEventListener('click', (e) => { if(e.target === modal) closeModalFunc(); });
+            if(form) form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                let name = document.getElementById('name').value.trim(), company = document.getElementById('company').value.trim(), email = document.getElementById('email').value.trim(), message = document.getElementById('message').value.trim();
+                if (!name || !company || !email || !message) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Please fill in all fields.</span>'; return; }
+                if (!email.includes('@')) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Invalid email.</span>'; return; }
+                const submitBtn = form.querySelector('.modal-submit');
+                submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; statusDiv.innerHTML = 'Sending...';
+                try { await fetch(PROXY_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, company, email, message }) });
+                    statusDiv.innerHTML = '<span style="color:#2e7d32;">✓ Thank you! We will get back to you soon.</span>'; form.reset(); setTimeout(closeModalFunc, 2000);
+                } catch(err) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Error, please try again later.</span>'; }
+                finally { submitBtn.disabled = false; submitBtn.textContent = 'Send inquiry'; }
+            });
+        })();
+    </script>
+</body>
+</html>
