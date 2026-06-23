@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Components | GPL Diagnostics – magnetic beads, microspheres, enzymes, substrates</title>
+    <meta name="description" content="Core IVD components: magnetic beads, latex microspheres, fluorescent particles, nucleic acid extraction beads, enzymes, substrates, streptavidin, serum matrices and rapid test uncut sheets.">
+    <meta name="keywords" content="magnetic beads, latex microspheres, fluorescent microspheres, nucleic acid extraction, HRP, TMB, pNPP, BCIP/NBT, streptavidin, uncut sheets, rapid tests, IVD components, GPL Diagnostics">
+    <meta name="author" content="GPL Diagnostics">
+    <meta property="og:title" content="Components | GPL Diagnostics – core IVD components">
+    <meta property="og:description" content="High‑quality IVD components: magnetic beads, enzymes, substrates, streptavidin and rapid test uncut sheets.">
+    <meta property="og:image" content="images/hero.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #2c2c2c; line-height: 1.5; }
+        .hero-image, .bottom-image { width: 100%; display: block; }
+        .content { max-width: 1400px; margin: 0 auto; padding: 60px 24px; }
+        h1 { color: #00101c; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 700; margin-bottom: 8px; text-align: center; }
+        .subhead { text-align: center; font-size: 1.1rem; color: #4a4a4a; margin-bottom: 32px; }
+        
+        .burger { position: fixed; top: 32px; right: 32px; z-index: 1000; }
+        .burger-btn { background: rgba(0,16,28,0.7); backdrop-filter: blur(8px); border: none; border-radius: 40px; width: 52px; height: 52px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; }
+        .burger-btn span { width: 24px; height: 2px; background: white; border-radius: 4px; }
+        .menu-panel { position: fixed; top: 0; right: -420px; width: 380px; max-width: 85vw; height: 100%; background: rgba(10,15,26,0.96); backdrop-filter: blur(16px); border-left: 1px solid rgba(255,255,255,0.2); z-index: 1100; transition: right 0.4s; padding: 40px 28px; overflow-y: auto; }
+        .menu-panel.open { right: 0; }
+        .menu-panel .main-cat { font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 12px; border-left: 3px solid #00101c; padding-left: 14px; }
+        .sub-list { list-style: none; padding-left: 20px; }
+        .sub-list li { margin: 12px 0; }
+        .sub-list a { text-decoration: none; font-size: 1rem; color: #e0e4f0; transition: 0.2s; display: inline-block; }
+        .sub-list a:hover { color: white; transform: translateX(4px); }
+        .close-menu { background: none; border: none; color: white; font-size: 28px; cursor: pointer; position: absolute; top: 24px; left: 24px; }
+        
+        .search-section { margin-bottom: 40px; display: flex; justify-content: center; }
+        .search-container { position: relative; width: 100%; max-width: 500px; }
+        .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: #00101c; pointer-events: none; }
+        #searchInput { width: 100%; padding: 14px 20px 14px 48px; font-size: 1rem; border: 1px solid #ccc; border-radius: 60px; outline: none; }
+        #searchInput:focus { border-color: #00101c; }
+        .search-clear { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; cursor: pointer; display: none; }
+        
+        .components-section { margin-bottom: 60px; }
+        .category-title { color: #00101c; font-size: 1.8rem; font-weight: 600; margin-bottom: 16px; border-left: 4px solid #00101c; padding-left: 20px; }
+        .result-count { font-size: 0.85rem; color: #4a4a4a; margin-bottom: 12px; }
+        .components-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .components-table th, .components-table td { border: 1px solid #e2e2e2; padding: 12px 16px; text-align: left; vertical-align: top; word-break: break-word; }
+        .components-table th { background-color: #f5f5f5; font-weight: 600; color: #00101c; }
+        .product-name { cursor: pointer; transition: background 0.1s; }
+        .product-name:active { background-color: #f0f0f0; }
+        .spec-cell { font-family: monospace; font-weight: 500; position: relative; }
+        .tooltip-overlay { position: absolute; top: 0; left: 0; right: 0; background: #00101c; color: white; padding: 8px 12px; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 0.75rem; line-height: 1.4; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: fadeIn 0.2s ease; word-break: break-word; white-space: normal; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+        .no-results { text-align: center; padding: 32px; color: #777; font-style: italic; }
+        
+        .btn-inquire { display: inline-block; background-color: #00101c; color: white; font-weight: 600; font-size: 1rem; padding: 12px 40px; border-radius: 40px; border: none; cursor: pointer; margin: 32px auto 20px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; max-width: 520px; width: 90%; border-radius: 28px; padding: 36px 28px; position: relative; }
+        .modal-content h3 { font-size: 1.8rem; color: #00101c; margin-bottom: 20px; }
+        .modal-content label { display: block; margin-top: 16px; font-weight: 500; }
+        .modal-content input, .modal-content textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 16px; font-family: inherit; }
+        .modal-submit { background: #00101c; color: white; border: none; padding: 12px; border-radius: 40px; font-weight: 600; width: 100%; margin-top: 24px; cursor: pointer; }
+        .close-modal { position: absolute; top: 18px; right: 22px; font-size: 28px; cursor: pointer; color: #777; }
+        .form-status { margin-top: 16px; font-size: 0.9rem; text-align: center; }
+        .footer img { width: 100%; display: block; }
+        .text-center { text-align: center; }
+        
+        @media (max-width: 768px) {
+            .content { padding: 40px 16px; }
+            .components-table th, .components-table td { padding: 8px 12px; font-size: 0.8rem; }
+            .category-title { font-size: 1.4rem; }
+            .burger { top: 20px; right: 20px; }
+            .burger-btn { width: 44px; height: 44px; }
+            .tooltip-overlay { font-size: 0.7rem; padding: 6px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <img class="hero-image" src="images/hero.png" alt="GPL Diagnostics – IVD components">
+    
+    <div class="burger"><div class="burger-btn" id="burgerBtn"><span></span><span></span><span></span></div></div>
+    <div class="menu-panel" id="menuPanel">
+        <button class="close-menu" id="closeMenuBtn">✕</button>
+        <div style="margin-top: 32px;"></div>
+        <div class="menu-section"><div class="main-cat">Mission</div><a href="about.html" style="margin-left: 18px; color:#e0e4f0;">About GPL →</a></div>
+        <div class="menu-section"><div class="main-cat">Products</div><ul class="sub-list"><li><a href="sub.html">Substances</a></li><li><a href="comp.html">Components</a></li><li><a href="ag.html">Antigens</a></li><li><a href="ab.html">Antibodies</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Services</div><ul class="sub-list"><li><a href="serv.html">IVD Market Survey</a></li><li><a href="opt.html">IVD Web Optimisation</a></li><li><a href="soft.html">IVD Software Development</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Contacts</div><a href="contacts.html" style="margin-left: 18px; color:#e0e4f0;">Get in touch →</a></div>
+    </div>
+    
+    <div class="content">
+        <h1>Components</h1>
+        <p class="subhead">Core IVD components — magnetic beads, microspheres, enzymes, substrates, streptavidin, serum matrices and rapid test uncut sheets.</p>
+        <div class="search-section"><div class="search-container"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="Search by catalog number, type or description (e.g. GLC001, HRP, streptavidin)"><button id="clearSearch" class="search-clear">✕</button></div></div>
+        <div id="tablesContainer"></div>
+        <div class="text-center"><button class="btn-inquire" id="inquireBtnComp">Inquire →</button></div>
+    </div>
+    
+    <div class="footer"><img src="images/bottom.png" alt="GPL Diagnostics bottom"></div>
+    
+    <div id="contactModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeModalBtn">&times;</span><h3>Inquiry</h3><form id="contactForm"><label>Full name *</label><input type="text" id="name" required><label>Company *</label><input type="text" id="company" required><label>Email *</label><input type="email" id="email" required><label>Your message *</label><textarea id="message" rows="3" required></textarea><button type="submit" class="modal-submit">Send inquiry</button><div id="formStatus" class="form-status"></div></form></div></div>
+    
+    <script>
+        (function() {
+            // =================================================================
+            // ДАННЫЕ ПО КОМПОНЕНТАМ
+            // =================================================================
+            
+            // ---------- 1. Magnetic beads ----------
+            const magneticBeads = [
+                { catalog:"GLC001", name:"Carboxyl magnetic beads (COOH)", spec:"1.2 μm", desc:"For covalent coupling of proteins, antibodies, nucleic acids." },
+                { catalog:"GLC002", name:"Carboxyl magnetic beads (COOH)", spec:"1.6 μm", desc:"For covalent coupling, high surface area." },
+                { catalog:"GLC003", name:"Carboxyl magnetic beads (COOH)", spec:"2.6 μm", desc:"For cell separation and large‑particle capture." },
+                { catalog:"GLC004", name:"Carboxyl magnetic beads (COOH)", spec:"2.8 μm", desc:"For immunoprecipitation and bead‑based assays." },
+                { catalog:"GLC005", name:"Tosyl‑activated magnetic beads (Tosyl)", spec:"1.6 μm", desc:"Direct coupling of antibodies via amine groups." },
+                { catalog:"GLC006", name:"Tosyl‑activated magnetic beads (Tosyl)", spec:"2.7 μm", desc:"For high‑capacity antibody immobilisation." },
+                { catalog:"GLC007", name:"Epoxy‑coated magnetic beads (Epoxy)", spec:"1.6 μm", desc:"Covalent binding of proteins via epoxy groups." },
+                { catalog:"GLC008", name:"Epoxy‑coated magnetic beads (Epoxy)", spec:"2.7 μm", desc:"For stable, oriented antibody coupling." },
+                { catalog:"GLC009", name:"NHS‑activated magnetic beads (NHS)", spec:"1.6 μm", desc:"Pre‑activated for rapid amine coupling." },
+                { catalog:"GLC010", name:"NHS‑activated magnetic beads (NHS)", spec:"2.7 μm", desc:"High‑efficiency antibody conjugation." },
+                { catalog:"GLC011", name:"Streptavidin magnetic beads (SA)", spec:"1.6 μm", desc:"For biotin‑based capture and purification." },
+                { catalog:"GLC012", name:"Streptavidin magnetic beads (SA)", spec:"2.7 μm", desc:"High‑capacity biotin binding." }
+            ];
+            
+            // ---------- 2. Latex microspheres ----------
+            const latexMicrospheres = [
+                { catalog:"GLC013", name:"Carboxylated latex microspheres", spec:"Various sizes", desc:"For turbidimetric immunoassays (direct/indirect)." },
+                { catalog:"GLC014", name:"Physical adsorption latex beads", spec:"Various sizes", desc:"For passive adsorption of antibodies/proteins." }
+            ];
+            
+            // ---------- 3. Specialised beads ----------
+            const specialisedBeads = [
+                { catalog:"GLC015", name:"Red blood cell removal beads", spec:"—", desc:"For depletion of RBCs in whole blood samples." },
+                { catalog:"GLC016", name:"Mycotoxin purification beads", spec:"—", desc:"For clean‑up of mycotoxin extracts (e.g. aflatoxin, DON)." }
+            ];
+            
+            // ---------- 4. Fluorescent microspheres ----------
+            const fluorescentBeads = [
+                { catalog:"GLC017", name:"Time‑resolved fluorescent microspheres", spec:"Various sizes", desc:"For TR‑FIA and high‑sensitivity immunoassays." },
+                { catalog:"GLC018", name:"Ultra‑sensitive time‑resolved microspheres", spec:"Various sizes", desc:"Enhanced brightness for low‑level detection." },
+                { catalog:"GLC019", name:"Common fluorescent microspheres", spec:"Various sizes/colors", desc:"For flow cytometry, multiplexing, and lateral flow." }
+            ];
+            
+            // ---------- 5. Nucleic acid extraction beads ----------
+            const naExtractionBeads = [
+                { catalog:"GLC020", name:"Basic nucleic acid magnetic beads", spec:"150 nm", desc:"For general DNA/RNA extraction from biological samples." },
+                { catalog:"GLC021", name:"Basic nucleic acid magnetic beads", spec:"300 nm", desc:"For larger‑volume extractions." },
+                { catalog:"GLC022", name:"Basic nucleic acid magnetic beads", spec:"450 nm", desc:"For automated extraction systems." },
+                { catalog:"GLC023", name:"Basic nucleic acid magnetic beads", spec:"500 nm", desc:"For high‑throughput purification." },
+                { catalog:"GLC024", name:"Capture nucleic acid magnetic beads", spec:"300 nm", desc:"For specific capture of target nucleic acids." },
+                { catalog:"GLC025", name:"Capture nucleic acid magnetic beads", spec:"600 nm", desc:"For viral RNA/DNA capture." },
+                { catalog:"GLC026", name:"Capture nucleic acid magnetic beads", spec:"1000 nm", desc:"For large‑fragment or genomic DNA capture." }
+            ];
+            
+            // ---------- 6. Quality control ----------
+            const qcMaterials = [
+                { catalog:"GLC027", name:"Quality control microspheres", spec:"300 nm", desc:"For instrument calibration and QC in flow cytometry / bead‑based assays." }
+            ];
+            
+            // ---------- 7. Enzymes & ready‑to‑use substrates ----------
+            const enzymesSubstrates = [
+                { catalog:"GLC028", name:"Horseradish Peroxidase (HRP)", spec:"—", desc:"High‑activity enzyme for ELISA and chemiluminescence." },
+                { catalog:"GLC029", name:"Poly Apo HRP (enzymatically inactive HRP)", spec:"—", desc:"Apo‑HRP for blocking anti‑HRP autoantibodies in one‑step competitive ELISA." },
+                { catalog:"GLC030", name:"Single‑component TMB solution (RM‑TMB‑001)", spec:"—", desc:"Ready‑to‑use TMB substrate for HRP detection." },
+                { catalog:"GLC031", name:"Single‑component TMB solution (RM‑TMB‑002)", spec:"—", desc:"Alternative TMB formulation." },
+                { catalog:"GLC032", name:"Single‑component TMB solution (RM‑TMB‑003)", spec:"—", desc:"High‑sensitivity TMB formulation." },
+                { catalog:"GLC033", name:"Single‑component TMB solution (RM‑TMB‑004)", spec:"—", desc:"Ultra‑stable TMB for automated systems." },
+                { catalog:"GLC034", name:"TMB Stop Solution (RM‑STMB‑001)", spec:"—", desc:"Acidic stop solution for TMB (yellow end‑point)." },
+                { catalog:"GLC035", name:"TMB Stop Solution (RM‑STMB‑002)", spec:"—", desc:"Alternative stop formulation." },
+                { catalog:"GLC036", name:"TMB Stop Solution (RM‑STMB‑003)", spec:"—", desc:"For high‑throughput applications." },
+                { catalog:"GLC037", name:"TMB Stop Solution (RM‑STMB‑004)", spec:"—", desc:"Universal stop solution." },
+                { catalog:"GLC038", name:"pNPP Stop Solution (pNPP‑ST‑001)", spec:"—", desc:"Stop solution for pNPP alkaline phosphatase substrate." },
+                { catalog:"GLC039", name:"pNPP color development solution (Pnpp‑001)", spec:"—", desc:"Ready‑to‑use pNPP substrate for alkaline phosphatase." },
+                { catalog:"GLC040", name:"pNPP color development solution (Pnpp‑002)", spec:"—", desc:"Alternative pNPP formulation." },
+                { catalog:"GLC041", name:"BCIP/NBT color development solution (BCIP/NBT‑001)", spec:"—", desc:"For alkaline phosphatase detection (blue/purple)." },
+                { catalog:"GLC042", name:"BCIP/NBT color development solution (BCIP/NBT‑002)", spec:"—", desc:"For membrane and plate assays." },
+                { catalog:"GLC043", name:"BCIP/NBT color development solution (BCIP/NBT‑003)", spec:"—", desc:"High‑sensitivity formulation." },
+                { catalog:"GLC044", name:"BCIP/NBT color development solution (BCIP/NBT‑004)", spec:"—", desc:"For IHC and blotting applications." }
+            ];
+            
+            // ---------- 8. Streptavidin & matrices ----------
+            const streptavidinMatrices = [
+                { catalog:"GLC045", name:"Streptavidin (SA)", spec:"—", desc:"High‑affinity biotin‑binding protein for ELISA, IHC, and bead‑based assays." },
+                { catalog:"GLC046", name:"T3/T4 dehormonized human serum", spec:"—", desc:"Human serum matrix stripped of thyroid hormones — for calibrators and controls." },
+                { catalog:"GLC047", name:"T3/T4 dehormonized bovine serum", spec:"—", desc:"Bovine serum matrix stripped of thyroid hormones — for calibrators and controls." }
+            ];
+            
+            // ---------- 9. Rapid test uncut sheets ----------
+            const uncutSheets = [
+                { catalog:"GLU0001", name:"HCG One Step Pregnancy Test (Device, Urine)", spec:"Cassette", desc:"One‑step pregnancy test in cassette format for urine." },
+                { catalog:"GLU0002", name:"HCG One Step Pregnancy Test (Strip, Urine)", spec:"Strip", desc:"One‑step pregnancy test in strip format for urine." },
+                { catalog:"GLU0003", name:"HCG 3mm Midstream (with single box)", spec:"Midstream", desc:"3mm midstream with individual packaging." },
+                { catalog:"GLU0004", name:"HCG 3mm Midstream (without box)", spec:"Midstream", desc:"3mm midstream without packaging." },
+                { catalog:"GLU0005", name:"HCG 6mm Midstream (with single box)", spec:"Midstream", desc:"6mm midstream with individual packaging." },
+                { catalog:"GLU0006", name:"HCG 6mm Midstream (without box)", spec:"Midstream", desc:"6mm midstream without packaging." },
+                { catalog:"GLU0007", name:"HCG Test (Device, Serum/Urine)", spec:"Cassette", desc:"Pregnancy test cassette for serum and urine." },
+                { catalog:"GLU0008", name:"HCG Test (Device, Serum)", spec:"Cassette", desc:"Pregnancy test cassette for serum only." },
+                { catalog:"GLU0009", name:"HCG Test (Strip, Serum/Urine)", spec:"Strip", desc:"Pregnancy test strip for serum and urine." },
+                { catalog:"GLU0010", name:"HCG Test (Device, Whole blood/Serum/Urine)", spec:"Cassette", desc:"Multi‑matrix pregnancy test cassette." },
+                { catalog:"GLU0011", name:"LH Ovulation Test (Device, Urine)", spec:"Cassette", desc:"Ovulation test cassette for urine." },
+                { catalog:"GLU0012", name:"LH Ovulation Test (Strip, Urine)", spec:"Strip", desc:"Ovulation test strip for urine." },
+                { catalog:"GLU0013", name:"IGFBP‑1 Rapid Test (Device, Vaginal secretion)", spec:"Cassette", desc:"IGFBP‑1 test cassette for vaginal fluid (preterm birth risk)." },
+                { catalog:"GLU0014", name:"IGFBP‑1 Rapid Test (Strip, Vaginal secretion)", spec:"Strip", desc:"IGFBP‑1 test strip for vaginal fluid." },
+                { catalog:"GLU0015", name:"fFN Rapid Test (Device, Vaginal secretion)", spec:"Cassette", desc:"Fetal fibronectin test cassette (preterm birth risk)." },
+                { catalog:"GLU0016", name:"fFN Rapid Test (Strip, Vaginal secretion)", spec:"Strip", desc:"Fetal fibronectin test strip." },
+                { catalog:"GLU0017", name:"sFlt‑1 Test (S/P)", spec:"Cassette", desc:"sFlt‑1 test cassette for serum/plasma (preeclampsia)." },
+                { catalog:"GLU0018", name:"PlGF Test (S/P)", spec:"Cassette", desc:"PlGF test cassette for serum/plasma (preeclampsia)." },
+                { catalog:"GLU0019", name:"PE (sFlt‑1/PlGF) Test (S/P)", spec:"Cassette", desc:"Combined sFlt‑1/PlGF test for preeclampsia." },
+                { catalog:"GLU0020", name:"FSH Test (Strip, Urine)", spec:"Strip", desc:"FSH test strip for urine (menopause/fertility)." },
+                { catalog:"GLU0021", name:"FSH Test (Device, Urine)", spec:"Cassette", desc:"FSH test cassette for urine." }
+            ];
+            
+            // =================================================================
+            // КАТЕГОРИИ
+            // =================================================================
+            const categories = [
+                { name: "Magnetic beads", data: magneticBeads },
+                { name: "Latex microspheres", data: latexMicrospheres },
+                { name: "Specialised beads", data: specialisedBeads },
+                { name: "Fluorescent microspheres", data: fluorescentBeads },
+                { name: "Nucleic acid extraction beads", data: naExtractionBeads },
+                { name: "Quality control materials", data: qcMaterials },
+                { name: "Enzymes & ready‑to‑use substrates", data: enzymesSubstrates },
+                { name: "Streptavidin & serum matrices", data: streptavidinMatrices },
+                { name: "Rapid test uncut sheets", data: uncutSheets }
+            ];
+            
+            // =================================================================
+            // ФУНКЦИИ ОТРИСОВКИ
+            // =================================================================
+            let currentTooltip = null;
+            
+            function closeTooltip() {
+                if (currentTooltip) { currentTooltip.remove(); currentTooltip = null; }
+            }
+            
+            function attachClickHandler() {
+                document.querySelectorAll('.product-name').forEach(cell => {
+                    if (cell._clickHandler) cell.removeEventListener('click', cell._clickHandler);
+                    const handler = (e) => {
+                        e.stopPropagation();
+                        const desc = cell.getAttribute('data-desc');
+                        if (!desc) return;
+                        const specCell = cell.closest('tr').querySelector('.spec-cell');
+                        if (!specCell) return;
+                        if (currentTooltip && currentTooltip.parentNode === specCell) { closeTooltip(); return; }
+                        closeTooltip();
+                        const tooltip = document.createElement('div');
+                        tooltip.className = 'tooltip-overlay';
+                        tooltip.innerText = desc;
+                        specCell.style.position = 'relative';
+                        specCell.appendChild(tooltip);
+                        currentTooltip = tooltip;
+                    };
+                    cell.addEventListener('click', handler);
+                    cell._clickHandler = handler;
+                });
+            }
+            
+            function renderTable(searchTerm = "") {
+                const term = searchTerm.trim().toLowerCase();
+                const filterFn = (item) => item.catalog.toLowerCase().includes(term) || item.name.toLowerCase().includes(term) || item.desc.toLowerCase().includes(term);
+                
+                const container = document.getElementById('tablesContainer');
+                if (!container) return;
+                
+                let html = "";
+                let anyFound = false;
+                
+                for (let cat of categories) {
+                    let items = cat.data.filter(filterFn);
+                    if (items.length === 0) continue;
+                    anyFound = true;
+                    html += `<div class="components-section"><div class="category-title">${cat.name}</div><div class="result-count">Found: ${items.length}</div>`;
+                    html += `<div class="table-wrapper"><table class="components-table"><thead><tr><th>Catalog #</th><th>Product / Type</th><th>Size / Specification</th></tr></thead><tbody>`;
+                    items.forEach(item => {
+                        let specDisplay = item.spec && item.spec.trim() !== "" ? item.spec : "—";
+                        html += `<tr><td>${escapeHtml(item.catalog)}</td><td class="product-name" data-desc="${escapeAttr(item.desc)}">${escapeHtml(item.name)}</td><td class="spec-cell">${escapeHtml(specDisplay)}</td></tr>`;
+                    });
+                    html += `</tbody></table></div></div>`;
+                }
+                
+                if (!anyFound) html = `<div class="no-results">No components match your search.</div>`;
+                container.innerHTML = html;
+                attachClickHandler();
+            }
+            
+            function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+            function escapeAttr(str) { return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+            
+            document.body.addEventListener('click', (e) => { if (currentTooltip && !e.target.closest('.product-name')) closeTooltip(); });
+            
+            const searchInput = document.getElementById('searchInput'), clearBtn = document.getElementById('clearSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', () => { renderTable(searchInput.value); if (clearBtn) clearBtn.style.display = searchInput.value ? 'block' : 'none'; });
+            }
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => { searchInput.value = ''; renderTable(''); clearBtn.style.display = 'none'; });
+            }
+            renderTable('');
+            
+            // Бургер
+            const burgerBtn = document.getElementById('burgerBtn'), menuPanel = document.getElementById('menuPanel'), closeMenuBtn = document.getElementById('closeMenuBtn');
+            if(burgerBtn) burgerBtn.addEventListener('click', () => menuPanel.classList.add('open'));
+            if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => menuPanel.classList.remove('open'));
+            document.addEventListener('click', (e) => { if(menuPanel && menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !burgerBtn.contains(e.target)) menuPanel.classList.remove('open'); });
+            
+            // Форма
+            const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxA5MueC0RXAhrR5oR74pDP3iM5CrNIPr_vtYydxyqm5mgz-RRuGEHgmVHRxphBW40rvA/exec';
+            const modal = document.getElementById('contactModal'), inquireBtn = document.getElementById('inquireBtnComp'), closeModalBtn = document.getElementById('closeModalBtn'), form = document.getElementById('contactForm'), statusDiv = document.getElementById('formStatus');
+            function openModal() { modal.style.display = 'flex'; statusDiv.innerHTML = ''; }
+            function closeModalFunc() { modal.style.display = 'none'; form.reset(); statusDiv.innerHTML = ''; }
+            if(inquireBtn) inquireBtn.addEventListener('click', openModal);
+            if(closeModalBtn) closeModalBtn.addEventListener('click', closeModalFunc);
+            window.addEventListener('click', (e) => { if(e.target === modal) closeModalFunc(); });
+            if(form) form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                let name = document.getElementById('name').value.trim(), company = document.getElementById('company').value.trim(), email = document.getElementById('email').value.trim(), message = document.getElementById('message').value.trim();
+                if (!name || !company || !email || !message) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Please fill in all fields.</span>'; return; }
+                if (!email.includes('@')) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Invalid email.</span>'; return; }
+                const submitBtn = form.querySelector('.modal-submit');
+                submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; statusDiv.innerHTML = 'Sending...';
+                try { await fetch(PROXY_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, company, email, message }) });
+                    statusDiv.innerHTML = '<span style="color:#2e7d32;">✓ Thank you! We will get back to you soon.</span>'; form.reset(); setTimeout(closeModalFunc, 2000);
+                } catch(err) { statusDiv.innerHTML = '<span style="color:#d32f2f;">Error, please try again later.</span>'; }
+                finally { submitBtn.disabled = false; submitBtn.textContent = 'Send inquiry'; }
+            });
+        })();
+    </script>
+</body>
+</html>
