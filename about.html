@@ -23,7 +23,6 @@
         .btn-inquire { display: inline-block; background-color: #00101c; color: white; font-weight: 600; font-size: 1rem; padding: 12px 40px; border-radius: 40px; border: none; cursor: pointer; transition: 0.25s; margin-top: 16px; margin-bottom: 20px; }
         .btn-inquire:hover { background-color: #002a3b; }
         
-        /* Бургер-меню */
         .burger { position: fixed; top: 32px; right: 32px; z-index: 1000; }
         .burger-btn { background: rgba(0,16,28,0.7); backdrop-filter: blur(8px); border: none; border-radius: 40px; width: 52px; height: 52px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; }
         .burger-btn span { width: 24px; height: 2px; background: white; border-radius: 4px; }
@@ -35,6 +34,20 @@
         .sub-list a { text-decoration: none; font-size: 1rem; color: #e0e4f0; transition: 0.2s; display: inline-block; }
         .sub-list a:hover { color: white; transform: translateX(4px); }
         .close-menu { background: none; border: none; color: white; font-size: 28px; cursor: pointer; position: absolute; top: 24px; left: 24px; }
+        
+        .carousel-section { margin: 40px 0; max-width: 780px; margin-left: auto; margin-right: auto; position: relative; }
+        .carousel-wrapper { position: relative; overflow: hidden; border-radius: 20px; background: #fafafa; border: 1px solid #e5e5e5; }
+        .carousel-track { display: flex; transition: transform 0.5s ease; }
+        .carousel-slide { min-width: 100%; padding: 40px 32px; text-align: center; }
+        .carousel-slide h3 { color: #00101c; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; text-align: center; }
+        .carousel-slide p { font-size: 1rem; color: #2c2c2c; margin-bottom: 0; text-align: center; max-width: 680px; margin-left: auto; margin-right: auto; }
+        
+        .carousel-nav { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 16px; }
+        .carousel-btn { background: #00101c; color: white; border: none; border-radius: 40px; padding: 8px 24px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: 0.2s; font-family: 'Inter', sans-serif; }
+        .carousel-btn:hover { background: #002a3b; }
+        .carousel-dots { display: flex; justify-content: center; gap: 10px; }
+        .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: #d4d4d4; border: none; cursor: pointer; transition: 0.2s; }
+        .carousel-dot.active { background: #00101c; width: 28px; border-radius: 6px; }
         
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: white; max-width: 520px; width: 90%; border-radius: 28px; padding: 36px 28px; position: relative; }
@@ -56,19 +69,20 @@
             .modal-content { padding: 28px 20px; }
             .burger { top: 20px; right: 20px; }
             .burger-btn { width: 44px; height: 44px; }
+            .carousel-slide { padding: 28px 20px; }
+            .carousel-btn { padding: 6px 16px; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
     <img class="hero-image" src="images/hero.png" alt="GPL Diagnostics top">
     
-    <!-- Бургер -->
     <div class="burger"><div class="burger-btn" id="burgerBtn"><span></span><span></span><span></span></div></div>
     <div class="menu-panel" id="menuPanel">
         <button class="close-menu" id="closeMenuBtn">✕</button>
         <div style="margin-top: 32px;"></div>
         <div class="menu-section"><div class="main-cat">Mission</div><a href="about.html" style="margin-left: 18px; color:#e0e4f0;">About GPL →</a></div>
-        <div class="menu-section"><div class="main-cat">Products</div><ul class="sub-list"><li><a href="sub.html">Substances</a></li><li><a href="ab.html">Antibodies</a></li><li><a href="ag.html">Antigens</a></li></ul></div>
+        <div class="menu-section"><div class="main-cat">Products</div><ul class="sub-list"><li><a href="sub.html">Substances</a></li><li><a href="comp.html">Components</a></li><li><a href="ab.html">Antibodies</a></li><li><a href="ag.html">Antigens</a></li></ul></div>
         <div class="menu-section"><div class="main-cat">Services</div><ul class="sub-list"><li><a href="serv.html">IVD Market Survey</a></li><li><a href="opt.html">IVD Web Optimisation</a></li><li><a href="soft.html">IVD Software Development</a></li></ul></div>
         <div class="menu-section"><div class="main-cat">Contacts</div><a href="contacts.html" style="margin-left: 18px; color:#e0e4f0;">Get in touch →</a></div>
     </div>
@@ -79,6 +93,40 @@
         <p>With 30 years of expertise in both IVD development and supply, we unlock new opportunities. We save companies years of effort and hundreds of thousands of dollars in investment by offering a proven, ready‑to‑implement technology transfer package — and we back it with a reliable supply chain of validated components to scale your business.</p>
         <p>All you have to do is bring the finished product to your market. And even there, we can support you — by building a website, analysing the competition, and solving the tough integration challenges of deploying your solution into the complex architecture of real‑world laboratories.</p>
         <p>We are an international, multidisciplinary team with deep expertise across the entire IVD landscape. Whether you need ELISA, CLIA, clinical chemistry, PCR, rapid tests, histology staining, or urine and faecal diagnostics — we have the know‑how. We accompany you from the very first idea through to implementation, market launch, and commercial support.</p>
+        
+        <!-- Карусель -->
+        <div class="carousel-section">
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide">
+                        <h3>T3/T4 immunoassay systems</h3>
+                        <p>High‑quality T3/T4 antibodies, dehormonized human and bovine serum, BSA‑conjugated antigens and Poly Apo HRP — everything you need to build a world‑class thyroid diagnostic kit.</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <h3>One‑component TMB solutions</h3>
+                        <p>Ready‑to‑use TMB substrates for HRP detection: four formulations for ELISA, automated platforms, and high‑throughput screening. Stable, sensitive, and consistent.</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <h3>Magnetic beads</h3>
+                        <p>Carboxyl, tosyl, epoxy, NHS and streptavidin‑coated magnetic beads. Designed for chemiluminescent immunoassays, immunoprecipitation, and nucleic acid extraction.</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <h3>Biological buffers for any application</h3>
+                        <p>A full spectrum of biological buffers: HEPES, MOPS, TRIS, CAPS, MES, PIPES and more — for ELISA, clinical chemistry, PCR, cell culture, and protein stabilisation.</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <h3>A broad range of antigens and antibodies for your application</h3>
+                        <p>From native and recombinant antigens to monoclonal antibodies against small molecules, biomarkers, toxins and allergens — we supply the key reagents for your IVD development.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-btn" id="carouselPrev">← Prev</button>
+                <div class="carousel-dots" id="carouselDots"></div>
+                <button class="carousel-btn" id="carouselNext">Next →</button>
+            </div>
+        </div>
+        
         <button class="btn-inquire" id="inquireBtn">Inquire →</button>
     </div>
     
@@ -107,8 +155,6 @@
 
     <script>
         (function() {
-            const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxA5MueC0RXAhrR5oR74pDP3iM5CrNIPr_vtYydxyqm5mgz-RRuGEHgmVHRxphBW40rvA/exec';
-            
             // Бургер
             const burgerBtn = document.getElementById('burgerBtn');
             const menuPanel = document.getElementById('menuPanel');
@@ -117,7 +163,113 @@
             if (closeMenuBtn) closeMenuBtn.addEventListener('click', () => menuPanel.classList.remove('open'));
             document.addEventListener('click', (e) => { if (menuPanel && menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !burgerBtn.contains(e.target)) menuPanel.classList.remove('open'); });
             
+            // Карусель — бесконечное кольцо
+            const track = document.getElementById('carouselTrack');
+            const slides = track.querySelectorAll('.carousel-slide');
+            const dotsContainer = document.getElementById('carouselDots');
+            let currentIndex = 0;
+            let autoSlideInterval = null;
+            const slideCount = slides.length;
+
+            const firstClone = slides[0].cloneNode(true);
+            track.appendChild(firstClone);
+            
+            const allSlides = track.querySelectorAll('.carousel-slide');
+            const totalSlides = allSlides.length;
+
+            for (let i = 0; i < slideCount; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.dataset.index = i;
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            const dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+            function goToSlide(index, animate = true) {
+                if (index >= slideCount) {
+                    currentIndex = index;
+                    track.style.transition = 'transform 0.5s ease';
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    setTimeout(() => {
+                        track.style.transition = 'none';
+                        currentIndex = 0;
+                        track.style.transform = 'translateX(0%)';
+                        updateDots(0);
+                        setTimeout(() => {
+                            track.style.transition = 'transform 0.5s ease';
+                        }, 50);
+                    }, 500);
+                    return;
+                }
+                if (index < 0) {
+                    track.style.transition = 'none';
+                    currentIndex = slideCount;
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    updateDots(slideCount - 1);
+                    setTimeout(() => {
+                        track.style.transition = 'transform 0.5s ease';
+                        setTimeout(() => {
+                            goToSlide(slideCount - 1);
+                        }, 50);
+                    }, 50);
+                    return;
+                }
+                currentIndex = index;
+                track.style.transition = 'transform 0.5s ease';
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                updateDots(index);
+            }
+
+            function updateDots(index) {
+                const realIndex = index % slideCount;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === realIndex);
+                });
+            }
+
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+
+            function resetAutoSlide() {
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                    autoSlideInterval = null;
+                }
+                autoSlideInterval = setInterval(nextSlide, 5000);
+            }
+
+            document.getElementById('carouselNext').addEventListener('click', (e) => {
+                e.stopPropagation();
+                nextSlide();
+                resetAutoSlide();
+            });
+            
+            document.getElementById('carouselPrev').addEventListener('click', (e) => {
+                e.stopPropagation();
+                prevSlide();
+                resetAutoSlide();
+            });
+
+            const carouselWrapper = document.querySelector('.carousel-wrapper');
+            carouselWrapper.addEventListener('mouseenter', () => {
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                    autoSlideInterval = null;
+                }
+            });
+            carouselWrapper.addEventListener('mouseleave', resetAutoSlide);
+
+            track.style.transform = 'translateX(0%)';
+            resetAutoSlide();
+
             // Форма
+            const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxA5MueC0RXAhrR5oR74pDP3iM5CrNIPr_vtYydxyqm5mgz-RRuGEHgmVHRxphBW40rvA/exec';
             const modal = document.getElementById('contactModal');
             const inquireBtn = document.getElementById('inquireBtn');
             const closeBtn = document.getElementById('closeModalBtn');
