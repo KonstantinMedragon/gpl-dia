@@ -1,0 +1,13 @@
+# Allow all robots to crawl the site
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://gpl-diagnostics.com/sitemap.xml
+
+# Disallow admin or hidden folders (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Set crawl delay for heavy bots (optional)
+# Crawl-delay: 2
