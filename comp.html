@@ -187,7 +187,7 @@
             // ---------- 7. Enzymes & ready‑to‑use substrates ----------
             const enzymesSubstrates = [
                 { catalog:"GLC028", name:"Horseradish Peroxidase (HRP)", spec:"—", desc:"High‑activity enzyme for ELISA and chemiluminescence." },
-                { catalog:"GLC029", name:"Poly Apo HRP", spec:"—", desc:"Enzymatically inactive polymeric HRP. Neutralizes anti‑HRP autoantibodies in one‑step competitive ELISA (T3/T4). No pre‑incubation, no background signal. <a href='apo.html' style='color:#00101c;font-weight:600;text-decoration:underline;'>Learn more →</a>" },
+                { catalog:"GLC029", name:"Poly Apo HRP", spec:"—", desc:"Enzymatically inactive polymeric HRP. Neutralizes anti‑HRP autoantibodies in one‑step competitive ELISA (T3/T4). No pre‑incubation, no background signal." },
                 { catalog:"GLC030", name:"Single‑component TMB solution (RM‑TMB‑001)", spec:"—", desc:"Ready‑to‑use TMB substrate for HRP detection." },
                 { catalog:"GLC031", name:"Single‑component TMB solution (RM‑TMB‑002)", spec:"—", desc:"Alternative TMB formulation." },
                 { catalog:"GLC032", name:"Single‑component TMB solution (RM‑TMB‑003)", spec:"—", desc:"High‑sensitivity TMB formulation." },
@@ -263,24 +263,39 @@
             
             function attachClickHandler() {
                 document.querySelectorAll('.product-name').forEach(cell => {
-                    if (cell._clickHandler) cell.removeEventListener('click', cell._clickHandler);
-                    const handler = (e) => {
-                        e.stopPropagation();
-                        const desc = cell.getAttribute('data-desc');
-                        if (!desc) return;
-                        const specCell = cell.closest('tr').querySelector('.spec-cell');
-                        if (!specCell) return;
-                        if (currentTooltip && currentTooltip.parentNode === specCell) { closeTooltip(); return; }
-                        closeTooltip();
-                        const tooltip = document.createElement('div');
-                        tooltip.className = 'tooltip-overlay';
-                        tooltip.innerText = desc;
-                        specCell.style.position = 'relative';
-                        specCell.appendChild(tooltip);
-                        currentTooltip = tooltip;
-                    };
-                    cell.addEventListener('click', handler);
-                    cell._clickHandler = handler;
+                    // Проверяем, является ли этот продукт Poly Apo HRP (GLC029)
+                    const isPolyApo = cell.closest('tr').querySelector('td:first-child')?.textContent === 'GLC029';
+                    if (isPolyApo) {
+                        // Делаем название кликабельным
+                        cell.style.cursor = 'pointer';
+                        cell.style.color = '#00101c';
+                        cell.style.fontWeight = '600';
+                        cell.style.textDecoration = 'underline';
+                        cell.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            window.location.href = 'apo.html';
+                        });
+                    } else {
+                        // Обычное поведение — всплывающая подсказка
+                        if (cell._clickHandler) cell.removeEventListener('click', cell._clickHandler);
+                        const handler = (e) => {
+                            e.stopPropagation();
+                            const desc = cell.getAttribute('data-desc');
+                            if (!desc) return;
+                            const specCell = cell.closest('tr').querySelector('.spec-cell');
+                            if (!specCell) return;
+                            if (currentTooltip && currentTooltip.parentNode === specCell) { closeTooltip(); return; }
+                            closeTooltip();
+                            const tooltip = document.createElement('div');
+                            tooltip.className = 'tooltip-overlay';
+                            tooltip.innerText = desc;
+                            specCell.style.position = 'relative';
+                            specCell.appendChild(tooltip);
+                            currentTooltip = tooltip;
+                        };
+                        cell.addEventListener('click', handler);
+                        cell._clickHandler = handler;
+                    }
                 });
             }
             
@@ -302,8 +317,8 @@
                     html += `<div class="table-wrapper"><table class="components-table"><thead><tr><th>Catalog #</th><th>Product / Type</th><th>Size / Specification</th></tr></thead><tbody>`;
                     items.forEach(item => {
                         let specDisplay = item.spec && item.spec.trim() !== "" ? item.spec : "—";
-                        const descHtml = item.desc.includes('<a href') ? item.desc : escapeHtml(item.desc);
-html += `<tr><td>${escapeHtml(item.catalog)}</td><td class="product-name" data-desc="${escapeAttr(item.desc)}">${escapeHtml(item.name)}</td><td class="spec-cell">${descHtml}</td></tr>`;
+                        const descHtml = escapeHtml(item.desc);
+                        html += `<tr><td>${escapeHtml(item.catalog)}</td><td class="product-name" data-desc="${escapeAttr(item.desc)}">${escapeHtml(item.name)}</td><td class="spec-cell">${descHtml}</td></tr>`;
                     });
                     html += `</tbody></table></div></div>`;
                 }
