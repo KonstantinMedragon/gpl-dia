@@ -236,7 +236,7 @@
         </div>
         <div class="hero-image">
             <div class="image-container" onclick="openModalByDevice('apo2')">
-                <img src="image/apo2.png" alt="Poly Apo HRP mechanism">
+                <img src="images/apo2.png" alt="Poly Apo HRP mechanism">
             </div>
         </div>
     </div>
@@ -260,7 +260,7 @@
                 <p style="margin-top: 1rem; font-weight: 500;">Clinical consequence: False elevation of T3/T4 → unnecessary treatment or surgery.</p>
             </div>
             <div class="image-block" onclick="openModalByDevice('apo1')">
-                <img src="image/apo1.png" alt="One-step ELISA interference schematic">
+                <img src="images/apo1.png" alt="One-step ELISA interference schematic">
                 <div class="image-caption">Competitive one-step EIA: Anti-HRP antibodies block signal → false high T3.</div>
             </div>
         </div>
@@ -319,7 +319,7 @@
         <div class="section-header"><h2>Published Evidence</h2><div class="accent-line"></div><p>Landmark case report (Lim et al., Clin Chim Acta. 2018, PMID: 29175172).</p></div>
         <div style="max-width:800px;margin:0 auto">
             <div class="image-block" onclick="window.open('https://pubmed.ncbi.nlm.nih.gov/29175172/', '_blank')">
-                <img src="image/pubmed1.png" alt="PubMed">
+                <img src="images/pubmed1.png" alt="PubMed">
                 <div class="image-caption">Click to open abstract on PubMed</div>
             </div>
             <div class="card" style="margin-top:2rem">
@@ -353,7 +353,7 @@
                 </div>
             </div>
             <div class="image-block" onclick="openModalByDevice('apo2')">
-                <img src="image/apo2.png" alt="Poly Apo HRP mechanism">
+                <img src="images/apo2.png" alt="Poly Apo HRP mechanism">
                 <div class="image-caption">Poly Apo HRP (enzymatically inactive, polymeric) — no pre‑incubation required.</div>
             </div>
         </div>
@@ -388,11 +388,11 @@
     function openModalByDevice(imgType) {
         let imgSrc;
         if (isMobile()) {
-            if (imgType === 'apo1') imgSrc = 'image/apo1ph.png';
-            else if (imgType === 'apo2') imgSrc = 'image/apo2ph.png';
-            else imgSrc = `image/${imgType}.png`;
+            if (imgType === 'apo1') imgSrc = 'images/apo1ph.png';
+            else if (imgType === 'apo2') imgSrc = 'images/apo2ph.png';
+            else imgSrc = `images/${imgType}.png`;
         } else {
-            imgSrc = `image/${imgType}.png`;
+            imgSrc = `images/${imgType}.png`;
         }
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImage');
