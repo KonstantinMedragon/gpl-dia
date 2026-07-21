@@ -302,7 +302,8 @@
                     html += `<div class="table-wrapper"><table class="components-table"><thead><tr><th>Catalog #</th><th>Product / Type</th><th>Size / Specification</th></tr></thead><tbody>`;
                     items.forEach(item => {
                         let specDisplay = item.spec && item.spec.trim() !== "" ? item.spec : "—";
-                        html += `<tr><td>${escapeHtml(item.catalog)}</td><td class="product-name" data-desc="${escapeAttr(item.desc)}">${escapeHtml(item.name)}</td><td class="spec-cell">${escapeHtml(specDisplay)}</td></tr>`;
+                        const descHtml = item.desc.includes('<a href') ? item.desc : escapeHtml(item.desc);
+html += `<tr><td>${escapeHtml(item.catalog)}</td><td class="product-name" data-desc="${escapeAttr(item.desc)}">${escapeHtml(item.name)}</td><td class="spec-cell">${descHtml}</td></tr>`;
                     });
                     html += `</tbody></table></div></div>`;
                 }
