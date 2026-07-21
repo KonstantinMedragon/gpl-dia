@@ -187,7 +187,7 @@
             // ---------- 7. Enzymes & ready‑to‑use substrates ----------
             const enzymesSubstrates = [
                 { catalog:"GLC028", name:"Horseradish Peroxidase (HRP)", spec:"—", desc:"High‑activity enzyme for ELISA and chemiluminescence." },
-                { catalog:"GLC029", name:"Poly Apo HRP", spec:"Enzymatically inactive HRP", desc:"Neutralizes anti‑HRP autoantibodies in one‑step competitive ELISA (T3/T4). No pre‑incubation." },
+                { catalog:"GLC029", name:"Poly Apo HRP", spec:"Anti-HRP autoantibody blocker", desc:"Neutralizes anti‑HRP autoAB" },
                 { catalog:"GLC030", name:"Single‑component TMB solution (RM‑TMB‑001)", spec:"—", desc:"Ready‑to‑use TMB substrate for HRP detection." },
                 { catalog:"GLC031", name:"Single‑component TMB solution (RM‑TMB‑002)", spec:"—", desc:"Alternative TMB formulation." },
                 { catalog:"GLC032", name:"Single‑component TMB solution (RM‑TMB‑003)", spec:"—", desc:"High‑sensitivity TMB formulation." },
@@ -263,24 +263,36 @@
             
             function attachClickHandler() {
                 document.querySelectorAll('.product-name').forEach(cell => {
-                    if (cell._clickHandler) cell.removeEventListener('click', cell._clickHandler);
-                    const handler = (e) => {
-                        e.stopPropagation();
-                        const desc = cell.getAttribute('data-desc');
-                        if (!desc) return;
-                        const specCell = cell.closest('tr').querySelector('.spec-cell');
-                        if (!specCell) return;
-                        if (currentTooltip && currentTooltip.parentNode === specCell) { closeTooltip(); return; }
-                        closeTooltip();
-                        const tooltip = document.createElement('div');
-                        tooltip.className = 'tooltip-overlay';
-                        tooltip.innerText = desc;
-                        specCell.style.position = 'relative';
-                        specCell.appendChild(tooltip);
-                        currentTooltip = tooltip;
-                    };
-                    cell.addEventListener('click', handler);
-                    cell._clickHandler = handler;
+                    const isPolyApo = cell.closest('tr').querySelector('td:first-child')?.textContent === 'GLC029';
+                    if (isPolyApo) {
+                        cell.style.cursor = 'pointer';
+                        cell.style.color = '#00101c';
+                        cell.style.fontWeight = '600';
+                        cell.style.textDecoration = 'underline';
+                        cell.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            window.location.href = 'apo.html';
+                        });
+                    } else {
+                        if (cell._clickHandler) cell.removeEventListener('click', cell._clickHandler);
+                        const handler = (e) => {
+                            e.stopPropagation();
+                            const desc = cell.getAttribute('data-desc');
+                            if (!desc) return;
+                            const specCell = cell.closest('tr').querySelector('.spec-cell');
+                            if (!specCell) return;
+                            if (currentTooltip && currentTooltip.parentNode === specCell) { closeTooltip(); return; }
+                            closeTooltip();
+                            const tooltip = document.createElement('div');
+                            tooltip.className = 'tooltip-overlay';
+                            tooltip.innerText = desc;
+                            specCell.style.position = 'relative';
+                            specCell.appendChild(tooltip);
+                            currentTooltip = tooltip;
+                        };
+                        cell.addEventListener('click', handler);
+                        cell._clickHandler = handler;
+                    }
                 });
             }
             
@@ -331,7 +343,7 @@
             // Бургер
             const burgerBtn = document.getElementById('burgerBtn'), menuPanel = document.getElementById('menuPanel'), closeMenuBtn = document.getElementById('closeMenuBtn');
             if(burgerBtn) burgerBtn.addEventListener('click', () => menuPanel.classList.add('open'));
-            if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => menuPanel.classList.remove('open'));
+            if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => аmenuPanel.classList.remove('open'));
             document.addEventListener('click', (e) => { if(menuPanel && menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !burgerBtn.contains(e.target)) menuPanel.classList.remove('open'); });
             
             // Форма
